@@ -5,15 +5,14 @@ import PrimaryButton from "./components/PrimaryButton";
 import SecondaryButton from "./components/SecondaryButton";
 
 import { MdEdit, MdImportExport } from "react-icons/md";
-import {
-  SiGoogleclassroom,
-  SiFacebook,
-  SiGooglehangoutsmeet,
-} from "react-icons/si";
 
 import cardsData from "./data/cards.json";
 
+import Modal from "./components/Modal";
+import ImportExportModal from "./components/ImportExportModal";
+
 function App() {
+  const [bool, setBool] = useState(true);
   return (
     <div className="">
       <header className="bg-blue-500 h-20 flex items-center justify-center">
@@ -34,9 +33,10 @@ function App() {
           gridTemplateColumns: "repeat(auto-fit, minmax(24rem, max-content))",
         }}
       >
-        {cardsData.cards.map((card) => {
+        {cardsData.cards.map((card, i) => {
           return (
             <Card
+              key={i}
               title={card.title}
               subheading1={card.subheading1}
               subheading2={card.subheading2}
@@ -44,65 +44,13 @@ function App() {
             />
           );
         })}
-        {/* <Card
-          title={"CCS 248"}
-          subheading1={"Artificial Neural Networks"}
-          subheading2={"Bobby Gerardo"}
-          links={[
-            {
-              linkName: "Google Classroom",
-              icon: <SiGoogleclassroom />,
-              url: "/gcr",
-            },
-            { linkName: "Facebook", icon: <SiFacebook />, url: "/Fb" },
-            {
-              linkName: "Google Meet",
-              icon: <SiGooglehangoutsmeet />,
-              url: "/gm",
-            },
-          ]}
-        />
-        <Card
-          title={"CCS 248"}
-          subheading1={"Artificial Neural Networks"}
-          subheading2={"Bobby Gerardo"}
-          links={[
-            {
-              linkName: "Google Classroom",
-              icon: <SiGoogleclassroom />,
-              url: "/gcr",
-            },
-            { linkName: "Facebook", icon: <SiFacebook />, url: "/Fb" },
-            {
-              linkName: "Google Meet",
-              icon: <SiGooglehangoutsmeet />,
-              url: "/gm",
-            },
-          ]}
-        />
-        <Card
-          title={"CCS 248"}
-          subheading1={"Artificial Neural Networks"}
-          subheading2={"Bobby Gerardo"}
-          links={[
-            {
-              linkName: "Google Classroom",
-              icon: <SiGoogleclassroom />,
-              url: "/gcr",
-            },
-            { linkName: "Facebook", icon: <SiFacebook />, url: "/Fb" },
-            {
-              linkName: "Google Meet",
-              icon: <SiGooglehangoutsmeet />,
-              url: "/gm",
-            },
-          ]}
-        /> */}
       </div>
-      {/* </div> */}
 
-      <div className="p-5 flex space-x-3">
-        <SecondaryButton className="flex items-center space-x-1">
+      <div className="p-5 flex space-x-3 justify-center">
+        <SecondaryButton
+          onClick={() => setBool(true)}
+          className="flex items-center space-x-1"
+        >
           <MdImportExport size="1.2rem" />
           <span className="pr-1">Import/Export</span>
         </SecondaryButton>
@@ -112,6 +60,13 @@ function App() {
           <span className="pr-1">Edit</span>
         </PrimaryButton>
       </div>
+
+      <ImportExportModal
+        isOpen={bool}
+        closeModal={() => {
+          setBool(false);
+        }}
+      />
     </div>
   );
 }
