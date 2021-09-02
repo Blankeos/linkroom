@@ -1,0 +1,50 @@
+{
+  "cards": [
+    {
+      "title": "CCS 248",
+      "subheading1": "Artificial Neural Networks",
+      "subheading2": "Bobby Gerardo",
+      "links": [
+        {
+          "linkName": "Google Classroom",
+          "icon": "_icon_",
+          "url": "/googleclassroom"
+        },
+        {
+          "linkName": "Facebook Groups",
+          "icon": "_icon_",
+          "url": "/facebook"
+        }
+      ]
+    },
+    {
+      "title": "CCS 227",
+      "subheading1": "Software Engineering 2",
+      "subheading2": "Christy Villano",
+      "links": [
+        {
+          "linkName": "Google Classroom",
+          "icon": "_icon_",
+          "url": "/googleclassroom"
+        },
+        {
+          "linkName": "Facebook Groups",
+          "icon": "_icon_",
+          "url": "/facebook"
+        }
+      ]
+    },
+    {
+      "title": "CCS 226",
+      "subheading1": "Automata Theory & Formal Languages",
+      "subheading2": "Maluche Sabayle",
+      "links": [
+        {
+          "linkName": "Google Classroom",
+          "icon": "_icon_",
+          "url": "/googleclassroom"
+        }
+      ]
+    }
+  ]
+}
