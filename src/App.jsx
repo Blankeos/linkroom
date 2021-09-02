@@ -11,6 +11,8 @@ import {
   SiGooglehangoutsmeet,
 } from "react-icons/si";
 
+import cardsData from "./data/cards.json";
+
 function App() {
   return (
     <div className="">
@@ -32,7 +34,17 @@ function App() {
           gridTemplateColumns: "repeat(auto-fit, minmax(24rem, max-content))",
         }}
       >
-        <Card
+        {cardsData.cards.map((card) => {
+          return (
+            <Card
+              title={card.title}
+              subheading1={card.subheading1}
+              subheading2={card.subheading2}
+              links={card.links}
+            />
+          );
+        })}
+        {/* <Card
           title={"CCS 248"}
           subheading1={"Artificial Neural Networks"}
           subheading2={"Bobby Gerardo"}
@@ -85,7 +97,7 @@ function App() {
               url: "/gm",
             },
           ]}
-        />
+        /> */}
       </div>
       {/* </div> */}
 
