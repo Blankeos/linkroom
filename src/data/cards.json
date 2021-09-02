@@ -7,12 +7,12 @@
       "links": [
         {
           "linkName": "Google Classroom",
-          "icon": "_icon_",
+          "icon": "google_classroom",
           "url": "/googleclassroom"
         },
         {
           "linkName": "Facebook Groups",
-          "icon": "_icon_",
+          "icon": "facebook",
           "url": "/facebook"
         }
       ]
@@ -24,12 +24,12 @@
       "links": [
         {
           "linkName": "Google Classroom",
-          "icon": "_icon_",
+          "icon": "google_classroom",
           "url": "/googleclassroom"
         },
         {
           "linkName": "Facebook Groups",
-          "icon": "_icon_",
+          "icon": "facebook",
           "url": "/facebook"
         }
       ]
@@ -41,7 +41,7 @@
       "links": [
         {
           "linkName": "Google Classroom",
-          "icon": "_icon_",
+          "icon": "google_classroom",
           "url": "/googleclassroom"
         }
       ]
