@@ -10,20 +10,10 @@ import iconDict from "../../data/iconDict";
 
 import { useCardsContext } from "../../contexts/CardsContext";
 
+import Tippy from "@tippyjs/react";
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case "NEW_LINK":
-      return {
-        ...state,
-        links: [
-          ...state.links,
-          {
-            linkName: "",
-            icon: "default_link",
-            url: "",
-          },
-        ],
-      };
     case "DELETE_LINK":
       const newLinks = [...state.links];
       newLinks.splice(action.payload, 1);
@@ -45,12 +35,16 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
     links,
   };
 
-  const { changeOneCardTitle } = useCardsContext();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    changeOneCardTitle,
+    addNewLinkOneCard,
+    deleteLinkOneCard,
+    changeLinkOneCardProperty,
+  } = useCardsContext();
 
   return (
     <div
-      className="rounded-2xl shadow hover:shadow-lg transition w-96 inline-block"
+      className="rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block"
       style={{ minHeight: "18rem" }}
     >
       <div className="h-full rounded-b-2xl border-r border-l border-b rounded-t-3xl">
@@ -64,80 +58,143 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
             </button>
           </div>
           <input
-            className="font-bold text-3xl p-2 py-1 rounded-lg outline-none"
-            defaultValue={state && state.title}
+            className="font-bold text-3xl p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
+            defaultValue={title && title}
+            placeholder="Title"
             onChange={(e) => {
               changeOneCardTitle(index, "title", e.target.value);
             }}
           />
           <input
-            className="text-sm p-2 py-1 rounded-lg outline-none text-gray-500"
-            defaultValue={state && state.subheading1}
+            className="text-sm p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
+            defaultValue={subheading1 && subheading1}
+            placeholder="Subheading 1"
             onChange={(e) => {
               changeOneCardTitle(index, "subheading1", e.target.value);
             }}
           />
           <input
-            className="text-sm p-2 py-1 rounded-lg outline-none text-gray-500"
-            defaultValue={state && state.subheading2}
+            className="text-sm p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
+            defaultValue={subheading2 && subheading2}
+            placeholder="Subheading 2"
             onChange={(e) => {
               changeOneCardTitle(index, "subheading2", e.target.value);
             }}
           />
         </div>
         <div className="py-5 flex flex-col space-y-2 text-gray-600">
-          {state &&
-            state.links &&
-            state.links.map((link, i) => {
+          {links &&
+            links.map((link, i) => {
               return (
                 <Link
                   key={i}
                   icon={link && link.icon}
                   url={link.url}
-                  onDeleteClick={() =>
-                    dispatch({ type: "DELETE_LINK", payload: i })
-                  }
+                  onDeleteClick={() => deleteLinkOneCard(index, i)}
+                  cardID={index}
+                  linkID={i}
+                  changeLinkOneCardPropertyFunction={changeLinkOneCardProperty}
                 >
                   {link.linkName}
                 </Link>
               );
             })}
-          <NewLinkButton onClick={() => dispatch({ type: "NEW_LINK" })} />
+          <NewLinkButton onClick={() => addNewLinkOneCard(index)} />
         </div>
       </div>
     </div>
   );
 };
 
-const Link = ({ url, icon, children, onDeleteClick }) => {
+const Link = ({
+  url,
+  icon,
+  children,
+  onDeleteClick,
+  cardID,
+  linkID,
+  changeLinkOneCardPropertyFunction,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleChange = (e) => {
+    changeLinkOneCardPropertyFunction(
+      cardID,
+      linkID,
+      e.target.name,
+      e.target.value
+    );
+  };
   return (
-    <span
-      className="relative flex items-center space-x-2 px-5"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <span>{iconDict[icon]}</span>
-      <input
-        defaultValue={children}
-        placeholder="Link Name"
-        className="border border-gray-300 py-0.5 px-1.5 w-full"
-      />
-      <input
-        className="border border-gray-300 py-0.5 px-1.5 w-full"
-        placeholder="URL"
-        defaultValue={url}
-      />
-      <Transition appear show={isHovered} as={React.Fragment}>
+    <Tippy
+      interactive={true}
+      placement={"right"}
+      offset={[0, -12]}
+      content={
         <button
           onClick={onDeleteClick || (() => {})}
-          className="absolute -right-4 bg-gray-600 p-1 rounded-full text-white"
+          className="p-1 rounded-full text-red-400"
         >
           <DeleteIcon />
         </button>
-      </Transition>
-    </span>
+      }
+    >
+      <span
+        className="relative flex items-center space-x-2 px-5"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <Tippy
+          interactive
+          content={
+            <div className="grid grid-cols-4">
+              {Object.keys(iconDict).map((key, i) => {
+                return (
+                  <button
+                    onClick={() => {
+                      changeLinkOneCardPropertyFunction(
+                        cardID,
+                        linkID,
+                        "icon",
+                        key
+                      );
+                    }}
+                    className="p-2 text-lg"
+                    key={i}
+                  >
+                    {iconDict[key]}
+                  </button>
+                );
+              })}
+            </div>
+          }
+        >
+          <span>{iconDict[icon]}</span>
+        </Tippy>
+        <input
+          name="linkName"
+          onChange={handleChange}
+          defaultValue={children}
+          placeholder="Link Name"
+          className="border border-gray-300 py-0.5 px-1.5 w-full text-sm"
+        />
+        <input
+          name="url"
+          onChange={handleChange}
+          className="border border-gray-300 py-0.5 px-1.5 w-full text-sm"
+          placeholder="URL"
+          defaultValue={url}
+        />
+        {/* <Transition appear show={isHovered} as={React.Fragment}>
+        <button
+        onClick={onDeleteClick || (() => {})}
+        className="absolute -right-3.5 bg-gray-600 p-1 rounded-full text-white"
+        >
+        <DeleteIcon />
+        </button>
+      </Transition> */}
+      </span>
+    </Tippy>
   );
 };
 
