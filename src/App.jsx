@@ -41,7 +41,8 @@ function App() {
 const Menu = () => {
   const [bool, setBool] = useState(false);
 
-  const { toggleIsEditingAllCards, isEditingAllCards } = useCardsContext();
+  const { toggleIsEditingAllCards, isEditingAllCards, cards } =
+    useCardsContext();
   return (
     <>
       <div className="p-5 flex space-x-3 justify-center">
@@ -53,15 +54,17 @@ const Menu = () => {
           <span className="pr-1">Import/Export</span>
         </SecondaryButton>
 
-        <PrimaryButton
-          onClick={() => toggleIsEditingAllCards()}
-          className="flex items-center space-x-1"
-        >
-          <MdEdit />
-          <span className="pr-1">
-            {isEditingAllCards ? "Save" : "Edit All"}
-          </span>
-        </PrimaryButton>
+        {cards && cards.cards.length > 0 && (
+          <PrimaryButton
+            onClick={() => toggleIsEditingAllCards()}
+            className="flex items-center space-x-1"
+          >
+            <MdEdit />
+            <span className="pr-1">
+              {isEditingAllCards ? "Save" : "Edit All"}
+            </span>
+          </PrimaryButton>
+        )}
       </div>
 
       <ImportExportModal
