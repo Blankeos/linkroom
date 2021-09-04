@@ -10,7 +10,7 @@ import iconDict from "../../data/iconDict";
 const Card = ({ title, subheading1, subheading2, links }) => {
   return (
     <div
-      className="rounded-2xl shadow hover:shadow-lg transition w-96 inline-block"
+      className="rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block"
       style={{ minHeight: "18rem" }}
     >
       <div className="h-full rounded-b-2xl border-r border-l border-b rounded-t-3xl">
@@ -23,7 +23,7 @@ const Card = ({ title, subheading1, subheading2, links }) => {
           {links &&
             links.map((link, i) => {
               return (
-                <Link key={i} icon={link && link.icon}>
+                <Link key={i} icon={link && link.icon} url={link && link.url}>
                   {link.linkName}
                 </Link>
               );
