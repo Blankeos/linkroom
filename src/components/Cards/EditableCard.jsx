@@ -8,6 +8,8 @@ import { Transition } from "@headlessui/react";
 
 import iconDict from "../../data/iconDict";
 
+import { useCardsContext } from "../../contexts/CardsContext";
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "NEW_LINK":
@@ -35,7 +37,7 @@ const reducer = (state, action) => {
   }
 };
 
-const EditableCard = ({ title, subheading1, subheading2, links }) => {
+const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
   const initialState = {
     title,
     subheading1,
@@ -43,6 +45,7 @@ const EditableCard = ({ title, subheading1, subheading2, links }) => {
     links,
   };
 
+  const { changeOneCardTitle } = useCardsContext();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
@@ -63,14 +66,23 @@ const EditableCard = ({ title, subheading1, subheading2, links }) => {
           <input
             className="font-bold text-3xl p-2 py-1 rounded-lg outline-none"
             defaultValue={state && state.title}
+            onChange={(e) => {
+              changeOneCardTitle(index, "title", e.target.value);
+            }}
           />
           <input
             className="text-sm p-2 py-1 rounded-lg outline-none text-gray-500"
             defaultValue={state && state.subheading1}
+            onChange={(e) => {
+              changeOneCardTitle(index, "subheading1", e.target.value);
+            }}
           />
           <input
             className="text-sm p-2 py-1 rounded-lg outline-none text-gray-500"
             defaultValue={state && state.subheading2}
+            onChange={(e) => {
+              changeOneCardTitle(index, "subheading2", e.target.value);
+            }}
           />
         </div>
         <div className="py-5 flex flex-col space-y-2 text-gray-600">

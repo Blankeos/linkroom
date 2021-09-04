@@ -5,15 +5,11 @@ import SecondaryButton from "./components/SecondaryButton";
 
 import { MdEdit, MdImportExport } from "react-icons/md";
 
-import cardsData from "./data/cards.json";
-
-import Modal from "./components/Modals/Modal";
 import ImportExportModal from "./components/Modals/ImportExportModal";
-import { CardsProvider } from "./contexts/CardsContext";
+import { CardsProvider, useCardsContext } from "./contexts/CardsContext";
 import CardsGrid from "./components/Cards/CardsGrid";
 
 function App() {
-  const [bool, setBool] = useState(false);
   return (
     <CardsProvider>
       <div className="">
@@ -33,32 +29,49 @@ function App() {
             </p>
           </div>
         </header>
+        <Menu />
+
         {/* Grid */}
         <CardsGrid />
-        <div className="p-5 flex space-x-3 justify-center">
-          <SecondaryButton
-            onClick={() => setBool(true)}
-            className="flex items-center space-x-1"
-          >
-            <MdImportExport size="1.2rem" />
-            <span className="pr-1">Import/Export</span>
-          </SecondaryButton>
-
-          <PrimaryButton className="flex items-center space-x-1">
-            <MdEdit />
-            <span className="pr-1">Edit</span>
-          </PrimaryButton>
-        </div>
-
-        <ImportExportModal
-          isOpen={bool}
-          closeModal={() => {
-            setBool(false);
-          }}
-        />
       </div>
     </CardsProvider>
   );
 }
+
+const Menu = () => {
+  const [bool, setBool] = useState(false);
+
+  const { toggleIsEditingAllCards, isEditingAllCards } = useCardsContext();
+  return (
+    <>
+      <div className="p-5 flex space-x-3 justify-center">
+        <SecondaryButton
+          onClick={() => setBool(true)}
+          className="flex items-center space-x-1"
+        >
+          <MdImportExport size="1.2rem" />
+          <span className="pr-1">Import/Export</span>
+        </SecondaryButton>
+
+        <PrimaryButton
+          onClick={() => toggleIsEditingAllCards()}
+          className="flex items-center space-x-1"
+        >
+          <MdEdit />
+          <span className="pr-1">
+            {isEditingAllCards ? "Save" : "Edit All"}
+          </span>
+        </PrimaryButton>
+      </div>
+
+      <ImportExportModal
+        isOpen={bool}
+        closeModal={() => {
+          setBool(false);
+        }}
+      />
+    </>
+  );
+};
 
 export default App;

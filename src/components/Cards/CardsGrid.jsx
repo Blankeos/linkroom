@@ -6,9 +6,8 @@ import { GiBroom } from "react-icons/gi";
 import EditableCard from "./EditableCard";
 
 const CardsGrid = () => {
-  const { cards, importCards } = useCardsContext();
-
-  const [editing, setEditing] = useState(false);
+  const { cards, isEditingAllCards } = useCardsContext();
+  // const [editing, setEditing] = useState(false);
 
   const renderGrid = (cards) => {
     if (cards) {
@@ -20,10 +19,11 @@ const CardsGrid = () => {
           }}
         >
           {cards.map((card, i) => {
-            if (editing) {
+            if (isEditingAllCards) {
               return (
                 <EditableCard
                   key={i}
+                  index={i}
                   title={card.title}
                   subheading1={card.subheading1}
                   subheading2={card.subheading2}
@@ -60,13 +60,13 @@ const CardsGrid = () => {
       {cards && (
         <>
           {renderGrid(cards.cards)}{" "}
-          <button
+          {/* <button
             onClick={() => {
               setEditing((prev) => !prev);
             }}
           >
             SetEditing
-          </button>
+          </button> */}
         </>
       )}
     </>
