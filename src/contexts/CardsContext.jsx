@@ -5,7 +5,9 @@ import React, {
   createContext,
   useReducer,
 } from "react";
+import { cloneDeep } from "lodash";
 
+import { generate } from "shortid";
 export const CARDS_STORAGE = "cardsStorage";
 
 const initialValue = {};
@@ -38,10 +40,11 @@ const reducer = (state, action) => {
         cards: newCards,
       };
     case "ADD_NEW_CARD":
-      newCards = [...state.cards];
+      newCards = cloneDeep(state.cards);
       newCards = [
-        ...state.cards,
+        ...newCards,
         {
+          _id: generate(),
           title: "",
           subheading1: "",
           subheading2: "",
@@ -51,11 +54,21 @@ const reducer = (state, action) => {
       return {
         cards: newCards,
       };
+    case "DELETE_CARD":
+      newCards = cloneDeep(state.cards);
+      // newCards = newCards.filter((card) => action.payload.id !== card._id);
+
+      console.log(newCards.splice(action.payload.id, 1));
+
+      return {
+        cards: newCards,
+      };
     case "ADD_NEW_LINK":
-      newCards = [...state.cards];
+      newCards = cloneDeep(state.cards);
       newCards[action.payload.id].links = [
-        ...state.cards[action.payload.id].links,
+        ...newCards[action.payload.id].links,
         {
+          _id: generate(),
           linkName: "",
           icon: "default_link",
           url: "",
@@ -106,7 +119,9 @@ export const CardsProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log(cards);
+    if (cards && cards.cards && cards.cards.length <= 0) {
+      setIsEditingAllCards(false);
+    }
   }, [cards]);
 
   // Public Functions
@@ -166,6 +181,15 @@ export const CardsProvider = ({ children }) => {
     });
   };
 
+  const deleteCard = (id) => {
+    dispatch({
+      type: "DELETE_CARD",
+      payload: {
+        id: id,
+      },
+    });
+  };
+
   const changeLinkOneCardProperty = (id, linkID, linkPropertyName, data) => {
     dispatch({
       type: "SET_LINK_PROPERTY",
@@ -188,6 +212,7 @@ export const CardsProvider = ({ children }) => {
     addNewLinkOneCard,
     deleteLinkOneCard,
     changeLinkOneCardProperty,
+    deleteCard,
   };
   return (
     <CardsContext.Provider value={value}>{children}</CardsContext.Provider>
