@@ -28,7 +28,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
       data.cards.map((card, i) => {
         return (
           <Card
-            key={i}
+            key={card._id}
             title={card.title}
             subheading1={card.subheading1}
             subheading2={card.subheading2}

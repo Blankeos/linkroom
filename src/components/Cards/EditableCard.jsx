@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BsArrowsMove as MoveIcon } from "react-icons/bs";
 import { MdAdd as AddIcon } from "react-icons/md";
 import { IoMdClose as DeleteIcon } from "react-icons/io";
@@ -9,38 +9,23 @@ import { Transition } from "@headlessui/react";
 import iconDict from "../../data/iconDict";
 
 import { useCardsContext } from "../../contexts/CardsContext";
-
 import Tippy from "@tippyjs/react";
+import DropDown from "../DropDown";
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "DELETE_LINK":
-      const newLinks = [...state.links];
-      newLinks.splice(action.payload, 1);
-
-      return {
-        ...state,
-        links: newLinks,
-      };
-    default:
-      return state;
-  }
-};
+import { generate } from "shortid";
 
 const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
-  const initialState = {
-    title,
-    subheading1,
-    subheading2,
-    links,
-  };
-
   const {
     changeOneCardTitle,
     addNewLinkOneCard,
     deleteLinkOneCard,
     changeLinkOneCardProperty,
+    deleteCard,
   } = useCardsContext();
+
+  const dropDownItems = [
+    { name: "Delete", icon: <DeleteIcon />, onClick: () => deleteCard(index) },
+  ];
 
   return (
     <div
@@ -50,12 +35,9 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
       <div className="h-full rounded-b-2xl border-r border-l border-b rounded-t-3xl">
         <div className="flex flex-col space-y-1.5 bg-blue-500 text-gray-600 p-3 pb-5 rounded-t-2xl border border-blue-500">
           <div className="flex justify-end text-white pb-2">
-            {/* <button className="cursor-grab active:cursor-grabbing">
-              <MoveIcon size="1.5rem" />
-            </button> */}
-            <button className="">
+            <DropDown items={dropDownItems}>
               <MenuIcon size="1.5rem" />
-            </button>
+            </DropDown>
           </div>
           <input
             className="font-bold text-3xl p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
@@ -87,7 +69,7 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
             links.map((link, i) => {
               return (
                 <Link
-                  key={i}
+                  key={link._id}
                   icon={link && link.icon}
                   url={link.url}
                   onDeleteClick={() => deleteLinkOneCard(index, i)}
@@ -146,6 +128,7 @@ const Link = ({
       >
         <Tippy
           interactive
+          trigger="click"
           content={
             <div className="grid grid-cols-4">
               {Object.keys(iconDict).map((key, i) => {
@@ -169,7 +152,7 @@ const Link = ({
             </div>
           }
         >
-          <span>{iconDict[icon]}</span>
+          <span className="cursor-pointer">{iconDict[icon]}</span>
         </Tippy>
         <input
           name="linkName"
