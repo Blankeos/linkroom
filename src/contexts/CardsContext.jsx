@@ -8,6 +8,8 @@ import React, {
 import { cloneDeep } from "lodash";
 
 import { generate } from "shortid";
+import { toast } from "react-toastify";
+
 export const CARDS_STORAGE = "cardsStorage";
 
 const initialValue = {};
@@ -127,6 +129,8 @@ export const CardsProvider = ({ children }) => {
   // Public Functions
   const saveToStorage = (cardsObj) => {
     localStorage.setItem(CARDS_STORAGE, JSON.stringify(cardsObj));
+    console.log("Attempting to save");
+    toast("Saving Changes...");
   };
 
   const importCards = (cardsObj) => {

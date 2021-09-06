@@ -129,6 +129,7 @@ const Link = ({
         <Tippy
           interactive
           trigger="click"
+          hideOnClick
           content={
             <div className="grid grid-cols-4">
               {Object.keys(iconDict).map((key, i) => {

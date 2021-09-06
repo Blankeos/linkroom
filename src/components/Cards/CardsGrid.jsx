@@ -57,7 +57,7 @@ const CardsGrid = () => {
           <span>Create a new one to get started!</span>
           <span>
             <button
-              className="mt-10 p-10 rounded-2xl hover:shadow-lg flex items-center justify-center space-x-2 border border-blue-500 hover:bg-blue-500 text-blue-500 hover:text-white"
+              className="mt-10 p-10 rounded-2xl hover:shadow-lg flex items-center justify-center space-x-2 border border-blue-500 hover:bg-blue-500 text-blue-500 hover:text-white transition"
               onClick={() => {
                 addNewCard();
                 toggleIsEditingAllCards();

@@ -8,6 +8,8 @@ import { MdEdit, MdImportExport } from "react-icons/md";
 import ImportExportModal from "./components/Modals/ImportExportModal";
 import { CardsProvider, useCardsContext } from "./contexts/CardsContext";
 import CardsGrid from "./components/Cards/CardsGrid";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
 
         {/* Grid */}
         <CardsGrid />
+        <ToastContainer />
       </div>
     </CardsProvider>
   );
