@@ -4,15 +4,11 @@ import { MdAdd as AddIcon } from "react-icons/md";
 import { IoMdClose as DeleteIcon } from "react-icons/io";
 import { GoKebabVertical as MenuIcon } from "react-icons/go";
 
-import { Transition } from "@headlessui/react";
-
 import iconDict from "../../data/iconDict";
 
 import { useCardsContext } from "../../contexts/CardsContext";
 import Tippy from "@tippyjs/react";
 import DropDown from "../DropDown";
-
-import { generate } from "shortid";
 
 const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
   const {
@@ -24,12 +20,16 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
   } = useCardsContext();
 
   const dropDownItems = [
-    { name: "Delete", icon: <DeleteIcon />, onClick: () => deleteCard(index) },
+    {
+      name: "Delete",
+      icon: <DeleteIcon />,
+      onClick: () => deleteCard(index),
+    },
   ];
 
   return (
     <div
-      className="rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block"
+      className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block bg-white"
       style={{ minHeight: "18rem" }}
     >
       <div className="h-full rounded-b-2xl border-r border-l border-b rounded-t-3xl">
