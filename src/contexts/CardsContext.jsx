@@ -61,9 +61,9 @@ const reducer = (state, action) => {
       };
     case "DELETE_CARD":
       newCards = cloneDeep(state.cards);
-
+      console.log(action.payload.id);
       newCards.splice(action.payload.id, 1);
-
+      console.log(newCards);
       return {
         cards: newCards,
       };
@@ -106,6 +106,7 @@ const reducer = (state, action) => {
         action.payload.oldIndex,
         action.payload.newIndex
       );
+      action.payload.saveToStorageFunction({ cards: newCards });
       return { cards: newCards };
     default:
       return state;
@@ -130,15 +131,16 @@ export const CardsProvider = ({ children }) => {
 
   useEffect(() => {
     if (cards && cards.cards && cards.cards.length <= 0) {
-      setIsEditingAllCards(false);
+      setIsEditingAllCards(() => {
+        saveToStorage(cards);
+        return false;
+      });
     }
   }, [cards]);
 
   // Public Functions
   const saveToStorage = (cardsObj) => {
     localStorage.setItem(CARDS_STORAGE, JSON.stringify(cardsObj));
-    console.log("Attempting to save");
-    toast("Saving Changes...");
   };
 
   const importCards = (cardsObj) => {
@@ -220,6 +222,7 @@ export const CardsProvider = ({ children }) => {
       payload: {
         oldIndex: oldIndex,
         newIndex: newIndex,
+        saveToStorageFunction: saveToStorage,
       },
     });
   };
