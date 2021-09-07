@@ -38,7 +38,7 @@ const Link = ({ url, icon, children }) => {
   return (
     <a
       href={url || "/404"}
-      target={!url && "_blank"}
+      target={!url ? "_blank" : ""}
       className="flex items-center space-x-2 hover:text-blue-500"
     >
       {iconDict[icon]}

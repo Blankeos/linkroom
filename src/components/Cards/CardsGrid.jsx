@@ -8,9 +8,17 @@ import { MdAdd as AddIcon } from "react-icons/md";
 import EditableCard from "./EditableCard";
 import AddCardButton from "./AddCardButton";
 
+// Sortable
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+
 const CardsGrid = () => {
-  const { cards, isEditingAllCards, addNewCard, toggleIsEditingAllCards } =
-    useCardsContext();
+  const {
+    cards,
+    isEditingAllCards,
+    addNewCard,
+    toggleIsEditingAllCards,
+    reorderCard,
+  } = useCardsContext();
 
   const renderEditableCards = (cards) => {
     const editableCards = cards.map((card, i) => {
@@ -42,11 +50,52 @@ const CardsGrid = () => {
       );
     });
   };
+
+  // --SORTABLE--
+  const SortableItem = SortableElement(({ card, index }) => (
+    <li className="list-none">
+      <Card
+        key={card._id}
+        index={index}
+        title={card.title}
+        subheading1={card.subheading1}
+        subheading2={card.subheading2}
+        links={card.links}
+      />
+    </li>
+  ));
+
+  const SortableList = SortableContainer(({ cards }) => {
+    return (
+      <ul className="grid sm:justify-center gap-5 p-5 grid-cols-1 cards-grid">
+        {cards.map((card, index) => (
+          <SortableItem key={card._id} index={index} card={card} />
+        ))}
+      </ul>
+    );
+  });
+  // --SORTABLE--
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    console.log(oldIndex, newIndex);
+    reorderCard(oldIndex, newIndex);
+  };
+
   const renderGrid = (cards) => {
     if (cards != null && cards.length > 0) {
       return (
-        <div className="grid sm:justify-center gap-5 p-5 grid-cols-1 cards-grid">
-          {isEditingAllCards ? renderEditableCards(cards) : renderCards(cards)}
+        <div className="">
+          {isEditingAllCards ? (
+            renderEditableCards(cards)
+          ) : (
+            <SortableList
+              cards={cards}
+              onSortEnd={onSortEnd}
+              axis="xy"
+              pressDelay={100}
+              pressThreshold={100}
+            />
+          )}
         </div>
       );
     } else {

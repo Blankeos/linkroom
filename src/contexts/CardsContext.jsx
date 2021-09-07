@@ -5,9 +5,12 @@ import React, {
   createContext,
   useReducer,
 } from "react";
-import { cloneDeep } from "lodash";
 
+// util
+import { cloneDeep } from "lodash";
 import { generate } from "shortid";
+import { arrayMoveImmutable as arrayMove } from "array-move";
+
 import { toast } from "react-toastify";
 
 export const CARDS_STORAGE = "cardsStorage";
@@ -99,6 +102,15 @@ const reducer = (state, action) => {
       return {
         cards: newCards,
       };
+    case "REORDER":
+      newCards = cloneDeep(state.cards);
+      console.log(newCards);
+      newCards = arrayMove(
+        newCards,
+        action.payload.oldIndex,
+        action.payload.newIndex
+      );
+      return { cards: newCards };
     default:
       return state;
   }
@@ -206,6 +218,16 @@ export const CardsProvider = ({ children }) => {
     });
   };
 
+  const reorderCard = (oldIndex, newIndex) => {
+    dispatch({
+      type: "REORDER",
+      payload: {
+        oldIndex: oldIndex,
+        newIndex: newIndex,
+      },
+    });
+  };
+
   const value = {
     cards,
     importCards,
@@ -217,6 +239,7 @@ export const CardsProvider = ({ children }) => {
     deleteLinkOneCard,
     changeLinkOneCardProperty,
     deleteCard,
+    reorderCard,
   };
   return (
     <CardsContext.Provider value={value}>{children}</CardsContext.Provider>
