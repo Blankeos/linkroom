@@ -17,7 +17,7 @@ const renderEditableCards = (cards) => {
 // --SORTABLE HOC Setup--
 const SortableList = SortableContainer(({ cards, isEditingAllCards }) => {
   return (
-    <ul className="grid sm:justify-center gap-5 p-5 grid-cols-1 cards-grid">
+    <ul className="grid sm:justify-center gap-5 p-5 pb-16 grid-cols-1 cards-grid">
       {isEditingAllCards
         ? renderEditableCards(cards)
         : cards.map((card, index) => (
