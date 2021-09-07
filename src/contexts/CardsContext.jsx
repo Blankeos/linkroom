@@ -61,9 +61,8 @@ const reducer = (state, action) => {
       };
     case "DELETE_CARD":
       newCards = cloneDeep(state.cards);
-      // newCards = newCards.filter((card) => action.payload.id !== card._id);
 
-      console.log(newCards.splice(action.payload.id, 1));
+      newCards.splice(action.payload.id, 1);
 
       return {
         cards: newCards,
@@ -79,8 +78,6 @@ const reducer = (state, action) => {
           url: "",
         },
       ];
-
-      console.log("ADD_NEW_LINK is dispatched");
 
       return {
         cards: newCards,
@@ -104,7 +101,6 @@ const reducer = (state, action) => {
       };
     case "REORDER":
       newCards = cloneDeep(state.cards);
-      console.log(newCards);
       newCards = arrayMove(
         newCards,
         action.payload.oldIndex,
