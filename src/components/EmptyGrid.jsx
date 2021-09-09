@@ -6,7 +6,7 @@ import { useCardsContext } from "../contexts/CardsContext";
 const EmptyGrid = () => {
   const { addNewCard, toggleIsEditingAllCards } = useCardsContext();
   return (
-    <div className="flex-grow text-center flex flex-col space-y-1 justify-center items-center text-gray-400 text-sm font-light">
+    <div className="flex-grow text-center flex flex-col space-y-1 justify-center items-center text-gray-400 text-sm font-light pb-16">
       <GiBroom className="text-3xl text-gray-400" />
       <span>No cards yet.</span>
       <span>Create a new one to get started!</span>

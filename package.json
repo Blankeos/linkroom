@@ -7,13 +7,17 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@dnd-kit/core": "^3.1.1",
+    "@dnd-kit/sortable": "^4.0.0",
     "@headlessui/react": "^1.4.1",
     "@tippyjs/react": "^4.2.5",
     "array-move": "^4.0.0",
     "lodash": "^4.17.21",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react-device-detect": "^1.17.0",
+    "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
+    "react-router-dom": "^5.3.0",
     "react-sortable-hoc": "^2.0.0",
     "react-toastify": "^8.0.2",
     "shortid": "^2.2.16",

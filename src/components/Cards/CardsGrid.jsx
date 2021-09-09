@@ -5,7 +5,12 @@ import { useCardsContext } from "../../contexts/CardsContext";
 import EditableCard from "./EditableCard";
 import AddCardButton from "./AddCardButton";
 
+// Sortable HOC
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
+
+// DND-Kit
+import { DndContext } from "@dnd-kit/core";
+import { SortableContext } from "@dnd-kit/sortable";
 
 const renderEditableCards = (cards) => {
   const allCards = cards.map((card, index) => (
@@ -57,31 +62,40 @@ const SortableItem = SortableElement(({ card }) => (
 ));
 // --SORTABLE HOC Setup--
 
+// const CardsGrid = ({ cards, isEditingAllCards }) => {
+//   const { reorderCard } = useCardsContext();
+
+//   const onSortEnd = ({ oldIndex, newIndex }) => {
+//     reorderCard(oldIndex, newIndex);
+//   };
+
+//   return (
+//     <>
+//       <SortableList
+//         cards={cards}
+//         isEditingAllCards={isEditingAllCards}
+//         onSortStart={() => {
+//           if (window.getSelection) {
+//             window.getSelection().removeAllRanges();
+//           } else if (document.selection) {
+//             document.selection.empty();
+//           }
+//         }}
+//         onSortEnd={onSortEnd}
+//         axis="xy"
+//         helperClass="opacity-90"
+//         pressDelay={200}
+//       />
+//     </>
+//   );
+// };
+
 const CardsGrid = ({ cards, isEditingAllCards }) => {
-  const { reorderCard } = useCardsContext();
-
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    reorderCard(oldIndex, newIndex);
-  };
-
   return (
     <>
-      <SortableList
-        distance={1}
-        cards={cards}
-        isEditingAllCards={isEditingAllCards}
-        onSortStart={() => {
-          if (window.getSelection) {
-            window.getSelection().removeAllRanges();
-          } else if (document.selection) {
-            document.selection.empty();
-          }
-        }}
-        onSortEnd={onSortEnd}
-        axis="xy"
-        helperClass="opacity-90"
-        pressThreshold={100}
-      />
+      <DndContext onDragEnd={handleDragEnd}>
+        <SortableContext items={cards}></SortableContext>
+      </DndContext>
     </>
   );
 };

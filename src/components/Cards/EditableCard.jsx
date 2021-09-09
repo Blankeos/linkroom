@@ -25,6 +25,11 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
       icon: <DeleteIcon />,
       onClick: () => deleteCard(index),
     },
+    {
+      name: "More Edit Options",
+      icon: <DeleteIcon />,
+      onClick: () => {},
+    },
   ];
 
   return (
