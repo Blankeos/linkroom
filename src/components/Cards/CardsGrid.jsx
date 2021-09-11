@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "./Card";
 import { useCardsContext } from "../../contexts/CardsContext";
 
@@ -9,8 +9,21 @@ import AddCardButton from "./AddCardButton";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 // DND-Kit
-import { DndContext } from "@dnd-kit/core";
-import { SortableContext } from "@dnd-kit/sortable";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  TouchSensor,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
 
 const renderEditableCards = (cards) => {
   const allCards = cards.map((card, index) => (
@@ -50,16 +63,17 @@ const AddCardSortableItem = SortableElement(({}) => (
   </li>
 ));
 
-const SortableItem = SortableElement(({ card }) => (
-  <li className="list-none" style={{ minHeight: "18rem" }}>
-    <Card
-      title={card.title}
-      subheading1={card.subheading1}
-      subheading2={card.subheading2}
-      links={card.links}
-    />
-  </li>
-));
+// const SortableItem = SortableElement(({ card }) => (
+//   <li className="list-none" style={{ minHeight: "18rem" }}>
+//     <Card
+//       cardID={card._id}
+//       title={card.title}
+//       subheading1={card.subheading1}
+//       subheading2={card.subheading2}
+//       links={card.links}
+//     />
+//   </li>
+// ));
 // --SORTABLE HOC Setup--
 
 // const CardsGrid = ({ cards, isEditingAllCards }) => {
@@ -90,12 +104,90 @@ const SortableItem = SortableElement(({ card }) => (
 //   );
 // };
 
+import { SortableItem } from "./SortableItem";
+import { DragOverlay } from "@dnd-kit/core";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
+import { isMobile } from "react-device-detect";
+import CardOverlay from "./CardOverlay";
+
 const CardsGrid = ({ cards, isEditingAllCards }) => {
+  const { reorderCard } = useCardsContext();
+  const [activeId, setActiveId] = useState(null);
+  const [isDropped, setIsDropped] = useState(false);
+
+  const mobileSensors = useSensors(
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    })
+  );
+
+  const defaultSensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        tolerance: 5,
+        delay: 150,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  function handleDragStart(event) {
+    const { active } = event;
+    setActiveId(active.id);
+    setIsDropped(false);
+  }
+
+  function handleDragEnd(event) {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      const oldIndex = cards.findIndex((card) => card._id === active.id);
+      const newIndex = cards.findIndex((card) => card._id === over.id);
+
+      reorderCard(oldIndex, newIndex);
+
+      setActiveId(null);
+    }
+    setIsDropped(true);
+  }
+
   return (
     <>
-      <DndContext onDragEnd={handleDragEnd}>
-        <SortableContext items={cards}></SortableContext>
-      </DndContext>
+      <div className="grid sm:justify-center gap-5 p-5 pb-16 grid-cols-1 cards-grid">
+        <DndContext
+          sensors={isMobile ? mobileSensors : defaultSensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+          modifiers={[restrictToParentElement]}
+          onDragStart={(event) => {
+            handleDragStart(event);
+            if (window.getSelection) {
+              window.getSelection().removeAllRanges();
+            } else if (document.selection) {
+              document.selection.empty();
+            }
+          }}
+        >
+          <SortableContext
+            items={cards.map((card) => card._id)}
+            strategy={rectSortingStrategy}
+          >
+            {cards.map((card) => (
+              <Card key={card._id} id={card._id} card={card} />
+            ))}
+          </SortableContext>
+
+          <DragOverlay adjustScale={true}>
+            {activeId ? (
+              <CardOverlay cards={cards} id={activeId} isDropped={isDropped} />
+            ) : null}
+          </DragOverlay>
+        </DndContext>
+      </div>
     </>
   );
 };
