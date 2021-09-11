@@ -4,13 +4,18 @@ import { Menu, Transition } from "@headlessui/react";
 
 import { IoMdClose as DeleteIcon } from "react-icons/io";
 
-const DropDown = ({ children, items }) => {
+const DropDown = ({ children, items, disabled = false }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       {({ open }) => (
         <>
           <div>
-            <Menu.Button className={"focus:outline-none"}>
+            <Menu.Button
+              disabled={disabled}
+              className={`focus:outline-none ${
+                disabled && "pointer-events-none"
+              }`}
+            >
               {children}
             </Menu.Button>
           </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/App.css";
 
 import { CardsProvider, useCardsContext } from "./contexts/CardsContext";
 import { ToastContainer } from "react-toastify";

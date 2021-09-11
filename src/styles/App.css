@@ -1,0 +1,19 @@
+.card-overlay {
+  /* background-color: blueviolet; */
+  animation: dragged 250ms forwards;
+}
+
+.card-overlay-dropped {
+  animation: dragged 100ms reverse;
+}
+
+@keyframes dragged {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+}
