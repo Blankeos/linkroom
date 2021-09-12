@@ -136,13 +136,13 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
     })
   );
 
-  function handleDragStart(event) {
+  const handleDragStart = (event) => {
     const { active } = event;
     setActiveId(active.id);
     setIsDropped(false);
-  }
+  };
 
-  function handleDragEnd(event) {
+  const handleDragEnd = (event) => {
     const { active, over } = event;
     if (active.id !== over.id) {
       const oldIndex = cards.findIndex((card) => card._id === active.id);
@@ -153,7 +153,7 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
       setActiveId(null);
     }
     setIsDropped(true);
-  }
+  };
 
   return (
     <>
