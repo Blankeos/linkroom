@@ -15,6 +15,9 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
   const { cards, importCards } = useCardsContext();
   const [importInput, setImportInput] = useState("");
 
+  // Copy Button State
+  const [copyButtonText, setCopyButtonText] = useState("Copy");
+
   function CardsJSONFormatError() {}
   CardsJSONFormatError.prototype = new Error();
 
@@ -48,11 +51,17 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
     }
   };
 
-  const handleCopy = () => {};
+  const handleCopy = () => {
+    navigator.clipboard.writeText(JSON.stringify(cards));
+    setCopyButtonText("Copied");
+    setTimeout(() => {
+      setCopyButtonText("Copy");
+    }, 2000);
+  };
 
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>
-      <div className="flex space-x-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <span className="flex space-x-2 items-center mb-2 text-lg text-gray-600 font-semibold">
             <span>Import</span>
@@ -62,7 +71,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
               }
             />
           </span>
-          <div className=" w-96 h-52  text-gray-600">
+          <div className="w-96 sm:w-64 md:w-72 lg:w-96 h-52  text-gray-600">
             <textarea
               onChange={(e) => setImportInput(e.target.value)}
               className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-non"
@@ -79,15 +88,15 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
               content={"Copy this text and share or import on another device."}
             />
           </span>
-          <div className=" w-96 h-52 text-gray-600">
+          <div className="w-96 sm:w-64 md:w-72 lg:w-96 h-52 text-gray-600">
             <textarea
               onChange={() => {}}
-              className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none"
+              className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none text-gray-500 bg-gray-100"
               value={JSON.stringify(cards)}
             ></textarea>
           </div>
           <ModalButton className="mt-3" onClick={handleCopy}>
-            Copy
+            {copyButtonText}
           </ModalButton>
         </div>
       </div>
