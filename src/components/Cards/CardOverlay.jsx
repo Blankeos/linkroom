@@ -10,7 +10,7 @@ const CardOverlay = forwardRef(({ id, cards, isDropped, ...props }, ref) => {
 
   return (
     <div
-      className={`h-full fixed cursor-grabbing ${
+      className={`h-full w-full fixed cursor-grabbing ${
         isDropped ? "card-overlay-dropped" : "card-overlay"
       }`}
       style={{ minHeight: "18rem" }}
