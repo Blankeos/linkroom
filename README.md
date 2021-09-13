@@ -1,6 +1,6 @@
-# LinkRoom
-
-![img](/.readme-assets/preview.jpg)
+<h1 align="center">🏹 LinkRoom</h1>
+<div align="center"><span><img src="https://img.shields.io/badge/Work_In_Progress-2ea44f?style=for-the-badge" alt="Work In Progress"></span><span><img src="https://img.shields.io/badge/Not_Deployed_Yet-ffd800?style=for-the-badge" alt="Not Deployed Yet"></span></div>
+<div align="center"><img src="/.readme-assets/preview.jpg" width="800px" /></div>
 
 # 🏷️ About
 
@@ -12,10 +12,10 @@ Made with ViteJS, React, Tailwind, DnDKit, and a couple more cool packages. See 
 
 # 🔌 Meet Our Mascot - Socket
 
-<img src="public/assets/socket_illustration_0.svg" width="300px" height="300px" />
-<img src="public/assets/socket_illustration_1.svg" width="300px" height="300px" />
+<span><img src="public/assets/socket_illustration_0.svg" width="300px" height="300px" /></span>
+<span><img src="public/assets/socket_illustration_1.svg" width="300px" height="300px" /></span>
 
-The cutest blue socket character carrying the LinkRoom brand. Illustrations were also a little bit inspired by Wumpus, Discord mascot. Concept by [glecy](https://github.com/glecy)
+The cutest blue socket character carrying the LinkRoom brand. Illustrations were also a little bit inspired by Wumpus, Discord mascot. Concept by [glecy](https://github.com/glecy).
 
 # ✍ To Dos:
 
