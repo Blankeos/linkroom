@@ -1,12 +1,16 @@
 import React, { forwardRef } from "react";
-import { GoKebabVertical as MenuIcon } from "react-icons/go";
-import { IoMdClose as DeleteIcon } from "react-icons/io";
-import iconDict from "../../data/iconDict";
+import { useCardsContext } from "../../contexts/CardsContext";
 
 import { CardElement } from "./Card";
+import { EditableCardElement } from "./EditableCard";
 
 const CardOverlay = forwardRef(({ id, cards, isDropped, ...props }, ref) => {
-  const card = cards[cards.findIndex((c) => c._id === id)];
+  const findCard = (id) => {
+    return cards[cards.findIndex((c) => c._id === id)];
+  };
+  const currentCard = findCard(id);
+
+  const { isEditingAllCards } = useCardsContext();
 
   return (
     <div
@@ -17,7 +21,13 @@ const CardOverlay = forwardRef(({ id, cards, isDropped, ...props }, ref) => {
       {...props}
       ref={ref}
     >
-      <CardElement card={card} disabled={true} />
+      {isEditingAllCards ? (
+        <>
+          <EditableCardElement card={currentCard} overlay />
+        </>
+      ) : (
+        <CardElement card={currentCard} disabled={true} />
+      )}
     </div>
   );
 });
