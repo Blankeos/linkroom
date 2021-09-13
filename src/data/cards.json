@@ -1,17 +1,108 @@
 {
   "cards": [
     {
+      "_id": "8YTl5J81s",
+      "title": "Cool Websites",
+      "subheading1": "Great for Design Work",
+      "subheading2": "",
+      "links": [
+        {
+          "_id": "aeIi6PzPo",
+          "linkName": "Dribble",
+          "icon": "default_link",
+          "url": "/"
+        },
+        {
+          "_id": "Dym2A1Jmg",
+          "linkName": "CodeWars",
+          "icon": "default_link",
+          "url": "/"
+        },
+        {
+          "_id": "D_C-tj4uF",
+          "linkName": "LeetCode",
+          "icon": "default_link",
+          "url": "/"
+        }
+      ]
+    },
+    {
       "_id": "w5X_Dw3KED",
       "title": "CCS 248",
       "subheading1": "Artificial Neural Networks",
       "subheading2": "Bobby G.",
-      "links": []
+      "links": [
+        {
+          "_id": "0miqgaPhyZ",
+          "linkName": "Google Classroom",
+          "icon": "google_classroom",
+          "url": "/"
+        },
+        {
+          "_id": "eDhiHG6MJ",
+          "linkName": "Facebook Groups",
+          "icon": "facebook",
+          "url": "/"
+        }
+      ]
+    },
+    {
+      "_id": "-EUZYgijy",
+      "title": "My Socials",
+      "subheading1": "Awesome Stuff!",
+      "subheading2": "",
+      "links": [
+        {
+          "_id": "3zS8FdCeQk",
+          "linkName": "Facebook Page",
+          "icon": "facebook",
+          "url": "/"
+        },
+        {
+          "_id": "RTW3rn6gO",
+          "linkName": "Instagram",
+          "icon": "default_link",
+          "url": "/"
+        },
+        {
+          "_id": "ea3P2TYcK",
+          "linkName": "GitHub",
+          "icon": "default_link",
+          "url": "/"
+        },
+        {
+          "_id": "4jes4bMQi",
+          "linkName": "Twitter",
+          "icon": "default_link",
+          "url": "/"
+        }
+      ]
     },
     {
       "_id": "wSQzIQXlZE",
       "title": "CCS 227",
       "subheading1": "Software Engineering 2",
       "subheading2": "Christy V.",
+      "links": [
+        {
+          "_id": "jlFwrNkzW",
+          "linkName": "Google Classroom",
+          "icon": "google_classroom",
+          "url": "/"
+        },
+        {
+          "_id": "HcRa6V3RH",
+          "linkName": "Facebook Groups",
+          "icon": "facebook",
+          "url": "/"
+        }
+      ]
+    },
+    {
+      "_id": "lGrIkAdU6",
+      "title": "",
+      "subheading1": "",
+      "subheading2": "",
       "links": []
     },
     {
@@ -19,14 +110,20 @@
       "title": "CCS 226",
       "subheading1": "Automata Theory & Formal Languages",
       "subheading2": "Maluche S.",
-      "links": []
-    },
-    {
-      "_id": "8YTl5J81s",
-      "title": "",
-      "subheading1": "",
-      "subheading2": "",
-      "links": []
+      "links": [
+        {
+          "_id": "59n6HhXkm",
+          "linkName": "Google Classroom",
+          "icon": "google_classroom",
+          "url": "/"
+        },
+        {
+          "_id": "a1LUo7i7y",
+          "linkName": "Facebook Groups",
+          "icon": "facebook",
+          "url": "/"
+        }
+      ]
     }
   ]
 }

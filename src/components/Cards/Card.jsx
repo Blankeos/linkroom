@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
+// Icons
 import { GoKebabVertical as MenuIcon } from "react-icons/go";
 import { IoMdClose as DeleteIcon } from "react-icons/io";
+import { MdEdit as EditIcon } from "react-icons/md";
 import iconDict from "../../data/iconDict";
+
 import DropDown from "../DropDown";
 
 //  DND-Kit
@@ -40,7 +43,7 @@ const Card = ({ card, id }) => {
   const dropDownItems = [
     {
       name: "Edit",
-      icon: <DeleteIcon />,
+      icon: <EditIcon />,
       onClick: () => {},
     },
   ];
@@ -67,8 +70,18 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
   return (
     <div className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block bg-white">
       <div className="h-full rounded-b-2xl rounded-t-3xl">
-        <div className="flex flex-col space-y-1 bg-blue-500 text-white p-6 rounded-t-2xl">
-          <div className="flex items-center justify-between text-white pb-2">
+        <div className="relative flex flex-col space-y-1 bg-blue-500 text-white p-6 rounded-t-2xl">
+          <div
+            className="absolute inset-0 opacity-40"
+            style={{
+              backgroundImage: "url('/assets/socket_illustration_1.svg')",
+              backgroundPosition: "right",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              filter: "grayscale(1)",
+            }}
+          ></div>
+          <div className="relative flex items-center justify-between text-white pb-2">
             <h2 className="font-bold text-3xl truncate">
               {title}
               {renderDummyIfEmpty(title.length <= 0)}
@@ -78,11 +91,11 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
             </DropDown>
           </div>
 
-          <p className="text-sm font-light">
+          <p className="relative text-sm font-light">
             {subheading1}
             {renderDummyIfEmpty(subheading1.length <= 0)}
           </p>
-          <p className="text-sm font-light">
+          <p className="relative text-sm font-light">
             {subheading2}
             {renderDummyIfEmpty(subheading2.length <= 0)}
           </p>
