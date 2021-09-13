@@ -10,7 +10,7 @@ export default function Modal({ isOpen, closeModal, children, closeMessage }) {
           className="fixed inset-0 z-10 overflow-y-auto"
           onClose={closeModal}
         >
-          <div className="min-h-screen px-4 text-center bg-blue-400 bg-opacity-70">
+          <div className="min-h-screen px-4 text-center bg-blue-400 backdrop-filter backdrop-blur-sm bg-opacity-60">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
