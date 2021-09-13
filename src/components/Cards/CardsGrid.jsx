@@ -6,62 +6,48 @@ import EditableCard from "./EditableCard";
 import AddCardButton from "./AddCardButton";
 
 // Sortable HOC
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 // DND-Kit
 import {
   DndContext,
   closestCenter,
-  KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
   TouchSensor,
 } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  rectSortingStrategy,
-} from "@dnd-kit/sortable";
+import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
 
-const renderEditableCards = (cards) => {
-  const allCards = cards.map((card, index) => (
-    <EditableSortableItem key={card._id} index={index} card={card} i={index} />
-  ));
-
-  return [...allCards, <AddCardSortableItem key="add-card" disabled />];
-};
 // --SORTABLE HOC Setup--
-const SortableList = SortableContainer(({ cards, isEditingAllCards }) => {
-  return (
-    <ul className="grid sm:justify-center gap-5 p-5 pb-16 grid-cols-1 cards-grid">
-      {isEditingAllCards
-        ? renderEditableCards(cards)
-        : cards.map((card, index) => (
-            <SortableItem key={card._id} index={index} card={card} />
-          ))}
-    </ul>
-  );
-});
+// const SortableList = SortableContainer(({ cards, isEditingAllCards }) => {
+//   return (
+//     <ul className="grid sm:justify-center gap-5 p-5 pb-16 grid-cols-1 cards-grid">
+//       {isEditingAllCards
+//         ? renderEditableCards(cards)
+//         : cards.map((card, index) => (
+//             <SortableItem key={card._id} index={index} card={card} />
+//           ))}
+//     </ul>
+//   );
+// });
 
-const EditableSortableItem = SortableElement(({ card, i }) => (
-  <li className="list-none" style={{ minHeight: "18rem" }}>
-    <EditableCard
-      index={i}
-      title={card.title}
-      subheading1={card.subheading1}
-      subheading2={card.subheading2}
-      links={card.links}
-    />
-  </li>
-));
+// const EditableSortableItem = SortableElement(({ card, i }) => (
+//   <li className="list-none" style={{ minHeight: "18rem" }}>
+//     <EditableCard
+//       index={i}
+//       title={card.title}
+//       subheading1={card.subheading1}
+//       subheading2={card.subheading2}
+//       links={card.links}
+//     />
+//   </li>
+// ));
 
-const AddCardSortableItem = SortableElement(({}) => (
-  <li className="list-none" style={{ minHeight: "18rem" }}>
-    <AddCardButton />
-  </li>
-));
+// const AddCardSortableItem = SortableElement(({}) => (
+//   <li className="list-none" style={{ minHeight: "18rem" }}>
+//     <AddCardButton />
+//   </li>
+// ));
 
 // const SortableItem = SortableElement(({ card }) => (
 //   <li className="list-none" style={{ minHeight: "18rem" }}>
@@ -104,7 +90,6 @@ const AddCardSortableItem = SortableElement(({}) => (
 //   );
 // };
 
-import { SortableItem } from "./SortableItem";
 import { DragOverlay } from "@dnd-kit/core";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import { isMobile } from "react-device-detect";
@@ -130,9 +115,6 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
         tolerance: 5,
         delay: 150,
       },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 
@@ -176,9 +158,11 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
             items={cards.map((card) => card._id)}
             strategy={rectSortingStrategy}
           >
-            {cards.map((card) => (
-              <Card key={card._id} id={card._id} card={card} />
-            ))}
+            {isEditingAllCards
+              ? renderEditableCards(cards)
+              : cards.map((card) => (
+                  <Card key={card._id} id={card._id} card={card} />
+                ))}
           </SortableContext>
 
           <DragOverlay adjustScale={true}>
@@ -190,6 +174,14 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
       </div>
     </>
   );
+};
+
+const renderEditableCards = (cards) => {
+  const allCards = cards.map((card, i) => (
+    <EditableCard key={card._id} id={card._id} card={card} index={i} />
+  ));
+
+  return [...allCards, <AddCardButton key="add-card" />];
 };
 
 export default CardsGrid;

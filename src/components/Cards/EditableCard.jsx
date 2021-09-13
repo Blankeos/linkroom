@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { BsArrowsMove as MoveIcon } from "react-icons/bs";
 import { MdAdd as AddIcon } from "react-icons/md";
 import { IoMdClose as DeleteIcon } from "react-icons/io";
 import { GoKebabVertical as MenuIcon } from "react-icons/go";
@@ -10,7 +9,32 @@ import { useCardsContext } from "../../contexts/CardsContext";
 import Tippy from "@tippyjs/react";
 import DropDown from "../DropDown";
 
-const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
+//  DND-Kit
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
+
+const EditableCard = ({ card, id, index }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: id,
+    transition: {
+      duration: 150, // milliseconds
+      easing: "cubic-bezier(0.25, 1, 0.5, 1)",
+    },
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    touchAction: "none",
+  };
+
   const {
     changeOneCardTitle,
     addNewLinkOneCard,
@@ -18,6 +42,13 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
     changeLinkOneCardProperty,
     deleteCard,
   } = useCardsContext();
+
+  const editFunctions = {
+    changeOneCardTitle,
+    addNewLinkOneCard,
+    deleteLinkOneCard,
+    changeLinkOneCardProperty,
+  };
 
   const dropDownItems = [
     {
@@ -34,61 +65,20 @@ const EditableCard = ({ index, title, subheading1, subheading2, links }) => {
 
   return (
     <div
-      className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block bg-white"
-      style={{ minHeight: "18rem" }}
+      className={`${
+        isDragging && "opacity-40"
+      } transition duration-300 ease-in-out cursor-grab`}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
     >
-      <div className="h-full rounded-b-2xl border-r border-l border-b rounded-t-3xl">
-        <div className="flex flex-col space-y-1.5 bg-blue-500 text-gray-600 p-3 pb-5 rounded-t-2xl border border-blue-500">
-          <div className="flex justify-end text-white pb-2">
-            <DropDown items={dropDownItems}>
-              <MenuIcon size="1.5rem" />
-            </DropDown>
-          </div>
-          <input
-            className="font-bold text-3xl p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
-            defaultValue={title && title}
-            placeholder="Title"
-            onChange={(e) => {
-              changeOneCardTitle(index, "title", e.target.value);
-            }}
-          />
-          <input
-            className="text-sm p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
-            defaultValue={subheading1 && subheading1}
-            placeholder="Subheading 1"
-            onChange={(e) => {
-              changeOneCardTitle(index, "subheading1", e.target.value);
-            }}
-          />
-          <input
-            className="text-sm p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
-            defaultValue={subheading2 && subheading2}
-            placeholder="Subheading 2"
-            onChange={(e) => {
-              changeOneCardTitle(index, "subheading2", e.target.value);
-            }}
-          />
-        </div>
-        <div className="py-5 flex flex-col space-y-2 text-gray-600">
-          {links &&
-            links.map((link, i) => {
-              return (
-                <Link
-                  key={link._id}
-                  icon={link && link.icon}
-                  url={link.url}
-                  onDeleteClick={() => deleteLinkOneCard(index, i)}
-                  cardID={index}
-                  linkID={i}
-                  changeLinkOneCardPropertyFunction={changeLinkOneCardProperty}
-                >
-                  {link.linkName}
-                </Link>
-              );
-            })}
-          <NewLinkButton onClick={() => addNewLinkOneCard(index)} />
-        </div>
-      </div>
+      <EditableCardElement
+        index={index}
+        card={card}
+        dropDownItems={dropDownItems}
+        editFunctions={editFunctions}
+      />
     </div>
   );
 };
@@ -102,15 +92,17 @@ const Link = ({
   linkID,
   changeLinkOneCardPropertyFunction,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   const handleChange = (e) => {
-    changeLinkOneCardPropertyFunction(
-      cardID,
-      linkID,
-      e.target.name,
-      e.target.value
-    );
+    if (changeLinkOneCardPropertyFunction) {
+      changeLinkOneCardPropertyFunction(
+        cardID,
+        linkID,
+        e.target.name,
+        e.target.value
+      );
+    } else {
+      console.log("No changeLinkOneCardPropertyFunction() found");
+    }
   };
   return (
     <Tippy
@@ -126,11 +118,7 @@ const Link = ({
         </button>
       }
     >
-      <span
-        className="relative flex items-center space-x-2 px-5"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      <span className="relative flex items-center space-x-2 px-5">
         <Tippy
           interactive
           trigger="click"
@@ -141,12 +129,14 @@ const Link = ({
                 return (
                   <button
                     onClick={() => {
-                      changeLinkOneCardPropertyFunction(
-                        cardID,
-                        linkID,
-                        "icon",
-                        key
-                      );
+                      if (changeLinkOneCardProperty) {
+                        changeLinkOneCardPropertyFunction(
+                          cardID,
+                          linkID,
+                          "icon",
+                          key
+                        );
+                      }
                     }}
                     className="p-2 text-lg"
                     key={i}
@@ -199,3 +189,99 @@ const NewLinkButton = ({ onClick }) => {
 };
 
 export default EditableCard;
+
+export const EditableCardElement = ({
+  card,
+  index,
+  dropDownItems = [],
+  overlay = false,
+  editFunctions = null,
+}) => {
+  const { title, subheading1, subheading2, links } = card;
+  return (
+    <div className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block bg-white">
+      <div className="h-full rounded-b-2xl rounded-t-3xl">
+        <div className="flex flex-col space-y-1.5 bg-blue-500 text-gray-600 p-3 pb-5 rounded-t-2xl">
+          <div className="flex justify-end text-white pb-2">
+            <DropDown items={dropDownItems} disabled={overlay}>
+              <MenuIcon size="1.5rem" />
+            </DropDown>
+          </div>
+          <input
+            className="font-bold text-3xl p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
+            defaultValue={title && title}
+            value={overlay ? title : undefined}
+            placeholder="Title"
+            onChange={(e) => {
+              if (editFunctions) {
+                editFunctions.changeOneCardTitle(
+                  index,
+                  "title",
+                  e.target.value
+                );
+              }
+            }}
+          />
+          <input
+            className="text-sm p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
+            defaultValue={subheading1 && subheading1}
+            value={overlay ? subheading1 : undefined}
+            placeholder="Subheading 1"
+            onChange={(e) => {
+              if (editFunctions) {
+                editFunctions.changeOneCardTitle(
+                  index,
+                  "subheading1",
+                  e.target.value
+                );
+              }
+            }}
+          />
+          <input
+            className="text-sm p-2 py-1 rounded-lg outline-none bg-white bg-opacity-10 text-white placeholder-gray-50 placeholder-opacity-50"
+            defaultValue={subheading2 && subheading2}
+            value={overlay ? subheading2 : undefined}
+            placeholder="Subheading 2"
+            onChange={(e) => {
+              if (editFunctions) {
+                editFunctions.changeOneCardTitle(
+                  index,
+                  "subheading2",
+                  e.target.value
+                );
+              }
+            }}
+          />
+        </div>
+        <div className="py-5 flex flex-col space-y-2 text-gray-600">
+          {links &&
+            links.map((link, i) => {
+              return (
+                <Link
+                  key={link._id}
+                  icon={link && link.icon}
+                  url={link.url}
+                  onDeleteClick={() => {
+                    if (editFunctions)
+                      editFunctions.deleteLinkOneCard(index, i);
+                  }}
+                  cardID={index}
+                  linkID={i}
+                  changeLinkOneCardPropertyFunction={
+                    editFunctions
+                      ? editFunctions.changeLinkOneCardProperty
+                      : null
+                  }
+                >
+                  {link.linkName}
+                </Link>
+              );
+            })}
+          <NewLinkButton
+            onClick={() => editFunctions.addNewLinkOneCard(index)}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
