@@ -64,21 +64,19 @@ const EditableCard = ({ card, id, index }) => {
   ];
 
   return (
-    <div
-      className={`${
-        isDragging && "opacity-40"
-      } transition duration-300 ease-in-out cursor-grab`}
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-    >
-      <EditableCardElement
-        index={index}
-        card={card}
-        dropDownItems={dropDownItems}
-        editFunctions={editFunctions}
-      />
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      <div
+        className={`${
+          isDragging && "opacity-40"
+        } transition duration-300 ease-in-out cursor-grab`}
+      >
+        <EditableCardElement
+          index={index}
+          card={card}
+          dropDownItems={dropDownItems}
+          editFunctions={editFunctions}
+        />
+      </div>
     </div>
   );
 };
