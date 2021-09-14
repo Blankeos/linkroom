@@ -8,7 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
+
+// Pages
 import MainApp from "./pages/MainApp";
+import InstallPage from "./pages/InstallPage";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -21,6 +24,7 @@ function App() {
           <Router>
             <Switch>
               <Route exact path="/" component={MainApp} />
+              <Route exact path="/install" component={InstallPage} />
             </Switch>
           </Router>
         </Main>
