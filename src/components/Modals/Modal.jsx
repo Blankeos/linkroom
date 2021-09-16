@@ -1,7 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 
-export default function Modal({ isOpen, closeModal, children, closeMessage }) {
+// Make sure modalClass is for size
+export default function Modal({
+  isOpen,
+  closeModal,
+  children,
+  closeMessage,
+  modalClass,
+}) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -39,7 +46,9 @@ export default function Modal({ isOpen, closeModal, children, closeMessage }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div
+                className={`${modalClass} inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl`}
+              >
                 <div>{children}</div>
                 {closeMessage && (
                   <div className="mt-4">
