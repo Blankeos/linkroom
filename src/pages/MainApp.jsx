@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "../components/Menu";
 import EmptyGrid from "../components/EmptyGrid";
 import { useCardsContext } from "../contexts/CardsContext";
 import CardsGrid from "../components/Cards/CardsGrid";
+import EditModal from "../components/Modals/EditModal";
 
 const MainApp = () => {
   const { cards, isEditingAllCards } = useCardsContext();
-
+  const [show, setShow] = useState(false);
   return (
     <>
       <Menu />
@@ -15,7 +16,8 @@ const MainApp = () => {
       ) : (
         <EmptyGrid />
       )}
-      {/* {JSON.stringify(cards.cards)} */}
+      <button onClick={() => setShow(true)}>Show Modal</button>
+      <EditModal isOpen={show} closeModal={() => setShow(false)} />
     </>
   );
 };
