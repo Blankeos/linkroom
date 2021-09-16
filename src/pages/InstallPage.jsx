@@ -40,7 +40,7 @@ const InstallPage = () => {
         <InstallButton />
         <Link
           to="/"
-          className="bg-gray-900 select-none text-white p-3 px-6 rounded-full my-1 mx-1"
+          className="bg-gray-900 select-none text-white p-3 px-6 rounded-full my-1 mx-1 transition shadow hover:shadow-lg hover:bg-gray-800"
         >
           {`Proceed ${isStandalone ? "to app" : "with your browser"}`}
         </Link>
