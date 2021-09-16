@@ -12,6 +12,8 @@ export default defineConfig({
         "favicon.ico",
         "robots.txt",
         "apple-touch-icon.png",
+        "assets/socket_illustration_0.svg",
+        "assets/socket_illustration_1.svg",
       ],
       manifest: {
         name: "Link Room",
@@ -34,6 +36,12 @@ export default defineConfig({
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
+          },
+        ],
+        related_applications: [
+          {
+            platform: "webapp",
+            url: "http://localhost:5000/manifest.webmanifest",
           },
         ],
       },
