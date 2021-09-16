@@ -40,13 +40,19 @@ const Card = ({ card, id }) => {
     touchAction: "none",
   };
 
+  // Handlers
+  const handleEdit = () => {
+    console.log(id);
+  };
+
   const dropDownItems = [
     {
       name: "Edit",
       icon: <EditIcon />,
-      onClick: () => {},
+      onClick: handleEdit,
     },
   ];
+
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <div
@@ -81,24 +87,25 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
               filter: "grayscale(1)",
             }}
           ></div>
-          <div className="relative flex items-center justify-between text-white pb-2">
-            <h2 className="font-bold text-3xl truncate">
-              {title}
-              {renderDummyIfEmpty(title.length <= 0)}
-            </h2>
-            <DropDown disabled={disabled} items={dropDownItems}>
-              <MenuIcon size="1.5rem" />
-            </DropDown>
+          <div className="relative">
+            <div className="flex items-center justify-between text-white pb-2">
+              <h2 className="font-bold text-3xl truncate">
+                {title}
+                {renderDummyIfEmpty(title.length <= 0)}
+              </h2>
+              <DropDown disabled={disabled} items={dropDownItems}>
+                <MenuIcon size="1.5rem" />
+              </DropDown>
+            </div>
+            <p className="text-sm font-light">
+              {subheading1}
+              {renderDummyIfEmpty(subheading1.length <= 0)}
+            </p>
+            <p className="text-sm font-light">
+              {subheading2}
+              {renderDummyIfEmpty(subheading2.length <= 0)}
+            </p>
           </div>
-
-          <p className="relative text-sm font-light">
-            {subheading1}
-            {renderDummyIfEmpty(subheading1.length <= 0)}
-          </p>
-          <p className="relative text-sm font-light">
-            {subheading2}
-            {renderDummyIfEmpty(subheading2.length <= 0)}
-          </p>
         </div>
         <div className="p-6 flex flex-col space-y-2 text-gray-600 rounded-b-2xl">
           {links &&
