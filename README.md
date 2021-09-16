@@ -1,6 +1,6 @@
 <h1 align="center">🏹 LinkRoom</h1>
 <div align="center"><span><img src="https://img.shields.io/badge/Work_In_Progress-2ea44f?style=for-the-badge" alt="Work In Progress"></span><span><img src="https://img.shields.io/badge/Not_Deployed_Yet-ffd800?style=for-the-badge" alt="Not Deployed Yet"></span></div>
-<div align="center"><img src="/.readme-assets/preview.jpg" width="800px" /></div>
+<div align="center"><img src="/.readme-assets/preview.jpg" width="800px" /><img src="/.readme-assets/preview_landing.jpg" width="800px" /></div>
 
 ## 🏷️ About
 
@@ -23,7 +23,7 @@ The cutest blue socket character carrying the LinkRoom brand. Illustrations were
 
 - [x] Working Drag and Drop
 - [ ] Single Edit Mode (Modal)
-- [ ] Install PWA Modal or `/install` landing page.
+- [x] Install PWA Modal or `/install` landing page.
 - [ ] Toast Tip System (Tracked with LocalStorage)
 - [ ] Mobile Version: Bottom Nav and Sorting Page
 - [ ] FAQs Page
