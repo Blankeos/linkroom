@@ -17,3 +17,8 @@
     opacity: 0.95;
   }
 }
+
+/* For when you're focusing and the label gets highlighted */
+.input-focus-wrapper:focus-within > label {
+  color: rgba(59, 130, 246);
+}
