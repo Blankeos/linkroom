@@ -89,26 +89,3 @@ const MenuItem = ({ children, onClick, icon, href }) => {
     </Menu.Item>
   );
 };
-
-/* {items.map((item, i) => {
-    return (
-    <Menu.Item key={i}>
-        {({ active }) => (
-        <Link
-            to={item.route}
-            onClick={item.onClick}
-            className={`
-            ${
-                active
-                ? "bg-gray-100 text-gray-700"
-                : "text-gray-600"
-            } px-4 py-2 text-sm flex space-x-2 items-center
-            `}
-        >
-            {item.icon}
-            <span>{item.name}</span>
-        </Link>
-        )}
-    </Menu.Item>
-    );
-})} */

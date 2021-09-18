@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useCardsContext } from "../contexts/CardsContext";
+
+// Components
 import Menu from "../components/Menu";
 import EmptyGrid from "../components/EmptyGrid";
-import { useCardsContext } from "../contexts/CardsContext";
 import CardsGrid from "../components/Cards/CardsGrid";
 import EditModal from "../components/Modals/EditModal";
 

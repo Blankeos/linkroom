@@ -4,7 +4,7 @@ import { cloneDeep } from "lodash";
 
 import Modal from "./Modal";
 
-import { IoMdClose as DeleteIcon } from "react-icons/io";
+import { IoMdClose as CloseIcon } from "react-icons/io";
 
 const createNewStateObject = () => ({
   _id: generate(),
@@ -18,7 +18,7 @@ const createNewLinkObject = () => ({
   _id: generate(),
   linkName: "",
   url: "",
-  icon: "",
+  icon: "default_link",
 });
 
 const reducer = (state, action) => {
@@ -44,8 +44,10 @@ const reducer = (state, action) => {
       return state;
   }
 };
-const EditModal = ({ isOpen, closeModal }) => {
+const EditModal = ({ isOpen, closeModal, initialState }) => {
   const [state, dispatch] = useReducer(reducer, createNewStateObject());
+
+  const initialize = (initialState) => {};
 
   //   Custom Close Handler + the boolean state setter from the parent
   const handleClose = () => {
@@ -64,7 +66,7 @@ const EditModal = ({ isOpen, closeModal }) => {
       <h1 className="flex justify-between mb-5 font-bold text-xl text-gray-700">
         <span>✍ Edit Card</span>
         <button onClick={handleClose}>
-          <DeleteIcon
+          <CloseIcon
             className="text-gray-400 hover:text-gray-500"
             size="1.2rem"
           />
@@ -73,7 +75,11 @@ const EditModal = ({ isOpen, closeModal }) => {
       <div className="flex flex-col space-y-3">
         <div className="input-focus-wrapper flex flex-col space-y-1">
           <EditLabel id="edit_title">Title</EditLabel>
-          <EditInput id="edit_title" placeholder="Enter title" />
+          <EditInput
+            id="edit_title"
+            placeholder="Enter title"
+            defaultValue={state.title}
+          />
         </div>
         <div className="input-focus-wrapper flex flex-col space-y-1">
           <EditLabel id="edit_subheading1">Subheading 1</EditLabel>
@@ -124,12 +130,18 @@ const EditLabel = ({ id, children }) => {
   );
 };
 
-const EditInput = ({ id, onChange = () => null, placeholder = "" }) => {
+const EditInput = ({
+  id,
+  onChange = () => null,
+  placeholder = "",
+  defaultValue = "",
+}) => {
   return (
     <input
       id={id}
       className="p-2 text-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded border border-gray-300"
       placeholder={placeholder}
+      defaultValue={defaultValue}
       onChange={onChange}
     />
   );

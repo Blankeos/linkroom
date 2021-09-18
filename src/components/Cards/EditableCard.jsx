@@ -127,7 +127,7 @@ const Link = ({
                 return (
                   <button
                     onClick={() => {
-                      if (changeLinkOneCardProperty) {
+                      if (changeLinkOneCardPropertyFunction) {
                         changeLinkOneCardPropertyFunction(
                           cardID,
                           linkID,

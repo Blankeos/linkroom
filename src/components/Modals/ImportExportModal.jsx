@@ -74,7 +74,8 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
           <div className="w-96 sm:w-64 md:w-72 lg:w-96 h-52  text-gray-600">
             <textarea
               onChange={(e) => setImportInput(e.target.value)}
-              className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-non"
+              className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none"
+              value={importInput}
             ></textarea>
           </div>
           <ModalButton className="mt-3" onClick={handleSave}>

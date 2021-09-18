@@ -2,23 +2,20 @@ import React, { useState } from "react";
 
 // Icons
 import { GoKebabVertical as MenuIcon } from "react-icons/go";
-import { IoMdClose as DeleteIcon } from "react-icons/io";
 import { MdEdit as EditIcon } from "react-icons/md";
 import iconDict from "../../data/iconDict";
 
+// Components
 import DropDown from "../DropDown";
+import EditModal from "../Modals/EditModal";
 
 //  DND-Kit
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-const renderDummyIfEmpty = (isEmpty) => {
-  return (
-    <>{isEmpty && <span className="text-transparent select-none">`</span>}</>
-  );
-};
-
 const Card = ({ card, id }) => {
+  const [editVisible, setEditVisibile] = useState(false);
+
   const {
     attributes,
     listeners,
@@ -42,7 +39,8 @@ const Card = ({ card, id }) => {
 
   // Handlers
   const handleEdit = () => {
-    console.log(id);
+    // Open edit modal
+    setEditVisibile(true);
   };
 
   const dropDownItems = [
@@ -54,21 +52,29 @@ const Card = ({ card, id }) => {
   ];
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <div
-        className={`h-full transform transition duration-300 ease-in-out cursor-grab ${
-          isDragging && "opacity-40"
-        }`}
-        style={{
-          transform: isDragging ? "scale(1.02)" : undefined,
-          minHeight: "18rem",
-        }}
-      >
-        <CardElement card={card} dropDownItems={dropDownItems} />
+    <>
+      <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+        <div
+          className={`h-full transform transition duration-300 ease-in-out cursor-grab ${
+            isDragging && "opacity-40"
+          }`}
+          style={{
+            transform: isDragging ? "scale(1.02)" : undefined,
+            minHeight: "18rem",
+          }}
+        >
+          <CardElement card={card} dropDownItems={dropDownItems} />
+        </div>
       </div>
-    </div>
+      <EditModal
+        isOpen={editVisible}
+        initialState={card}
+        closeModal={() => setEditVisibile(false)}
+      />
+    </>
   );
 };
+
 export default Card;
 
 export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
@@ -139,5 +145,12 @@ const Link = ({ url, icon, children, disabled = false }) => {
       {iconDict[icon]}
       <span>{children}</span>
     </a>
+  );
+};
+
+// Helper Functions
+const renderDummyIfEmpty = (isEmpty) => {
+  return (
+    <>{isEmpty && <span className="text-transparent select-none">`</span>}</>
   );
 };
