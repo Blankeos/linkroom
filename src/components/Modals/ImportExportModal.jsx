@@ -6,7 +6,9 @@ import { useCardsContext, CARDS_STORAGE } from "../../contexts/CardsContext";
 // For error checking
 import Card from "../Cards/Card";
 
+// Icons
 import { RiInformationLine as InfoIcon } from "react-icons/ri";
+import { IoMdClose as CloseIcon } from "react-icons/io";
 
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -60,7 +62,19 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} closeModal={closeModal}>
+    <Modal
+      modalClass="w-full sm:w-11/12 md:w-9/12 lg:w-7/12"
+      isOpen={isOpen}
+      closeModal={closeModal}
+    >
+      <div className="flex justify-end">
+        <button onClick={closeModal}>
+          <CloseIcon
+            className="text-gray-400 hover:text-gray-500"
+            size="1.2rem"
+          />
+        </button>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <span className="flex space-x-2 items-center mb-2 text-lg text-gray-600 font-semibold">
@@ -71,7 +85,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
               }
             />
           </span>
-          <div className="w-96 sm:w-64 md:w-72 lg:w-96 h-52  text-gray-600">
+          <div className="h-52  text-gray-600">
             <textarea
               onChange={(e) => setImportInput(e.target.value)}
               className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none"
@@ -89,7 +103,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
               content={"Copy this text and share or import on another device."}
             />
           </span>
-          <div className="w-96 sm:w-64 md:w-72 lg:w-96 h-52 text-gray-600">
+          <div className="h-52 text-gray-600">
             <textarea
               onChange={() => {}}
               className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none text-gray-500 bg-gray-100"
