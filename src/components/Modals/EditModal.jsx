@@ -1,71 +1,42 @@
 import React, { useRef, useReducer } from "react";
-import { generate } from "shortid";
-import { cloneDeep } from "lodash";
 
 import Modal from "./Modal";
 
 import { IoMdClose as CloseIcon } from "react-icons/io";
 
-const createNewStateObject = () => ({
-  _id: generate(),
-  title: "",
-  subheading1: "",
-  subheading2: "",
-  links: [],
-});
-
-const createNewLinkObject = () => ({
-  _id: generate(),
-  linkName: "",
-  url: "",
-  icon: "default_link",
-});
-
-const reducer = (state, action) => {
-  let linksClone;
-  switch (action.type) {
-    case "SET_ALL":
-      return action.payload.state;
-    case "NEW_LINK":
-      linksClone = cloneDeep(state.links);
-      linksClone = [...linksClone, createNewLinkObject()];
-      return {
-        ...state,
-        links: linksClone,
-      };
-    case "DELETE_LINK":
-      linksClone = cloneDeep(state.links);
-      linksClone = linksClone.filter((link) => link._id !== action.payload.id);
-      return {
-        ...state,
-        links: linksClone,
-      };
-    default:
-      return state;
-  }
-};
-const EditModal = ({ isOpen, closeModal, initialState }) => {
-  const [state, dispatch] = useReducer(reducer, createNewStateObject());
-
-  const initialize = (initialState) => {};
-
-  //   Custom Close Handler + the boolean state setter from the parent
-  const handleClose = () => {
-    closeModal();
-    // This is so it resets the state when the close animation finishes. (Bad practice but it works)
-    setTimeout(() => {
-      dispatch({ type: "SET_ALL", payload: { state: createNewStateObject() } });
-    }, 700);
+const EditModal = ({ isOpen, closeModal, card, dispatch }) => {
+  // Custom property change handler
+  const handlePropertyChange = (e) => {
+    dispatch({
+      type: "SET_PROPERTY",
+      payload: {
+        propertyName: e.target.name,
+        value: e.target.value,
+      },
+    });
   };
+
+  // Should've been a handler for onChange event, but just a function so parameters are more flexible.
+  const changeLinkProperty = (linkID, linkPropertyName, value) => {
+    dispatch({
+      type: "SET_LINK_PROPERTY",
+      payload: {
+        linkID: linkID,
+        linkPropertyName: linkPropertyName,
+        value: value,
+      },
+    });
+  };
+
   return (
     <Modal
       modalClass="w-full sm:w-9/12 md:w-7/12 lg:w-5/12"
       isOpen={isOpen}
-      closeModal={handleClose}
+      closeModal={closeModal}
     >
       <h1 className="flex justify-between mb-5 font-bold text-xl text-gray-700">
         <span>✍ Edit Card</span>
-        <button onClick={handleClose}>
+        <button onClick={closeModal}>
           <CloseIcon
             className="text-gray-400 hover:text-gray-500"
             size="1.2rem"
@@ -77,31 +48,46 @@ const EditModal = ({ isOpen, closeModal, initialState }) => {
           <EditLabel id="edit_title">Title</EditLabel>
           <EditInput
             id="edit_title"
+            name="title"
             placeholder="Enter title"
-            defaultValue={state.title}
+            value={card && card.title}
+            onChange={handlePropertyChange}
           />
         </div>
         <div className="input-focus-wrapper flex flex-col space-y-1">
           <EditLabel id="edit_subheading1">Subheading 1</EditLabel>
-          <EditInput id="edit_subheading1" placeholder="Enter subheading 1" />
+          <EditInput
+            id="edit_subheading1"
+            name="subheading1"
+            placeholder="Enter subheading 1"
+            value={card && card.subheading1}
+            onChange={handlePropertyChange}
+          />
         </div>
         <div className="input-focus-wrapper flex flex-col space-y-1">
           <EditLabel id="edit_subheading2">Subheading 2</EditLabel>
-          <EditInput id="edit_subheading2" placeholder="Enter subheading 2" />
+          <EditInput
+            id="edit_subheading2"
+            name="subheading2"
+            placeholder="Enter subheading 2"
+            value={card && card.subheading2}
+            onChange={handlePropertyChange}
+          />
         </div>
         <div className="flex flex-col space-y-1">
           <EditLabel>Links</EditLabel>
           <div className="links-container-(not-a-real-class) flex flex-col space-y-3">
-            {state.links.map((link, i) => {
-              return (
-                <LinkItem
-                  key={link._id}
-                  onDelete={() =>
-                    dispatch({ type: "DELETE_LINK", payload: { id: link._id } })
-                  }
-                />
-              );
-            })}
+            {card &&
+              card.links.map((link) => {
+                return (
+                  <LinkItem
+                    key={link._id}
+                    linkValue={link}
+                    onDelete={() => null}
+                    changeLinkProperty={changeLinkProperty}
+                  />
+                );
+              })}
             <button
               onClick={() =>
                 dispatch({
@@ -132,29 +118,37 @@ const EditLabel = ({ id, children }) => {
 
 const EditInput = ({
   id,
+  name = undefined,
   onChange = () => null,
   placeholder = "",
   defaultValue = "",
+  value = "",
 }) => {
   return (
     <input
       id={id}
+      name={name}
       className="p-2 text-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded border border-gray-300"
       placeholder={placeholder}
       defaultValue={defaultValue}
       onChange={onChange}
+      value={value}
     />
   );
 };
 
-const LinkItem = ({ onDelete = () => null }) => {
+const LinkItem = ({
+  onDelete = () => null,
+  linkValue,
+  changeLinkProperty = () => null,
+}) => {
   return (
     <a className="border border-gray-200 focus-within:ring-1 focus-within:ring-blue-400 rounded cursor-default">
       <span className="bg-gray-50 p-3.5 rounded text-sm flex flex-col group space-y-2">
         <span className="flex justify-between items-center">
           <span>Icon</span>
           <button onClick={onDelete}>
-            <DeleteIcon
+            <CloseIcon
               className="text-gray-400 hover:text-gray-500"
               size="1.2rem"
             />
@@ -168,7 +162,11 @@ const LinkItem = ({ onDelete = () => null }) => {
             autoComplete="off"
             id="name"
             placeholder="Google Classroom"
-            className="border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 p-1 w-full placeholder-gray-400"
+            className="border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 p-1 w-full placeholder-gray-400 text-gray-600"
+            value={linkValue && linkValue.linkName}
+            onChange={(e) =>
+              changeLinkProperty(linkValue._id, "linkName", e.target.value)
+            }
           />
         </span>
         <span className="input-focus-wrapper grid items-center grid-cols-[65px,1fr] gap-y-2">
@@ -179,7 +177,11 @@ const LinkItem = ({ onDelete = () => null }) => {
             autoComplete="off"
             id="url"
             placeholder="https://classroom.google.com"
-            className="border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 p-1 w-full placeholder-gray-400"
+            className="border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 p-1 w-full placeholder-gray-400 text-gray-600"
+            value={linkValue && linkValue.url}
+            onChange={(e) =>
+              changeLinkProperty(linkValue._id, "url", e.target.value)
+            }
           />
         </span>
       </span>
