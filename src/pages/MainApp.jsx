@@ -24,7 +24,6 @@ const MainApp = () => {
           <EmptyGrid />
         )}
       </EditModalProvider>
-      <button onClick={() => setShow(true)}>Show Modal</button>
     </>
   );
 };

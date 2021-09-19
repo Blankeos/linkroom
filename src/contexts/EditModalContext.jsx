@@ -80,7 +80,6 @@ const reducer = (state, action) => {
         ...state,
         links: linksClone,
       };
-      return state;
     case "NEW_LINK":
       linksClone = cloneDeep(state.links);
       linksClone = [...linksClone, createNewLinkObject()];

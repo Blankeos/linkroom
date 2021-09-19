@@ -83,7 +83,14 @@ const EditModal = ({ isOpen, closeModal, card, dispatch }) => {
                   <LinkItem
                     key={link._id}
                     linkValue={link}
-                    onDelete={() => null}
+                    onDelete={() =>
+                      dispatch({
+                        type: "DELETE_LINK",
+                        payload: {
+                          id: link._id,
+                        },
+                      })
+                    }
                     changeLinkProperty={changeLinkProperty}
                   />
                 );
@@ -133,6 +140,7 @@ const EditInput = ({
       defaultValue={defaultValue}
       onChange={onChange}
       value={value}
+      autoComplete="off"
     />
   );
 };
