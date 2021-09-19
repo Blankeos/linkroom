@@ -12,10 +12,10 @@ import EditModal from "../Modals/EditModal";
 //  DND-Kit
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useEditModalContext } from "../../contexts/EditModalContext";
 
 const Card = ({ card, id }) => {
-  const [editVisible, setEditVisibile] = useState(false);
-
+  const { showEditModal } = useEditModalContext();
   const {
     attributes,
     listeners,
@@ -40,7 +40,7 @@ const Card = ({ card, id }) => {
   // Handlers
   const handleEdit = () => {
     // Open edit modal
-    setEditVisibile(true);
+    showEditModal(card);
   };
 
   const dropDownItems = [
@@ -66,11 +66,6 @@ const Card = ({ card, id }) => {
           <CardElement card={card} dropDownItems={dropDownItems} />
         </div>
       </div>
-      <EditModal
-        isOpen={editVisible}
-        initialState={card}
-        closeModal={() => setEditVisibile(false)}
-      />
     </>
   );
 };
