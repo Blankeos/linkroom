@@ -6,6 +6,7 @@ import Menu from "../components/Menu";
 import EmptyGrid from "../components/EmptyGrid";
 import CardsGrid from "../components/Cards/CardsGrid";
 import EditModal from "../components/Modals/EditModal";
+import EditModalProvider from "../contexts/EditModalContext";
 
 const MainApp = () => {
   const { cards, isEditingAllCards } = useCardsContext();
@@ -13,13 +14,17 @@ const MainApp = () => {
   return (
     <>
       <Menu />
-      {cards && cards.cards && cards.cards.length > 0 ? (
-        <CardsGrid cards={cards.cards} isEditingAllCards={isEditingAllCards} />
-      ) : (
-        <EmptyGrid />
-      )}
+      <EditModalProvider>
+        {cards && cards.cards && cards.cards.length > 0 ? (
+          <CardsGrid
+            cards={cards.cards}
+            isEditingAllCards={isEditingAllCards}
+          />
+        ) : (
+          <EmptyGrid />
+        )}
+      </EditModalProvider>
       <button onClick={() => setShow(true)}>Show Modal</button>
-      <EditModal isOpen={show} closeModal={() => setShow(false)} />
     </>
   );
 };
