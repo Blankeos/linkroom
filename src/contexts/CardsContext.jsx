@@ -29,7 +29,8 @@ const reducer = (state, action) => {
       return action.payload;
     case "SET_ONE_CARD_ALL":
       newCards = [...state.cards];
-      newCards[action.payload.id] = action.payload.data;
+      newCards[newCards.findIndex((card) => card._id === action.payload.id)] =
+        action.payload.data;
 
       return {
         cards: newCards,
@@ -61,9 +62,7 @@ const reducer = (state, action) => {
       };
     case "DELETE_CARD":
       newCards = cloneDeep(state.cards);
-      console.log(action.payload.id);
       newCards.splice(action.payload.id, 1);
-      console.log(newCards);
       return {
         cards: newCards,
       };
@@ -170,6 +169,17 @@ export const CardsProvider = ({ children }) => {
     });
   };
 
+  const changeOneCardAll = (id, data) => {
+    console.log("Saving:", data);
+    dispatch({
+      type: "SET_ONE_CARD_ALL",
+      payload: {
+        id: id,
+        data: data,
+      },
+    });
+  };
+
   const addNewCard = () => {
     dispatch({
       type: "ADD_NEW_CARD",
@@ -233,6 +243,7 @@ export const CardsProvider = ({ children }) => {
     isEditingAllCards,
     toggleIsEditingAllCards,
     changeOneCardTitle,
+    changeOneCardAll,
     addNewCard,
     addNewLinkOneCard,
     deleteLinkOneCard,

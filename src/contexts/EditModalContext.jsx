@@ -11,6 +11,8 @@ const EditModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [card, dispatch] = useReducer(reducer, createNewStateObject());
 
+  const { changeOneCardAll } = useCardsContext();
+
   const showEditModal = (initialCardValue) => {
     setIsOpen(true);
 
@@ -22,6 +24,11 @@ const EditModalProvider = ({ children }) => {
         },
       });
     }
+  };
+
+  const completeEditModal = () => {
+    setIsOpen(false);
+    changeOneCardAll(card._id, card);
   };
 
   const value = {
@@ -36,6 +43,7 @@ const EditModalProvider = ({ children }) => {
         card={card}
         closeModal={() => setIsOpen(false)}
         dispatch={dispatch}
+        completeEditModal={completeEditModal}
       />
     </EditModalContext.Provider>
   );
@@ -44,6 +52,7 @@ const EditModalProvider = ({ children }) => {
 // State
 import { generate } from "shortid";
 import { cloneDeep } from "lodash";
+import { useCardsContext } from "./CardsContext";
 
 const createNewStateObject = () => ({
   _id: generate(),
