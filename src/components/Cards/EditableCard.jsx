@@ -195,11 +195,15 @@ export const EditableCardElement = ({
   overlay = false,
   editFunctions = null,
 }) => {
-  const { title, subheading1, subheading2, links } = card;
+  const { title, subheading1, subheading2, links } = card || {}; // in case 'card' is undefined, just destructure an empty object
+
   return (
     <div className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block bg-white">
       <div className="h-full rounded-b-2xl rounded-t-3xl">
-        <div className="flex flex-col space-y-1.5 bg-blue-500 text-gray-600 p-3 pb-5 rounded-t-2xl">
+        <div
+          className="flex flex-col space-y-1.5 text-gray-600 p-3 pb-5 rounded-t-2xl"
+          style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
+        >
           <div className="flex justify-end text-white pb-2">
             <DropDown items={dropDownItems} disabled={overlay}>
               <MenuIcon size="1.5rem" />

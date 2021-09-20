@@ -73,11 +73,14 @@ const Card = ({ card, id }) => {
 export default Card;
 
 export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
-  const { title, subheading1, subheading2, links } = card;
+  const { title, subheading1, subheading2, links } = card || {}; // in case 'card' is undefined, just destructure an empty object
   return (
     <div className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block bg-white">
       <div className="h-full rounded-b-2xl rounded-t-3xl">
-        <div className="relative flex flex-col space-y-1 bg-blue-500 text-white p-6 rounded-t-2xl">
+        <div
+          className=" relative flex flex-col space-y-1 text-white p-6 rounded-t-2xl"
+          style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
+        >
           <div
             className="absolute inset-0 opacity-40"
             style={{
