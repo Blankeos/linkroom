@@ -4,7 +4,17 @@ import Modal from "./Modal";
 
 import { IoMdClose as CloseIcon } from "react-icons/io";
 
-const EditModal = ({ isOpen, closeModal, card, dispatch }) => {
+import iconDict from "../../data/iconDict";
+import Tippy from "@tippyjs/react";
+import { BlockPicker } from "react-color";
+
+const EditModal = ({
+  isOpen,
+  closeModal,
+  completeEditModal,
+  card,
+  dispatch,
+}) => {
   // Custom property change handler
   const handlePropertyChange = (e) => {
     dispatch({
@@ -44,6 +54,48 @@ const EditModal = ({ isOpen, closeModal, card, dispatch }) => {
         </button>
       </h1>
       <div className="flex flex-col space-y-3">
+        <div className="">
+          <Tippy
+            interactive={true}
+            arrow={false}
+            theme="transparent"
+            hideOnClick={false}
+            content={
+              <div className="shadow-lg rounded">
+                <BlockPicker
+                  colors={[
+                    "#3B82F6",
+                    "#2ccce4",
+                    "#EF4444",
+                    "#F47373",
+                    "#ff8a65",
+                    "#F59E0B",
+                    "#37d67a",
+                    "#EC4899",
+                    "#ba68c8",
+                    "#555555",
+                  ]}
+                  color={(card && card.color) || "#3B82F6"}
+                  triangle="hide"
+                  onChangeComplete={(color) =>
+                    dispatch({
+                      type: "SET_PROPERTY",
+                      payload: {
+                        propertyName: "color",
+                        value: color.hex,
+                      },
+                    })
+                  }
+                />
+              </div>
+            }
+          >
+            <button
+              className="h-10 w-10 rounded-full border-2 border-gray-600"
+              style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
+            ></button>
+          </Tippy>
+        </div>
         <div className="input-focus-wrapper flex flex-col space-y-1">
           <EditLabel id="edit_title">Title</EditLabel>
           <EditInput
@@ -107,7 +159,10 @@ const EditModal = ({ isOpen, closeModal, card, dispatch }) => {
             </button>
           </div>
         </div>
-        <button className="text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold">
+        <button
+          onClick={completeEditModal}
+          className="text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold"
+        >
           Done
         </button>
       </div>
@@ -154,7 +209,39 @@ const LinkItem = ({
     <a className="border border-gray-200 focus-within:ring-1 focus-within:ring-blue-400 rounded cursor-default">
       <span className="bg-gray-50 p-3.5 rounded text-sm flex flex-col group space-y-2">
         <span className="flex justify-between items-center">
-          <span>Icon</span>
+          <Tippy
+            interactive
+            trigger="click"
+            hideOnClick
+            content={
+              <div className="grid grid-cols-4">
+                {Object.keys(iconDict).map((key, i) => {
+                  return (
+                    <button
+                      onClick={() => {
+                        if (changeLinkProperty) {
+                          changeLinkProperty(linkValue._id, "icon", key);
+                        }
+                      }}
+                      className="p-2 text-lg"
+                      key={i}
+                    >
+                      {iconDict[key]}
+                    </button>
+                  );
+                })}
+              </div>
+            }
+          >
+            <span>
+              <Tippy content="Choose an icon" hideOnClick arrow={false}>
+                <button className="text-gray-600 text-lg cursor-pointer">
+                  {iconDict[linkValue.icon]}
+                </button>
+              </Tippy>
+            </span>
+          </Tippy>
+
           <button onClick={onDelete}>
             <CloseIcon
               className="text-gray-400 hover:text-gray-500"
