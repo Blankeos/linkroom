@@ -40,12 +40,12 @@ const EditModal = ({
 
   return (
     <Modal
-      modalClass="w-full sm:w-9/12 md:w-7/12 lg:w-5/12"
+      modalClass="w-full sm:w-10/12 md:w-10/12 lg:w-8/12 xl:w-5/12"
       isOpen={isOpen}
       closeModal={closeModal}
     >
-      <h1 className="flex justify-between mb-5 font-bold text-xl text-gray-700">
-        <span>✍ Edit Card</span>
+      <h1 className="flex items-center justify-between mb-5 font-bold text-xl text-gray-700">
+        <span className="pb-5">✍ Edit Card</span>
         <button onClick={closeModal}>
           <CloseIcon
             className="text-gray-400 hover:text-gray-500"
@@ -54,7 +54,7 @@ const EditModal = ({
         </button>
       </h1>
       <div className="flex flex-col space-y-3">
-        <div className="">
+        <div className="flex items-center space-x-5 text-gray-600 font-medium">
           <Tippy
             interactive={true}
             arrow={false}
@@ -95,6 +95,7 @@ const EditModal = ({
               style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
             ></button>
           </Tippy>
+          <p>Pick A Color</p>
         </div>
         <div className="input-focus-wrapper flex flex-col space-y-1">
           <EditLabel id="edit_title">Title</EditLabel>
@@ -153,18 +154,26 @@ const EditModal = ({
                   type: "NEW_LINK",
                 })
               }
-              className="text-sm rounded border border-gray-200 py-5 transition hover:bg-gray-50 bg-white text-gray-400 font-semibold"
+              className="text rounded border border-gray-300 py-5 transition hover:bg-gray-50 bg-white text-gray-400 font-semibold"
             >
               Add New Link +
             </button>
           </div>
         </div>
-        <button
-          onClick={completeEditModal}
-          className="text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold"
-        >
-          Done
-        </button>
+        <div className="flex space-x-5 pt-10">
+          <button
+            onClick={closeModal}
+            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 hover:text-white bg-white text-blue-500 font-semibold"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={completeEditModal}
+            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold"
+          >
+            Done
+          </button>
+        </div>
       </div>
     </Modal>
   );
