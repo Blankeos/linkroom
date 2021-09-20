@@ -7,10 +7,10 @@ import {
 
 import { BiLink } from "react-icons/bi";
 const iconDict = {
+  default_link: <BiLink />,
   facebook: <SiFacebook />,
   google_classroom: <SiGoogleclassroom />,
   google_meet: <SiGooglehangoutsmeet />,
-  default_link: <BiLink />,
 };
 
 export default iconDict;

@@ -22,3 +22,9 @@
 .input-focus-wrapper:focus-within > label {
   color: rgba(59, 130, 246);
 }
+
+/* Tippy Stuff */
+.tippy-box[data-theme~="transparent"] {
+  background-color: transparent;
+  color: transparent;
+}
