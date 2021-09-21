@@ -160,9 +160,12 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
           >
             {isEditingAllCards
               ? renderEditableCards(cards)
-              : cards.map((card) => (
-                  <Card key={card._id} id={card._id} card={card} />
-                ))}
+              : [
+                  cards.map((card) => (
+                    <Card key={card._id} id={card._id} card={card} />
+                  )),
+                  <AddCardButton key="add-card" />,
+                ]}
           </SortableContext>
 
           <DragOverlay adjustScale={true}>
