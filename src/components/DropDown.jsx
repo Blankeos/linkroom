@@ -2,8 +2,6 @@
 import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
-import { IoMdClose as DeleteIcon } from "react-icons/io";
-
 const DropDown = ({ children, items, disabled = false }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -65,7 +63,7 @@ const MenuItem = ({ children, onClick, icon, href }) => {
             <a
               href={href || "/404"}
               className={`${
-                active && "bg-gray-100"
+                active && "bg-blue-100"
               } text-left w-full px-3 py-1 text-gray-500 whitespace-nowrap flex items-center`}
             >
               {icon}
@@ -80,7 +78,7 @@ const MenuItem = ({ children, onClick, icon, href }) => {
                 active && "bg-gray-100"
               } text-left w-full px-3 py-1 text-gray-500 whitespace-nowrap flex items-center`}
             >
-              {icon}
+              <span className="text-blue-500">{icon}</span>
               <span className="px-3">{children}</span>
             </button>
           );
