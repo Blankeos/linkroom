@@ -27,7 +27,7 @@ const Menu = () => {
           <span className="pr-1">Import/Export</span>
         </SecondaryButton>
 
-        {cards && cards.cards.length > 0 && (
+        {/* {cards && cards.cards.length > 0 && (
           <PrimaryButton
             onClick={() => toggleIsEditingAllCards()}
             className="flex items-center space-x-1"
@@ -37,7 +37,7 @@ const Menu = () => {
               {isEditingAllCards ? "Save" : "Edit All"}
             </span>
           </PrimaryButton>
-        )}
+        )} */}
       </div>
 
       <ImportExportModal
