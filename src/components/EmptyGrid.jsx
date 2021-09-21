@@ -1,9 +1,11 @@
 import React from "react";
 import { MdAdd as AddIcon } from "react-icons/md";
 import { useCardsContext } from "../contexts/CardsContext";
+import { useEditModalContext } from "../contexts/EditModalContext";
 
 const EmptyGrid = () => {
   const { addNewCard, toggleIsEditingAllCards } = useCardsContext();
+  const { showEditModal } = useEditModalContext();
   return (
     <div className="flex-grow text-center flex flex-col space-y-1 justify-center items-center text-gray-400 text-sm font-light pb-16">
       {/* <img src="/assets/socket_illustration_0.svg" /> */}
@@ -24,8 +26,7 @@ const EmptyGrid = () => {
         <button
           className="mt-10 p-10 rounded-2xl hover:shadow-lg flex items-center justify-center space-x-2 border border-blue-500 hover:bg-blue-500 text-blue-500 hover:text-white transition"
           onClick={() => {
-            addNewCard();
-            toggleIsEditingAllCards();
+            showEditModal();
           }}
         >
           <AddIcon size="1.2rem" />
