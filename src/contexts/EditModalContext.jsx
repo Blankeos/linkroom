@@ -23,6 +23,13 @@ const EditModalProvider = ({ children }) => {
           state: initialCardValue,
         },
       });
+    } else {
+      dispatch({
+        type: "SET_ALL",
+        payload: {
+          state: createNewStateObject(),
+        },
+      });
     }
   };
 

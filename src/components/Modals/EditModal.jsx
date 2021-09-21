@@ -44,8 +44,8 @@ const EditModal = ({
       isOpen={isOpen}
       closeModal={closeModal}
     >
-      <h1 className="flex items-center justify-between mb-5 font-bold text-xl text-gray-700">
-        <span className="pb-5">✍ Edit Card</span>
+      <h1 className="flex items-center justify-between mb-5 font-bold text-xl text-gray-700 pb-5">
+        <span>✍ Edit Card</span>
         <button onClick={closeModal}>
           <CloseIcon
             className="text-gray-400 hover:text-gray-500"
@@ -54,12 +54,12 @@ const EditModal = ({
         </button>
       </h1>
       <div className="flex flex-col space-y-3">
-        <div className="flex items-center space-x-5 text-gray-600 font-medium">
+        <div className="flex items-center">
           <Tippy
+            trigger="click mouseenter"
             interactive={true}
             arrow={false}
             theme="transparent"
-            hideOnClick={false}
             content={
               <div className="shadow-lg rounded">
                 <BlockPicker
@@ -90,12 +90,16 @@ const EditModal = ({
               </div>
             }
           >
-            <button
-              className="h-10 w-10 rounded-full border-2 border-gray-600"
-              style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
-            ></button>
+            <span className="flex items-center space-x-5 font-medium cursor-pointer">
+              <button
+                className="h-10 w-10 rounded-full border-2 border-gray-600"
+                style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
+              ></button>
+              <span style={{ color: (card && card.color) || "#3B82F6" }}>
+                Pick A Color
+              </span>
+            </span>
           </Tippy>
-          <p>Pick A Color</p>
         </div>
         <div className="input-focus-wrapper flex flex-col space-y-1">
           <EditLabel id="edit_title">Title</EditLabel>
