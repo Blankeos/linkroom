@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 
+import { useEditModalContext } from "../../contexts/EditModalContext";
+import { useDeleteModalContext } from "../../contexts/DeleteModalContext";
+
 // Icons
 import { GoKebabVertical as MenuIcon } from "react-icons/go";
 import { MdEdit as EditIcon } from "react-icons/md";
+import { MdDelete as DeleteIcon } from "react-icons/md";
 import iconDict from "../../data/iconDict";
 
 // Components
 import DropDown from "../DropDown";
-import EditModal from "../Modals/EditModal";
 
 //  DND-Kit
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useEditModalContext } from "../../contexts/EditModalContext";
 
 const Card = ({ card, id }) => {
   const { showEditModal } = useEditModalContext();
+  const { showDeleteModal } = useDeleteModalContext();
+
   const {
     attributes,
     listeners,
@@ -43,11 +47,21 @@ const Card = ({ card, id }) => {
     showEditModal(card);
   };
 
+  const handleDelete = () => {
+    // Open deleteModal
+    showDeleteModal(card);
+  };
+
   const dropDownItems = [
     {
       name: "Edit",
       icon: <EditIcon />,
       onClick: handleEdit,
+    },
+    {
+      name: "Delete",
+      icon: <DeleteIcon />,
+      onClick: handleDelete,
     },
   ];
 
