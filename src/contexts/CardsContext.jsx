@@ -23,14 +23,26 @@ export const useCardsContext = () => useContext(CardsContext);
 
 const reducer = (state, action) => {
   let newCards;
+  let index;
 
   switch (action.type) {
     case "SET_ALL":
       return action.payload;
     case "SET_ONE_CARD_ALL":
       newCards = [...state.cards];
-      newCards[newCards.findIndex((card) => card._id === action.payload.id)] =
-        action.payload.data;
+
+      index = newCards.findIndex((card) => card._id == action.payload.id);
+      if (index !== -1) {
+        // Exists
+        console.log("Updated");
+        newCards[index] = action.payload.data;
+      } else {
+        // Doesn't Exist
+        console.log("Added");
+        newCards = [...newCards, action.payload.data];
+      }
+
+      action.payload.saveToStorageFunction({ cards: newCards });
 
       return {
         cards: newCards,
@@ -62,7 +74,12 @@ const reducer = (state, action) => {
       };
     case "DELETE_CARD":
       newCards = cloneDeep(state.cards);
-      newCards.splice(action.payload.id, 1);
+      newCards.splice(
+        newCards.findIndex((card) => card._id === action.payload.id),
+        1
+      );
+
+      action.payload.saveToStorageFunction({ cards: newCards });
       return {
         cards: newCards,
       };
@@ -128,14 +145,15 @@ export const CardsProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (cards && cards.cards && cards.cards.length <= 0) {
-      setIsEditingAllCards(() => {
-        saveToStorage(cards);
-        return false;
-      });
-    }
-  }, [cards]);
+  // Saves when delete reaches 0 (only useful with isEditingAllCards, but disabled that for now)
+  // useEffect(() => {
+  //   if (cards && cards.cards && cards.cards.length <= 0) {
+  //     setIsEditingAllCards(() => {
+  //       saveToStorage(cards);
+  //       return false;
+  //     });
+  //   }
+  // }, [cards]);
 
   // Public Functions
   const saveToStorage = (cardsObj) => {
@@ -169,13 +187,14 @@ export const CardsProvider = ({ children }) => {
     });
   };
 
+  // Special function that saves, used by EditModalContext
   const changeOneCardAll = (id, data) => {
-    console.log("Saving:", data);
     dispatch({
       type: "SET_ONE_CARD_ALL",
       payload: {
         id: id,
         data: data,
+        saveToStorageFunction: saveToStorage,
       },
     });
   };
@@ -205,11 +224,13 @@ export const CardsProvider = ({ children }) => {
     });
   };
 
+  // Special Function that saves used by EditModalContext
   const deleteCard = (id) => {
     dispatch({
       type: "DELETE_CARD",
       payload: {
         id: id,
+        saveToStorageFunction: saveToStorage,
       },
     });
   };
@@ -226,6 +247,7 @@ export const CardsProvider = ({ children }) => {
     });
   };
 
+  // Special Function that saves used by draggable
   const reorderCard = (oldIndex, newIndex) => {
     dispatch({
       type: "REORDER",

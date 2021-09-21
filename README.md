@@ -22,7 +22,7 @@ The cutest blue socket character carrying the LinkRoom brand. Illustrations were
 ## ✍ To Dos:
 
 - [x] Working Drag and Drop
-- [ ] Single Edit Mode (Modal)
+- [x] Single Edit Mode (Modal)
 - [x] Install PWA Modal or `/install` landing page.
 - [ ] Toast Tip System (Tracked with LocalStorage)
 - [ ] Mobile Version: Bottom Nav and Sorting Page

@@ -18,19 +18,19 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 function App() {
   return (
     <CardsProvider>
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <Main>
-          <Router>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <Main>
             <Switch>
               <Route exact path="/" component={MainApp} />
               <Route exact path="/install" component={InstallPage} />
             </Switch>
-          </Router>
-        </Main>
-        <Footer />
-        <ToastContainer />
-      </div>
+          </Main>
+          <Footer />
+          <ToastContainer />
+        </div>
+      </Router>
     </CardsProvider>
   );
 }
