@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 // Pages
 import MainApp from "./pages/MainApp";
 import InstallPage from "./pages/InstallPage";
+import AboutPage from "./pages/AboutPage";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -25,6 +26,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={MainApp} />
               <Route exact path="/install" component={InstallPage} />
+              <Route exact path="/about" component={AboutPage} />
             </Switch>
           </Main>
           <Footer />
