@@ -13,7 +13,7 @@ const AboutPage = () => {
         It's a single hub for all the places on the internet you need to go to
         is here! Links are portals to different parts of the internet. We know
         it's hard to keep track of them so we're here to provide your links the
-        space they need.
+        space they need!
       </p>
       <div className="flex flex-wrap text-center justify-center">
         <div className="bg-gray-900 select-none text-white p-3 px-6 rounded-2xl my-1 mx-1 transition shadow hover:shadow-lg hover:bg-gray-800">
