@@ -38,8 +38,10 @@ const AboutPage = () => {
         <h2 className="text-3xl font-extrabold text-gray-900">
           Special Thanks to
         </h2>
-        <p>This guy - UX</p>
-        <p>This guy - Mascot Concept (Socket)</p>
+        <div>
+          <p>This guy - UX</p>
+          <p>This guy - Mascot Concept (Socket)</p>
+        </div>
       </div>
     </div>
   );
