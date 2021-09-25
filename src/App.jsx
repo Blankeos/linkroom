@@ -5,14 +5,17 @@ import { CardsProvider, useCardsContext } from "./contexts/CardsContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
-
 // Pages
 import MainApp from "./pages/MainApp";
 import InstallPage from "./pages/InstallPage";
 import AboutPage from "./pages/AboutPage";
+
+// Components
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+
+
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
