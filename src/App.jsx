@@ -9,13 +9,12 @@ import "react-toastify/dist/ReactToastify.css";
 import MainApp from "./pages/MainApp";
 import InstallPage from "./pages/InstallPage";
 import AboutPage from "./pages/AboutPage";
+import Page404 from "./pages/Page404";
 
 // Components
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
-
-
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -30,6 +29,7 @@ function App() {
               <Route exact path="/" component={MainApp} />
               <Route exact path="/install" component={InstallPage} />
               <Route exact path="/about" component={AboutPage} />
+              <Route path="/" component={Page404} />
             </Switch>
           </Main>
           <Footer />
