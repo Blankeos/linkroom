@@ -16,7 +16,7 @@ const Page404 = () => {
             filter: "grayscale(1)",
           }}
         ></div>
-        <h2 className="absolute bottom-0 text-white font-black text-center text-9xl tracking-tighter">
+        <h2 className="filter drop-shadow-xl absolute bottom-0 text-white font-black text-center text-9xl tracking-tighter">
           404
         </h2>
       </div>
@@ -27,7 +27,7 @@ const Page404 = () => {
         Page doesn't exist or an error occured. Wrong link perhaps?
       </p>
       <Link to="/">
-        <PrimaryButton className="bg-black px-12 py-4">
+        <PrimaryButton className="transition hover:shadow-lg bg-black hover:bg-gray-800 px-12 py-4">
           Take me back to the app
         </PrimaryButton>
       </Link>
