@@ -178,6 +178,12 @@ const EditModal = ({
           </div>
         </div>
       </div>
+      <div className="bg-gray-200 px-10 py-5 flex justify-end items-center space-x-5 dark:bg-gray-800">
+        <div className="text-green-500 font-medium">Cancel</div>
+        <div className="bg-green-500 hover:bg-green-600 py-2 px-3.5 text-green-100 rounded-md font-medium dark:bg-green-400 dark:hover:bg-green-500 dark:text-white">
+          Save changes
+        </div>
+      </div>
       {/* <h1 className="flex items-center justify-between mb-5 font-bold text-xl text-gray-700 dark:text-gray-200 pb-5">
         <span>✍ Edit Card</span>
         <button onClick={closeModal}>
