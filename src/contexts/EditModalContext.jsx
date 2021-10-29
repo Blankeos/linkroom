@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, useReducer } from "react";
-import EditModal from "../components/Modals/EditModal";
+import NewerEditModal from "../components/Modals/NewerEditModal";
 
 const initialValue = {};
 
@@ -45,7 +45,7 @@ const EditModalProvider = ({ children }) => {
   return (
     <EditModalContext.Provider value={value}>
       {children}
-      <EditModal
+      <NewerEditModal
         isOpen={isOpen}
         card={card}
         closeModal={() => setIsOpen(false)}
