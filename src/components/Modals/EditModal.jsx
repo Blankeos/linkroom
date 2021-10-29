@@ -1,4 +1,4 @@
-import React, { useRef, useReducer } from "react";
+import React from "react";
 
 import Modal from "./Modal";
 
@@ -40,15 +40,15 @@ const EditModal = ({
 
   return (
     <Modal
-      modalClass="w-full sm:w-10/12 md:w-10/12 lg:w-8/12 xl:w-5/12"
+      modalClass="w-full sm:w-10/12 md:w-10/12 lg:w-8/12 xl:w-5/12 dark:bg-gray-900"
       isOpen={isOpen}
       closeModal={closeModal}
     >
-      <h1 className="flex items-center justify-between mb-5 font-bold text-xl text-gray-700 pb-5">
+      <h1 className="flex items-center justify-between mb-5 font-bold text-xl text-gray-700 dark:text-gray-200 pb-5">
         <span>✍ Edit Card</span>
         <button onClick={closeModal}>
           <CloseIcon
-            className="text-gray-400 hover:text-gray-500"
+            className="text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300"
             size="1.2rem"
           />
         </button>
@@ -185,7 +185,10 @@ const EditModal = ({
 
 const EditLabel = ({ id, children }) => {
   return (
-    <label htmlFor={id} className="font-semibold text-gray-700">
+    <label
+      htmlFor={id}
+      className="font-semibold text-gray-700 dark:text-gray-300"
+    >
       {children}
     </label>
   );
@@ -203,7 +206,7 @@ const EditInput = ({
     <input
       id={id}
       name={name}
-      className="p-2 text-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded border border-gray-300"
+      className="p-2 text-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded border border-gray-300 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400"
       placeholder={placeholder}
       defaultValue={defaultValue}
       onChange={onChange}
@@ -220,7 +223,7 @@ const LinkItem = ({
 }) => {
   return (
     <a className="border border-gray-200 focus-within:ring-1 focus-within:ring-blue-400 rounded cursor-default">
-      <span className="bg-gray-50 p-3.5 rounded text-sm flex flex-col group space-y-2">
+      <span className="bg-gray-50 p-3.5 rounded text-sm flex flex-col group space-y-2 dark:bg-gray-800">
         <span className="flex justify-between items-center">
           <Tippy
             interactive
@@ -248,7 +251,7 @@ const LinkItem = ({
           >
             <span>
               <Tippy content="Choose an icon" hideOnClick arrow={false}>
-                <button className="text-gray-600 text-lg cursor-pointer">
+                <button className="text-gray-500 hover:text-gray-500 text-lg cursor-pointer dark:hover:text-gray-300">
                   {iconDict[linkValue.icon]}
                 </button>
               </Tippy>
@@ -257,20 +260,23 @@ const LinkItem = ({
 
           <button onClick={onDelete}>
             <CloseIcon
-              className="text-gray-400 hover:text-gray-500"
+              className="text-gray-500 hover:text-gray-500 dark:hover:text-gray-300"
               size="1.2rem"
             />
           </button>
         </span>
         <span className="input-focus-wrapper grid items-center grid-cols-[65px,1fr] gap-y-2">
-          <label htmlFor="name" className="text-left">
+          <label
+            htmlFor="name"
+            className="text-left text-gray-500 dark:text-gray-400"
+          >
             Name
           </label>
           <input
             autoComplete="off"
             id="name"
             placeholder="Google Classroom"
-            className="border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 p-1 w-full placeholder-gray-400 text-gray-600"
+            className="focus:outline-none focus:ring-1 focus:ring-blue-500 p-1.5 w-full bg-gray-50 placeholder-gray-400 text-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:placeholder-gray-600"
             value={linkValue && linkValue.linkName}
             onChange={(e) =>
               changeLinkProperty(linkValue._id, "linkName", e.target.value)
@@ -278,14 +284,17 @@ const LinkItem = ({
           />
         </span>
         <span className="input-focus-wrapper grid items-center grid-cols-[65px,1fr] gap-y-2">
-          <label htmlFor="url" className="text-left">
+          <label
+            htmlFor="url"
+            className="text-left text-gray-500 dark:text-gray-400"
+          >
             URL
           </label>
           <input
             autoComplete="off"
             id="url"
             placeholder="https://classroom.google.com"
-            className="border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 p-1 w-full placeholder-gray-400 text-gray-600"
+            className="focus:outline-none focus:ring-1 focus:ring-blue-500 p-1.5 w-full bg-gray-50 placeholder-gray-400 text-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:placeholder-gray-600"
             value={linkValue && linkValue.url}
             onChange={(e) =>
               changeLinkProperty(linkValue._id, "url", e.target.value)
