@@ -14,9 +14,8 @@ const MainApp = () => {
   const { cards, isEditingAllCards } = useCardsContext();
   // const [show, setShow] = useState(false);
   return (
-    <>
+    <div className="dark:bg-gray-800 transition flex-grow">
       <Menu />
-
       <EditModalProvider>
         <DeleteModalProvider>
           {cards && cards.cards && cards.cards.length > 0 ? (
@@ -29,7 +28,7 @@ const MainApp = () => {
           )}
         </DeleteModalProvider>
       </EditModalProvider>
-    </>
+    </div>
   );
 };
 export default MainApp;

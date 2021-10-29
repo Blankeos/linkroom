@@ -10,7 +10,7 @@ const AddCardButton = () => {
   return (
     <button
       onClick={() => showEditModal()}
-      className="group rounded-2xl hover:shadow-lg transition w-full sm:w-96 inline-block border border-blue-500 hover:bg-blue-500 text-blue-500"
+      className="group rounded-2xl hover:shadow-lg transition w-full sm:w-96 inline-block border dark:border-white border-blue-500 hover:bg-blue-500 text-blue-500"
       style={{ minHeight: "18rem" }}
     >
       <div className="w-full h-full flex justify-center items-center">

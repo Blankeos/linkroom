@@ -30,7 +30,7 @@ const DropDown = ({ children, items, disabled = false }) => {
           >
             <Menu.Items
               static
-              className="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              className="origin-top-right absolute right-0 mt-2 rounded-md shadow-lg bg-white dark:bg-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
               <div className="py-1 flex flex-col ">
                 {items.map((item, i) => (
@@ -63,8 +63,8 @@ const MenuItem = ({ children, onClick, icon, href }) => {
             <a
               href={href || "/404"}
               className={`${
-                active && "bg-blue-100"
-              } text-left w-full px-3 py-1 text-gray-500 whitespace-nowrap flex items-center`}
+                active && "bg-blue-100 dark:bg-gray-800"
+              } text-left w-full px-3 py-1 text-gray-500 dark:text-gray-300 whitespace-nowrap flex items-center`}
             >
               {icon}
               <span className="px-3">{children}</span>
@@ -75,8 +75,8 @@ const MenuItem = ({ children, onClick, icon, href }) => {
             <button
               onClick={onClick || (() => {})}
               className={`${
-                active && "bg-gray-100"
-              } text-left w-full px-3 py-1 text-gray-500 whitespace-nowrap flex items-center`}
+                active && "bg-gray-100 dark:bg-gray-800"
+              } text-left w-full px-3 py-1 text-gray-500 dark:text-gray-300 whitespace-nowrap flex items-center`}
             >
               <span className="text-blue-500">{icon}</span>
               <span className="px-3">{children}</span>

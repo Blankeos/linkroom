@@ -89,8 +89,8 @@ export default Card;
 export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
   const { title, subheading1, subheading2, links } = card || {}; // in case 'card' is undefined, just destructure an empty object
   return (
-    <div className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block bg-white">
-      <div className="h-full rounded-b-2xl rounded-t-3xl">
+    <div className="h-full rounded-2xl shadow hover:shadow-lg transition w-full sm:w-96 inline-block">
+      <div className="h-full rounded-b-2xl rounded-t-3xl flex flex-col">
         <div
           className=" relative flex flex-col space-y-1 text-white p-6 rounded-t-2xl"
           style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
@@ -125,7 +125,7 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
             </p>
           </div>
         </div>
-        <div className="p-6 flex flex-col space-y-2 text-gray-600 rounded-b-2xl">
+        <div className="bg-white dark:bg-gray-700 flex-grow p-6 flex flex-col space-y-2 text-gray-600 dark:text-gray-300 rounded-b-2xl">
           {links &&
             links.map((link, i) => {
               return (

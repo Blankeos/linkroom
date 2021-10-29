@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCardsContext } from "../contexts/CardsContext";
 
 // Components
@@ -13,6 +13,15 @@ import { GoCheck } from "react-icons/go";
 
 const Menu = () => {
   const [bool, setBool] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDarkMode]);
 
   const { toggleIsEditingAllCards, isEditingAllCards, cards } =
     useCardsContext();
@@ -25,6 +34,9 @@ const Menu = () => {
         >
           <MdImportExport size="1.2rem" />
           <span className="pr-1">Import/Export</span>
+        </SecondaryButton>
+        <SecondaryButton onClick={() => setIsDarkMode((prev) => !prev)}>
+          {isDarkMode ? "Disable Dark" : "Enable Dark"}
         </SecondaryButton>
 
         {/* {cards && cards.cards.length > 0 && (

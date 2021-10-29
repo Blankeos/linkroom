@@ -17,7 +17,7 @@ export default function SlideOver({
           className="fixed inset-0 z-10 overflow-y-auto"
           onClose={closeModal}
         >
-          <div className="flex justify-end h-full min-h-screen text-right bg-blue-400 backdrop-filter backdrop-blur-sm bg-opacity-60 overflow-hidden">
+          <div className="flex justify-end h-full min-h-screen text-right bg-blue-400 bg-opacity-60 dark:bg-gray-700 dark:bg-opacity-60 backdrop-filter backdrop-blur-sm overflow-hidden">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -40,7 +40,7 @@ export default function SlideOver({
               leaveTo="opacity-0 translate-x-5"
             >
               <div
-                className={`transform translate-x-0 bg-white transition-all h-full py-10 overflow-hidden shadow-xl overflow-y-auto`}
+                className={`transform translate-x-0 bg-white transition-all h-full py-10 overflow-hidden shadow-xl overflow-y-auto ${slideOverClass}`}
               >
                 <div>{children}</div>
               </div>

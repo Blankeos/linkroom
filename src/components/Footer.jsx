@@ -9,7 +9,9 @@ const Footer = () => {
   return <>{isMobile ? <MobileFooter /> : <DesktopFooter />}</>;
 };
 const DesktopFooter = () => {
-  return <div className="h-20 bg-blue-500 w-full"></div>;
+  return (
+    <div className="h-20 dark:bg-gray-900 bg-blue-500 w-full transition"></div>
+  );
 };
 
 const MobileFooter = () => {

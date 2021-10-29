@@ -9,7 +9,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 const Header = () => {
   return (
-    <header className="relative bg-blue-500 h-20 flex items-center">
+    <header className="relative bg-blue-500 dark:bg-gray-900 h-20 flex items-center transition">
       {/* Logo Wrapper */}
       <div className="absolute flex flex-col items-center w-full">
         <Link to="/" className="flex flex-col items-center">
