@@ -107,7 +107,7 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
           ></div>
           <div className="relative">
             <div className="flex items-center justify-between text-white pb-2">
-              <h2 className="font-bold text-3xl truncate">
+              <h2 className="font-bold text-3xl truncate tracking-tight pr-0.5">
                 {title}
                 {renderDummyIfEmpty(title.length <= 0)}
               </h2>
