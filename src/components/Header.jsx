@@ -1,6 +1,9 @@
 import React from "react";
 import SideNavButton from "./SideNavButton";
 
+// Components
+import { Link } from "react-router-dom";
+
 // Icons
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
@@ -18,7 +21,7 @@ const Header = () => {
           </span>
         </p>
         <p className="text-xs font-light text-blue-100">
-          One place for your all your virtual classrooms
+          One room for all your links
         </p>
       </div>
       <div className="absolute right-0 text-white p-5">
