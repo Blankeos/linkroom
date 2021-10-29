@@ -26,11 +26,11 @@ const InstallPage = () => {
   }, [isStandalone]);
 
   return (
-    <div className="p-5 bg-blue-500 flex-grow flex flex-col items-center justify-center space-y-7 pt-12 pb-0">
+    <div className="p-5 bg-blue-500 dark:bg-gray-900 flex-grow flex flex-col items-center justify-center space-y-7 pt-12 pb-0">
       <h1 className="font-extrabold text-4xl md:text-5xl tracking-tighter text-white max-w-sm text-center">
         ALL YOUR LINKS IN ONE PLACE
       </h1>
-      <p className="font-extralight text-sm max-w-md text-white text-center">
+      <p className="font-extralight text-sm max-w-md text-white text-center dark:text-gray-300">
         A single hub for all the places on the internet you need to go to is
         here! Links are portals to different parts of the internet. We know it's
         hard to keep track of them so we're here to provide your links the space
@@ -40,7 +40,7 @@ const InstallPage = () => {
         <InstallButton />
         <Link
           to="/"
-          className="bg-gray-900 select-none text-white p-3 px-6 rounded-full my-1 mx-1 transition shadow hover:shadow-lg hover:bg-gray-800"
+          className="bg-gray-900 dark:bg-gray-500 dark:hover:bg-gray-600 select-none text-white p-3 px-6 rounded-full my-1 mx-1 transition shadow hover:shadow-lg hover:bg-gray-800"
         >
           {`Proceed ${isStandalone ? "to app" : "with your browser"}`}
         </Link>

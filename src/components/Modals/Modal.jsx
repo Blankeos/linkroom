@@ -47,7 +47,7 @@ export default function Modal({
               leaveTo="opacity-0 scale-95"
             >
               <div
-                className={`${modalClass} inline-block p-10 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl`}
+                className={`${modalClass} inline-block overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl`}
               >
                 <div>{children}</div>
                 {closeMessage && (
