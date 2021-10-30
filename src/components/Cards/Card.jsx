@@ -109,7 +109,7 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
             <div className="flex items-center justify-between text-white pb-2">
               <h2 className="font-bold text-3xl truncate tracking-tight pr-0.5">
                 {title}
-                {renderDummyIfEmpty(title.length <= 0)}
+                {renderDummyIfEmpty(title)}
               </h2>
               <DropDown disabled={disabled} items={dropDownItems}>
                 <MenuIcon size="1.5rem" />
@@ -117,15 +117,15 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
             </div>
             <p className="text-sm font-light">
               {subheading1}
-              {renderDummyIfEmpty(subheading1.length <= 0)}
+              {renderDummyIfEmpty(subheading1)}
             </p>
             <p className="text-sm font-light">
               {subheading2}
-              {renderDummyIfEmpty(subheading2.length <= 0)}
+              {renderDummyIfEmpty(subheading2)}
             </p>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-700 flex-grow p-6 flex flex-col space-y-2 text-gray-600 dark:text-gray-300 rounded-b-2xl">
+        <div className="transition bg-white dark:bg-gray-700 flex-grow p-6 flex flex-col space-y-2 text-gray-600 dark:text-gray-300 rounded-b-2xl">
           {links &&
             links.map((link, i) => {
               return (
@@ -161,8 +161,13 @@ const Link = ({ url, icon, children, disabled = false }) => {
 };
 
 // Helper Functions
-const renderDummyIfEmpty = (isEmpty) => {
-  return (
-    <>{isEmpty && <span className="text-transparent select-none">`</span>}</>
-  );
+const renderDummyIfEmpty = (text) => {
+  const emptyElement = <span className="text-transparent select-none">`</span>;
+
+  // If text doesn't exist
+  if (!text) {
+    return emptyElement;
+  } else if (text.length <= 0) {
+    return emptyElement;
+  }
 };
