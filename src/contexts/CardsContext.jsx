@@ -11,8 +11,6 @@ import { cloneDeep } from "lodash";
 import { generate } from "shortid";
 import { arrayMoveImmutable as arrayMove } from "array-move";
 
-import { toast } from "react-toastify";
-
 export const CARDS_STORAGE = "cardsStorage";
 
 const initialValue = {};
