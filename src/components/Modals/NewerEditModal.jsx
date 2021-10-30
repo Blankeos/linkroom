@@ -60,6 +60,7 @@ const EditModal = ({
             interactive={true}
             arrow={false}
             theme="transparent"
+            placement="right-end"
             content={
               <div className="shadow-lg rounded">
                 <BlockPicker
@@ -91,21 +92,23 @@ const EditModal = ({
             }
           >
             <span className="flex items-center space-x-5 font-medium cursor-pointer">
-              <button
-                className="h-10 w-10 rounded-full border-2 border-gray-900"
-                style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
-              ></button>
               <span style={{ color: (card && card.color) || "#3B82F6" }}>
                 Pick A Color
               </span>
+              <button
+                className="h-9 w-9 rounded-full border-2 border-transparent"
+                style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
+              ></button>
             </span>
           </Tippy>
         </div>
       </div>
-      <div className="h-1 min-h-[20rem] shadow hover:shadow-lg transition w-full inline-block">
-        <div className="h-full flex flex-col">
+      {/* Card Preview */}
+      <div className="bg-green-500 grid h-full min-h-[20rem] max-h-full shadow hover:shadow-lg transition w-full">
+        <div className="h-full bg-indigo-600 flex flex-col">
+          {/* Card Preview Top Part */}
           <div
-            className=" relative flex flex-col space-y-1 text-white p-6"
+            className="relative flex flex-col space-y-1 text-white p-6"
             style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
           >
             <div
@@ -159,123 +162,11 @@ const EditModal = ({
               </p> */}
             </div>
           </div>
+          {/* Card Preview Bottom Half */}
           <div className="bg-white dark:bg-gray-700 flex-grow p-6 flex flex-col space-y-2 text-gray-600 dark:text-gray-300">
             {card &&
               card.links &&
               card.links.map((link, i) => {
-                return (
-                  <div>Hi</div>
-                  // <Link
-                  //   key={i}
-                  //   icon={link && link.icon}
-                  //   url={link && link.url}
-                  //   disabled={disabled}
-                  // >
-                  //   {link.linkName}
-                  // </Link>
-                );
-              })}
-          </div>
-        </div>
-      </div>
-      <div className="bg-gray-200 px-10 py-5 flex justify-end items-center space-x-5 dark:bg-gray-800">
-        <div className="text-green-500 font-medium">Cancel</div>
-        <div className="bg-green-500 hover:bg-green-600 py-2 px-3.5 text-green-100 rounded-md font-medium dark:bg-green-400 dark:hover:bg-green-500 dark:text-white">
-          Save changes
-        </div>
-      </div>
-      {/* <h1 className="flex items-center justify-between mb-5 font-bold text-xl text-gray-700 dark:text-gray-200 pb-5">
-        <span>✍ Edit Card</span>
-        <button onClick={closeModal}>
-        <CloseIcon
-        className="text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300"
-        size="1.2rem"
-        />
-        </button>
-      </h1>
-      <div className="flex flex-col space-y-3">
-      <div className="flex items-center">
-      <Tippy
-      trigger="click mouseenter"
-      interactive={true}
-      arrow={false}
-      theme="transparent"
-      content={
-        <div className="shadow-lg rounded">
-        <BlockPicker
-        colors={[
-          "#3B82F6",
-          "#2ccce4",
-          "#EF4444",
-          "#F47373",
-          "#ff8a65",
-          "#F59E0B",
-          "#37d67a",
-          "#EC4899",
-          "#ba68c8",
-          "#555555",
-        ]}
-        color={(card && card.color) || "#3B82F6"}
-        triangle="hide"
-        onChangeComplete={(color) =>
-          dispatch({
-            type: "SET_PROPERTY",
-            payload: {
-              propertyName: "color",
-              value: color.hex,
-            },
-          })
-        }
-        />
-              </div>
-            }
-          >
-            <span className="flex items-center space-x-5 font-medium cursor-pointer">
-              <button
-                className="h-10 w-10 rounded-full border-2 border-gray-600"
-                style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
-              ></button>
-              <span style={{ color: (card && card.color) || "#3B82F6" }}>
-                Pick A Color
-              </span>
-            </span>
-          </Tippy>
-        </div>
-        <div className="input-focus-wrapper flex flex-col space-y-1">
-          <EditLabel id="edit_title">Title</EditLabel>
-          <EditInput
-            id="edit_title"
-            name="title"
-            placeholder="Enter title"
-            value={card && card.title}
-            onChange={handlePropertyChange}
-          />
-        </div>
-        <div className="input-focus-wrapper flex flex-col space-y-1">
-          <EditLabel id="edit_subheading1">Subheading 1</EditLabel>
-          <EditInput
-            id="edit_subheading1"
-            name="subheading1"
-            placeholder="Enter subheading 1"
-            value={card && card.subheading1}
-            onChange={handlePropertyChange}
-          />
-        </div>
-        <div className="input-focus-wrapper flex flex-col space-y-1">
-          <EditLabel id="edit_subheading2">Subheading 2</EditLabel>
-          <EditInput
-            id="edit_subheading2"
-            name="subheading2"
-            placeholder="Enter subheading 2"
-            value={card && card.subheading2}
-            onChange={handlePropertyChange}
-          />
-        </div>
-        <div className="flex flex-col space-y-1">
-          <EditLabel>Links</EditLabel>
-          <div className="links-container-(not-a-real-class) flex flex-col space-y-3">
-            {card &&
-              card.links.map((link) => {
                 return (
                   <LinkItem
                     key={link._id}
@@ -292,71 +183,104 @@ const EditModal = ({
                   />
                 );
               })}
-            <button
-              onClick={() =>
-                dispatch({
-                  type: "NEW_LINK",
-                })
-              }
-              className="text rounded border border-gray-300 py-5 transition hover:bg-gray-50 bg-white text-gray-400 font-semibold"
-            >
-              Add New Link +
-            </button>
+            <span className="pt-1">
+              <button
+                className="text-green-300 font-light"
+                onClick={() =>
+                  dispatch({
+                    type: "NEW_LINK",
+                  })
+                }
+              >
+                + Add new link
+              </button>
+            </span>
           </div>
         </div>
-        <div className="flex space-x-5 pt-10">
-          <button
-            onClick={closeModal}
-            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 hover:text-white bg-white text-blue-500 font-semibold"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={completeEditModal}
-            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold"
-          >
-            Done
-          </button>
-        </div>
-      </div> */}
+      </div>
+      {/* End of Card Preview */}
+      <div className="bg-gray-200 px-10 py-5 flex justify-end items-center space-x-5 dark:bg-gray-800">
+        <button className="text-green-500 font-medium" onClick={closeModal}>
+          Cancel
+        </button>
+        <button
+          className="bg-green-500 hover:bg-green-600 py-2 px-3.5 text-green-100 rounded-md font-medium dark:bg-green-400 dark:hover:bg-green-500 dark:text-white"
+          onClick={completeEditModal}
+        >
+          Save changes
+        </button>
+      </div>
     </Modal>
   );
 };
 
-const EditLabel = ({ id, children }) => {
-  return (
-    <label
-      htmlFor={id}
-      className="font-semibold text-gray-700 dark:text-gray-300"
-    >
-      {children}
-    </label>
-  );
-};
-
-const EditInput = ({
-  id,
-  name = undefined,
-  onChange = () => null,
-  placeholder = "",
-  defaultValue = "",
-  value = "",
+const LinkItem = ({
+  onDelete = () => null,
+  linkValue,
+  changeLinkProperty = () => null,
 }) => {
   return (
-    <input
-      id={id}
-      name={name}
-      className="p-2 text-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded border border-gray-300 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400"
-      placeholder={placeholder}
-      defaultValue={defaultValue}
-      onChange={onChange}
-      value={value}
-      autoComplete="off"
-    />
+    <div className={`flex items-center space-x-2 font-light`}>
+      {/* Icon */}
+      <Tippy
+        interactive
+        trigger="click"
+        hideOnClick
+        content={
+          <div className="grid grid-cols-4">
+            {Object.keys(iconDict).map((key, i) => {
+              return (
+                <button
+                  className="outline-none focus:outline-none"
+                  onClick={() => {
+                    if (changeLinkProperty) {
+                      changeLinkProperty(linkValue._id, "icon", key);
+                    }
+                  }}
+                  className="p-2 text-lg"
+                  key={i}
+                >
+                  {iconDict[key]}
+                </button>
+              );
+            })}
+          </div>
+        }
+      >
+        <span className="flex items-center">
+          <Tippy content="Choose an icon" hideOnClick arrow={false}>
+            <button className="">{iconDict[linkValue.icon]}</button>
+          </Tippy>
+        </span>
+      </Tippy>
+      {/* Link Name */}
+      <input
+        className="bg-transparent border-b border-transparent focus:border-gray-600 dark:focus:border-gray-300 outline-none font-light w-full"
+        placeholder="Enter link name"
+        onChange={(e) =>
+          changeLinkProperty(linkValue._id, "linkName", e.target.value)
+        }
+        value={linkValue.linkName}
+      />
+      <input
+        className="bg-transparent border-b border-transparent focus:border-gray-600 dark:focus:border-gray-300 outline-none font-light w-full text-gray-500 hover:text-gray-500 dark:text-gray-400 dark:focus:text-gray-300 dark:placeholder-gray-500"
+        placeholder="Enter link url"
+        onChange={(e) =>
+          changeLinkProperty(linkValue._id, "url", e.target.value)
+        }
+        value={linkValue.url}
+      />
+      <button onClick={onDelete}>
+        <CloseIcon
+          className="text-gray-500 hover:text-gray-500 dark:hover:text-gray-300"
+          size="1.2rem"
+        />
+      </button>
+    </div>
   );
 };
 
-const LinkItem = ({
+const LinkItem2 = ({
   onDelete = () => null,
   linkValue,
   changeLinkProperty = () => null,
@@ -391,9 +315,7 @@ const LinkItem = ({
           >
             <span>
               <Tippy content="Choose an icon" hideOnClick arrow={false}>
-                <button className="text-gray-500 hover:text-gray-500 text-lg cursor-pointer dark:hover:text-gray-300">
-                  {iconDict[linkValue.icon]}
-                </button>
+                <button className="">{iconDict[linkValue.icon]}</button>
               </Tippy>
             </span>
           </Tippy>
