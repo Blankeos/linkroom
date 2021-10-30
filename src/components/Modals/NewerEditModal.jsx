@@ -185,7 +185,7 @@ const EditModal = ({
               })}
             <span className="pt-1">
               <button
-                className="text-green-300 font-light"
+                className="text-green-500 dark:text-green-300"
                 onClick={() =>
                   dispatch({
                     type: "NEW_LINK",
