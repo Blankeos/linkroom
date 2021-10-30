@@ -27,24 +27,24 @@ const DeleteModal = ({ card, isOpen, closeModal, completeDeleteModal }) => {
   };
   return (
     <Modal
-      modalClass="w-9/12 sm:w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12"
+      modalClass="w-9/12 sm:w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 p-10 dark:bg-gray-900"
       isOpen={isOpen}
       closeModal={closeModal}
     >
       <div>
-        <h1 className="mb-5 font-bold text-xl text-gray-700 text-center">
+        <h1 className="mb-5 font-bold text-xl text-center text-gray-700 dark:text-gray-200">
           {headingMessage()}
         </h1>
         <div className="flex space-x-5 pt-5">
           <button
             onClick={closeModal}
-            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 hover:text-white bg-white text-blue-500 font-semibold"
+            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 hover:text-white bg-white text-blue-500 font-semibold dark:bg-transparent dark:hover:bg-blue-500"
           >
             No
           </button>
           <button
             onClick={completeDeleteModal}
-            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold"
+            className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold dark:bg-red-500 dark:border-red-500 dark:hover:bg-red-400"
           >
             Delete
           </button>
