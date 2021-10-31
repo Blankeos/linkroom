@@ -87,7 +87,7 @@ const InstallButton = () => {
       return (
         <>
           <BsExclamationTriangleFill size="1.2rem" />
-          <span>Can't Install / Already Installed</span>
+          <span>Can't Install or Already Installed</span>
         </>
       );
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 
 import Modal from "./Modal";
 
@@ -15,6 +15,17 @@ const EditModal = ({
   card,
   dispatch,
 }) => {
+  // Autofocus functionality (Might have bugs with different CPU performance)
+  // autoFocus doesn't work since useEffect mount doesn't work on this component
+  const titleRef = useCallback((node) => {
+    if (node !== null) {
+      setTimeout(() => {
+        console.log("focusing");
+        node.focus();
+      }, 100);
+    }
+  }, []);
+
   // Custom property change handler
   const handlePropertyChange = (e) => {
     dispatch({
@@ -124,6 +135,7 @@ const EditModal = ({
             <div className="relative flex flex-col space-y-1">
               <div className="flex flex-col text-white pb-2">
                 <input
+                  ref={titleRef}
                   name="title"
                   className="font-bold text-3xl truncate tracking-tight pr-0.5 bg-transparent border-b border-transparent focus:border-white outline-none placeholder-gray-50 placeholder-opacity-50"
                   value={(card && card.title) || ""}
