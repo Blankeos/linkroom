@@ -17,8 +17,6 @@ const Menu = () => {
   const [bool, setBool] = useState(false);
   const { isDark, setIsDark } = useDarkThemeContext();
 
-  const { toggleIsEditingAllCards, isEditingAllCards, cards } =
-    useCardsContext();
   return (
     <>
       <div className="p-5 flex space-x-3 justify-center">
@@ -35,14 +33,20 @@ const Menu = () => {
         <Switch
           checked={isDark}
           onChange={setIsDark}
-          className={`${isDark ? "bg-[teal]" : "bg-[cyan]"}
-          relative inline-flex flex-shrink-0 h-[38px] w-[74px] border-2 border-gray-900 rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+          className={`${
+            isDark
+              ? "bg-gray-700 border-gray-900"
+              : "bg-blue-400 border-blue-500"
+          }
+          relative inline-flex flex-shrink-0 h-[38px] w-[74px] border-2 rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
         >
           <span className="sr-only">Use setting</span>
           <span
             aria-hidden="true"
-            className={`${isDark ? "translate-x-9" : "translate-x-0"}
-            pointer-events-none inline-block h-[34px] w-[34px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200`}
+            className={`${
+              isDark ? "translate-x-9 bg-yellow-200" : "translate-x-0 bg-white"
+            }
+            pointer-events-none inline-block h-[34px] w-[34px] rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200`}
           />
         </Switch>
         {/* {cards && cards.cards.length > 0 && (
