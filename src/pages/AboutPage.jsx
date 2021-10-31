@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import FAQsDisclosureGroup from "../components/DisclosureGroups/FAQsDisclosureGroup";
 
 const AboutPage = () => {
   return (
@@ -21,14 +22,7 @@ const AboutPage = () => {
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
           FAQs
         </h2>
-        <div className="flex flex-col space-y-3">
-          <div className="w-96 h-20 bg-blue-200 rounded-md text-gray-800 flex items-center justify-center">
-            Do I do this?
-          </div>
-          <div className="w-96 h-20 bg-blue-200 rounded-md text-gray-800 flex items-center justify-center">
-            Do I do this?
-          </div>
-        </div>
+        <FAQsDisclosureGroup />
       </div>
       <div className="py-10">
         <h2 className="text-3xl font-extrabold text-gray-900">
