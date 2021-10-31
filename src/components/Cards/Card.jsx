@@ -115,11 +115,11 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
                 <MenuIcon size="1.5rem" />
               </DropDown>
             </div>
-            <p className="text-sm font-light">
+            <p className="text-sm font-light truncate">
               {subheading1}
               {renderDummyIfEmpty(subheading1)}
             </p>
-            <p className="text-sm font-light">
+            <p className="text-sm font-light truncate">
               {subheading2}
               {renderDummyIfEmpty(subheading2)}
             </p>
@@ -155,7 +155,7 @@ const Link = ({ url, icon, children, disabled = false }) => {
       }`}
     >
       {iconDict[icon]}
-      <span>{children}</span>
+      <span className="truncate">{children}</span>
     </a>
   );
 };
