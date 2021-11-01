@@ -144,7 +144,7 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
           sensors={isMobile ? mobileSensors : defaultSensors}
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
-          modifiers={[restrictToParentElement]}
+          // modifiers={[restrictToParentElement]}
           onDragStart={(event) => {
             handleDragStart(event);
             if (window.getSelection) {
