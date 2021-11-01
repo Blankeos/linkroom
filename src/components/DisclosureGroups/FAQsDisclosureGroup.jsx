@@ -10,7 +10,7 @@ import {
 export default function FAQsDisclosureGroup() {
   return (
     <div className="w-full px-4">
-      <div className="flex flex-col space-y-2 w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
+      <div className="flex flex-col space-y-2 w-full max-w-md p-2 mx-auto bg-white rounded-2xl dark:bg-gray-600">
         <MyDisclosure
           panelContent="You can't fam sorry. At least, not for now. For now you only have 1 room to work with but you can put as many cards and links on it as you like."
           buttonContent="Can I have more than 1 room for my links?"
@@ -33,7 +33,7 @@ function MyDisclosure({ panelContent = "", buttonContent = "" }) {
     <Disclosure as="div" className="">
       {({ open }) => (
         <>
-          <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+          <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-blue-500 bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-gray-400">
             <span>{buttonContent}</span>
             {open ? <ChevronUp size="1.1rem" /> : <ChevronDown size="1.1rem" />}
           </Disclosure.Button>
@@ -45,7 +45,7 @@ function MyDisclosure({ panelContent = "", buttonContent = "" }) {
             leaveFrom="transform scale-100 opacity-100"
             leaveTo="transform scale-95 opacity-0"
           >
-            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-gray-400">
               {panelContent}
             </Disclosure.Panel>
           </Transition>
