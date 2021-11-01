@@ -26,7 +26,7 @@ const InstallPage = () => {
   }, [isStandalone]);
 
   return (
-    <div className="p-5 bg-blue-500 dark:bg-gray-900 flex-grow flex flex-col items-center justify-center space-y-7 pt-12 pb-0">
+    <div className="transition p-5 bg-blue-500 dark:bg-gray-900 flex-grow flex flex-col items-center justify-center space-y-7 pt-12 pb-0">
       <h1 className="font-extrabold text-4xl md:text-5xl tracking-tighter text-white max-w-sm text-center">
         ALL YOUR LINKS IN ONE PLACE
       </h1>
