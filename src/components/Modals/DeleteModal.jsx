@@ -5,7 +5,9 @@ import { IoMdClose as CloseIcon } from "react-icons/io";
 
 // Heading Messages
 const MessageDefault = () => (
-  <span>😥 Are you sure you want to delete this card?</span>
+  <span className="text-gray-700 dark:text-gray-200">
+    😥 Are you sure you want to delete this card?
+  </span>
 );
 const MessageWithCardName = ({ cardName }) => (
   <>

@@ -26,6 +26,6 @@ The cutest blue socket character carrying the LinkRoom brand. Illustrations were
 - [x] Install PWA Modal or `/install` landing page.
 - [ ] Toast Tip System (Tracked with LocalStorage)
 - [ ] Mobile Version: Bottom Nav and Sorting Page
-- [ ] FAQs Page
+- [x] FAQs Page
 - [ ] Error-checking if data is valid. Catch error and reset all data if not.
 - [ ] Release 🚀🚀🚀
