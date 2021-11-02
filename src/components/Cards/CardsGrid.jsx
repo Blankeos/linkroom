@@ -100,11 +100,13 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
   const [activeId, setActiveId] = useState(null);
   const [isDropped, setIsDropped] = useState(false);
 
+  // Made the constraints high so you basically can't drag-sort on mobile
   const mobileSensors = useSensors(
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 250,
-        tolerance: 5,
+        distance: 1000,
+        tolerance: 500,
+        delay: 150,
       },
     })
   );

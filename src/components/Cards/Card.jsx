@@ -38,7 +38,7 @@ const Card = ({ card, id }) => {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    touchAction: "none",
+    // touchAction: "none", // Recommendation: to prevent scrolling when dragging
   };
 
   // Handlers
