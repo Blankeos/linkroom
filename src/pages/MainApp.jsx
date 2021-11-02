@@ -5,14 +5,19 @@ import { useCardsContext } from "../contexts/CardsContext";
 import Menu from "../components/Menu";
 import EmptyGrid from "../components/EmptyGrid";
 import CardsGrid from "../components/Cards/CardsGrid";
-import EditModal from "../components/Modals/EditModal";
+
+// Context
 import EditModalProvider from "../contexts/EditModalContext";
 import DeleteModalProvider from "../contexts/DeleteModalContext";
-import SideNavButton from "../components/SideNavButton";
+
+// Test
+import { testValidate } from "../data/cardsValidate";
 
 const MainApp = () => {
   const { cards, isEditingAllCards } = useCardsContext();
-  // const [show, setShow] = useState(false);
+
+  testValidate();
+
   return (
     <div className="dark:bg-gray-800 transition flex-grow">
       <Menu />
