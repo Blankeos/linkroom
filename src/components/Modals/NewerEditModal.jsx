@@ -20,7 +20,6 @@ const EditModal = ({
   const titleRef = useCallback((node) => {
     if (node !== null) {
       setTimeout(() => {
-        console.log("focusing");
         node.focus();
       }, 100);
     }
@@ -115,7 +114,7 @@ const EditModal = ({
         </div>
       </div>
       {/* Card Preview */}
-      <div className="bg-green-500 grid h-full min-h-[20rem] max-h-full shadow hover:shadow-lg transition w-full">
+      <div className="bg-green-500 grid grid-cols-1 h-full min-h-[20rem] max-h-full shadow hover:shadow-lg transition w-full">
         <div className="h-full bg-indigo-600 flex flex-col">
           {/* Card Preview Top Part */}
           <div
