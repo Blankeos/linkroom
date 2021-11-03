@@ -18,6 +18,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import FeedbackPage from "./pages/FeedbackPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route exact path="/" component={MainApp} />
                 <Route exact path="/install" component={InstallPage} />
                 <Route exact path="/about" component={AboutPage} />
+                {/* <Route exact path="/feedback" component={FeedbackPage} /> */}
                 <Route path="/" component={Page404} />
               </Switch>
             </Main>

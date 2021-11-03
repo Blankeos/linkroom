@@ -77,7 +77,7 @@ const InvalidGrid = () => {
             </p>
           </div>
           <button
-            className="w-full p-5 bg-gray-800 text-white dark:bg-gray-900 dark:text-gray-200 transition"
+            className="w-full p-5 bg-gray-800 text-white hover:bg-gray-900 dark:bg-gray-900 dark:hover:bg-black dark:text-gray-200 transition"
             onClick={() => importCards({ cards: [] })}
           >
             Sure, clear my cards
