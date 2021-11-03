@@ -12,13 +12,23 @@ const AboutPage = () => {
           <br />
           Link Room?
         </h1>
+        <img className="w-72 h-72" src="/assets/socket_illustration_1.svg" />
         <p className="font-light text-sm max-w-md text-gray-700 dark:text-gray-300 text-center">
           It's a single hub for all the places on the internet you need to go to
           is here! Links are portals to different parts of the internet. We know
           it's hard to keep track of them so we're here to provide your links
           the space they need!
         </p>
-        <img className="w-72 h-72" src="/assets/socket_illustration_1.svg" />
+        <p className="font-light text-sm max-w-md text-gray-700 dark:text-gray-300 text-center">
+          Made by{" "}
+          <a
+            className="dark:text-blue-300 text-blue-400"
+            href="https://carlo.vercel.app/"
+            target="_blank"
+          >
+            Carlo
+          </a>
+        </p>
       </div>
       {/* FAQs */}
       <div className="py-10 max-w-4xl mx-auto px-10 flex flex-col items-center space-y-5">
