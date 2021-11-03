@@ -13,7 +13,7 @@ const Footer = () => {
 };
 const DesktopFooter = () => {
   return (
-    <div className="h-20 dark:bg-gray-900 bg-blue-500 w-full transition"></div>
+    <div className="h-0 dark:bg-gray-900 bg-blue-500 w-full transition"></div>
   );
 };
 
