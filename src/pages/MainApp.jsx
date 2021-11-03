@@ -5,31 +5,39 @@ import { useCardsContext } from "../contexts/CardsContext";
 import Menu from "../components/Menu";
 import EmptyGrid from "../components/EmptyGrid";
 import CardsGrid from "../components/Cards/CardsGrid";
+import InvalidGrid from "../components/InvalidGrid";
 
 // Context
 import EditModalProvider from "../contexts/EditModalContext";
 import DeleteModalProvider from "../contexts/DeleteModalContext";
 
 // Test
-import { testValidate } from "../data/cardsValidate";
+import cardsValidate from "../data/cardsValidate";
+
+function isValid(cards) {
+  const isValid = cardsValidate(cards);
+  return isValid;
+}
 
 const MainApp = () => {
   const { cards, isEditingAllCards } = useCardsContext();
-
-  testValidate();
 
   return (
     <div className="dark:bg-gray-800 transition flex-grow">
       <Menu />
       <EditModalProvider>
         <DeleteModalProvider>
-          {cards && cards.cards && cards.cards.length > 0 ? (
-            <CardsGrid
-              cards={cards.cards}
-              isEditingAllCards={isEditingAllCards}
-            />
+          {isValid(cards) ? (
+            cards.cards.length > 0 ? (
+              <CardsGrid
+                cards={cards.cards}
+                isEditingAllCards={isEditingAllCards}
+              />
+            ) : (
+              <EmptyGrid />
+            )
           ) : (
-            <EmptyGrid />
+            <InvalidGrid />
           )}
         </DeleteModalProvider>
       </EditModalProvider>
