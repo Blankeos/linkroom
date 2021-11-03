@@ -10,7 +10,7 @@ import {
 export default function FAQsDisclosureGroup() {
   return (
     <div className="w-full px-4">
-      <div className="flex flex-col space-y-2 w-full max-w-md p-2 mx-auto bg-white rounded-2xl dark:bg-gray-600">
+      <div className="flex flex-col space-y-2 w-full max-w-lg p-2 mx-auto bg-white rounded-2xl dark:bg-gray-600">
         <MyDisclosure
           panelContent="You can't fam sorry. At least, not for now. For now you only have 1 room to work with but you can put as many cards and links on it as you like."
           buttonContent="Can I have more than 1 room for my links?"
