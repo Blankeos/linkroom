@@ -1,14 +1,11 @@
 import React from "react";
 import { MdAdd as AddIcon } from "react-icons/md";
-import { useCardsContext } from "../contexts/CardsContext";
 import { useEditModalContext } from "../contexts/EditModalContext";
 
 const EmptyGrid = () => {
-  const { addNewCard, toggleIsEditingAllCards } = useCardsContext();
   const { showEditModal } = useEditModalContext();
   return (
     <div className="flex-grow text-center flex flex-col space-y-1 justify-center items-center text-gray-400 text-sm font-light pb-16">
-      {/* <img src="/assets/socket_illustration_0.svg" /> */}
       <div
         className="w-64 h-64"
         style={{
