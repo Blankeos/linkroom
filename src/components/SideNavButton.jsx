@@ -39,9 +39,15 @@ const SideNavButton = ({ children }) => {
           <NavLink onClick={() => setIsOpen(false)} to="/about" icon="📔">
             About
           </NavLink>
-          <NavLink onClick={() => setIsOpen(false)} to="/" icon="💖">
-            Give us feedback
-          </NavLink>
+          <a
+            onClick={() => setIsOpen(false)}
+            className="select-none px-10 py-5 hover:bg-blue-100 dark:hover:bg-gray-800 transition grid grid-cols-[45px,1fr]"
+            href="https://forms.gle/GsQGgP5AfhY2njjZ9"
+            target="_blank"
+          >
+            <span>💖</span>
+            <span>Give us feedback</span>
+          </a>
           <NavLink onClick={() => setIsOpen(false)} to="/install" icon="👇">
             Install
           </NavLink>
