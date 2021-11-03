@@ -21,10 +21,6 @@ import { useMediaQuery } from "react-responsive";
 const InstallPage = () => {
   const isStandalone = useMediaQuery({ query: "(display-mode: standalone)" });
 
-  useEffect(() => {
-    console.log("Standalone:", isStandalone);
-  }, [isStandalone]);
-
   return (
     <div className="transition p-5 bg-blue-500 dark:bg-gray-900 flex-grow flex flex-col items-center justify-center space-y-7 pt-12 pb-0">
       <h1 className="font-extrabold text-4xl md:text-5xl tracking-tighter text-white max-w-sm text-center">
@@ -60,10 +56,12 @@ const InstallButton = () => {
 
   useEffect(async () => {
     // Check if App is already installed
-    const listOfInstalledApps = await navigator.getInstalledRelatedApps();
-    if (listOfInstalledApps && listOfInstalledRelatedApps.length > 0) {
-      setIsInstalled(true);
-    }
+    try {
+      const listOfInstalledApps = await navigator.getInstalledRelatedApps();
+      if (listOfInstalledApps && listOfInstalledRelatedApps.length > 0) {
+        setIsInstalled(true);
+      }
+    } catch (e) {}
   }, []);
 
   useEffect(() => {

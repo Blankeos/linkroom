@@ -28,12 +28,12 @@ const AboutPage = () => {
         <FAQsDisclosureGroup />
       </div>
       {/* Special Thanks */}
-      <div className="py-10 max-w-4xl mx-auto px-10 flex flex-col items-center space-y-5">
+      {/* <div className="py-10 max-w-4xl mx-auto px-10 flex flex-col items-center space-y-5">
         <h2 className="tracking-tighter text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-          💖 Special Thanks To 💖
+          Special Thanks To
         </h2>
         <FAQsDisclosureGroup />
-      </div>
+      </div> */}
     </div>
   );
 };
