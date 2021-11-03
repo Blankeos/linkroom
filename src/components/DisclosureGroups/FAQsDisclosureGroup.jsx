@@ -33,7 +33,7 @@ function MyDisclosure({ panelContent = "", buttonContent = "" }) {
     <Disclosure as="div" className="">
       {({ open }) => (
         <>
-          <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-blue-500 bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-gray-400">
+          <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-blue-500 bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-blue-500 focus-visible:ring-opacity-75 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-gray-300">
             <span>{buttonContent}</span>
             {open ? <ChevronUp size="1.1rem" /> : <ChevronDown size="1.1rem" />}
           </Disclosure.Button>
@@ -45,7 +45,7 @@ function MyDisclosure({ panelContent = "", buttonContent = "" }) {
             leaveFrom="transform scale-100 opacity-100"
             leaveTo="transform scale-95 opacity-0"
           >
-            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-gray-400">
+            <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 dark:text-gray-300">
               {panelContent}
             </Disclosure.Panel>
           </Transition>
