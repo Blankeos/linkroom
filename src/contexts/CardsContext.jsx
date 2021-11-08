@@ -11,6 +11,8 @@ import { cloneDeep } from "lodash";
 import { generate } from "shortid";
 import { arrayMoveImmutable as arrayMove } from "array-move";
 
+import cardsValidate from "../data/cardsValidate";
+
 export const CARDS_STORAGE = "cardsStorage";
 
 const initialValue = {};
