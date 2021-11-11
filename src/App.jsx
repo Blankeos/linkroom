@@ -32,7 +32,6 @@ function App() {
                 <Route exact path="/" component={MainApp} />
                 <Route exact path="/install" component={InstallPage} />
                 <Route exact path="/about" component={AboutPage} />
-                {/* <Route exact path="/feedback" component={FeedbackPage} /> */}
                 <Route path="/" component={Page404} />
               </Switch>
             </Main>
