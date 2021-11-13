@@ -29,6 +29,6 @@ The cutest blue socket character carrying the LinkRoom brand. Illustrations were
 - [ ] Mobile Version: Sorting Page
 - [x] FAQs Page
 - [x] Error-checking if data is valid. Catch error and give option to reset all data if not.
-- [ ] Error-checking for import/export.
+- [x] Error-checking for import/export.
 - [ ] Toast Tip System (Tracked with LocalStorage)
 - [ ] Release 🚀🚀🚀
