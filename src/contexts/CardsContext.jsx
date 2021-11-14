@@ -161,8 +161,14 @@ export const CardsProvider = ({ children }) => {
   };
 
   const importCards = (cardsObj) => {
-    dispatch({ type: "SET_ALL", payload: cardsObj });
-    saveToStorage(cardsObj);
+    const isValid = cardsValidate(cardsObj);
+
+    if (isValid) {
+      dispatch({ type: "SET_ALL", payload: cardsObj });
+      saveToStorage(cardsObj);
+    } else {
+      console.log("Invalid Import");
+    }
   };
 
   const toggleIsEditingAllCards = () => {
