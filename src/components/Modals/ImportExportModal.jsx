@@ -27,7 +27,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
 
   const [errors, setErrors] = useState([]); // List of strings to be displayed under import text area
   const [importIsValid, setImportIsValid] = useState(false); // bool for displaying green ring around text area when valid
-
+  const [importInputWasUsed, setImportInputWasUsed] = useState(false); // bool to disable validation when not used yet. For onChange. (better UX)
   // Copy Button State
   const [copyButtonText, setCopyButtonText] = useState("Copy");
 
@@ -37,6 +37,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
       setImportInput("");
       setErrors([]);
       setImportIsValid(false);
+      setImportInputWasUsed(false);
     }, 500);
 
     closeModal();
@@ -115,10 +116,25 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
 
   useEffect(() => {
     const to = setTimeout(() => {
+      // This if statement is so it only validates when the modal is used.
+      // When the modal is first shown, it won't validate until the user types.
+      // When the user erases their inputs, it will validate even when empty.
       if (importInput.length > 0) {
+        // Here, input is validated when the textarea isn't empty.
         validateImport();
+      } else {
+        // Here, the textarea is empty, but will only validate
+        // if the user has previously typed. (It was used)
+        if (importInputWasUsed) {
+          validateImport();
+        }
       }
     }, 300);
+
+    // Here, we keep a state bool that says the import input was used.
+    if (importInput.length > 0) {
+      setImportInputWasUsed(true);
+    }
 
     return () => clearTimeout(to);
   }, [importInput]);
