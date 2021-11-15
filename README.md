@@ -1,5 +1,5 @@
 <h1 align="center">🏹 LinkRoom</h1>
-<div align="center"><span><img src="https://img.shields.io/badge/Work_In_Progress-2ea44f?style=for-the-badge" alt="Work In Progress"></span><span><img src="https://img.shields.io/badge/Not_Deployed_Yet-ffd800?style=for-the-badge" alt="Not Deployed Yet"></span></div>
+<div align="center"><span><img src="https://img.shields.io/badge/LINKROOM.LIVE-2ea44f?style=for-the-badge" alt="LINKROOM.LIVE"></span><span><img src="https://img.shields.io/badge/BETA-3B82F6?style=for-the-badge" alt="BETA"></span></div>
 <div align="center"><img src="/.readme-assets/preview.jpg" width="800px" /><img src="/.readme-assets/preview_landing.jpg" width="800px" /></div>
 
 ## 🏷️ About
@@ -31,4 +31,4 @@ The cutest blue socket character carrying the LinkRoom brand. Illustrations were
 - [x] Error-checking if data is valid. Catch error and give option to reset all data if not.
 - [x] Error-checking for import/export.
 - [ ] Toast Tip System (Tracked with LocalStorage)
-- [ ] Release 🚀🚀🚀
+- [x] Release 🚀🚀🚀
