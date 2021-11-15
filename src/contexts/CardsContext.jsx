@@ -34,11 +34,9 @@ const reducer = (state, action) => {
       index = newCards.findIndex((card) => card._id == action.payload.id);
       if (index !== -1) {
         // Exists
-        console.log("Updated");
         newCards[index] = action.payload.data;
       } else {
         // Doesn't Exist
-        console.log("Added");
         newCards = [...newCards, action.payload.data];
       }
 
