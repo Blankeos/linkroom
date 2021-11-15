@@ -6,3 +6,8 @@ const ajv = new Ajv({ allErrors: true }); // options can be passed, e.g. {allErr
 const validate = ajv.compile(cardsSchema);
 
 export default validate;
+
+export function isValid(cardsObj) {
+  const isValid = validate(cardsObj);
+  return isValid;
+}

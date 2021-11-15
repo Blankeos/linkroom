@@ -49,8 +49,8 @@ const InvalidGrid = () => {
                   leaveTo="transform scale-95 opacity-0"
                 >
                   <Disclosure.Panel className="px-4 py-3 pt-4 text-sm text-gray-500 dark:text-gray-400 flex flex-col space-y-3">
-                    {cardsValidate.errors.map((error) => (
-                      <ErrorItem error={error} />
+                    {cardsValidate.errors.map((error, i) => (
+                      <ErrorItem key={i} error={error} />
                     ))}
                   </Disclosure.Panel>
                 </Transition>

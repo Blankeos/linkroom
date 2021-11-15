@@ -12,12 +12,7 @@ import EditModalProvider from "../contexts/EditModalContext";
 import DeleteModalProvider from "../contexts/DeleteModalContext";
 
 // Test
-import cardsValidate from "../data/cardsValidate";
-
-function isValid(cards) {
-  const isValid = cardsValidate(cards);
-  return isValid;
-}
+import cardsValidate, { isValid } from "../data/cardsValidate";
 
 const MainApp = () => {
   const { cards, isEditingAllCards } = useCardsContext();
