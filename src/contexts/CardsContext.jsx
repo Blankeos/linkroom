@@ -11,7 +11,7 @@ import { cloneDeep } from "lodash";
 import { generate } from "shortid";
 import { arrayMoveImmutable as arrayMove } from "array-move";
 
-import cardsValidate from "../data/cardsValidate";
+import { isValid } from "../data/cardsValidate";
 
 export const CARDS_STORAGE = "cardsStorage";
 
@@ -161,9 +161,7 @@ export const CardsProvider = ({ children }) => {
   };
 
   const importCards = (cardsObj) => {
-    const isValid = cardsValidate(cardsObj);
-
-    if (isValid) {
+    if (isValid(cardsObj)) {
       dispatch({ type: "SET_ALL", payload: cardsObj });
       saveToStorage(cardsObj);
     } else {
