@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 
-import { useCardsContext, CARDS_STORAGE } from "../../contexts/CardsContext";
-
-// For error checking
-import Card from "../Cards/Card";
+import { useCardsContext } from "../../contexts/CardsContext";
 
 // Icons
 import { RiInformationLine as InfoIcon } from "react-icons/ri";
@@ -116,6 +113,16 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
     }, 2000);
   };
 
+  useEffect(() => {
+    const to = setTimeout(() => {
+      if (importInput.length > 0) {
+        validateImport();
+      }
+    }, 300);
+
+    return () => clearTimeout(to);
+  }, [importInput]);
+
   return (
     <Modal
       modalClass="w-full sm:w-11/12 md:w-9/12 lg:w-7/12 p-10 dark:bg-gray-900"
@@ -142,8 +149,10 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
           </span>
           <div className="h-52  text-gray-600">
             <textarea
-              onChange={(e) => setImportInput(e.target.value)}
-              className={`p-2 h-full w-full resize-none border border-blue-100 rounded outline-none focus:outline-none dark:bg-gray-700 dark:text-gray-200 dark:border-gray-700 ${
+              onChange={(e) => {
+                setImportInput(e.target.value);
+              }}
+              className={`p-2 h-full w-full resize-none border border-gray-300 rounded outline-none focus:outline-none dark:bg-gray-700 dark:text-gray-200 dark:border-gray-700 ${
                 errors.length > 0
                   ? "ring-1 ring-red-400"
                   : importIsValid
@@ -151,7 +160,6 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
                   : "focus:ring-1 focus:ring-blue-500"
               }`}
               value={importInput}
-              onBlur={() => validateImport()}
             ></textarea>
           </div>
           <div className="mt-2.5 text-sm">
@@ -188,7 +196,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
           <div className="h-52 text-gray-600">
             <textarea
               onChange={() => {}}
-              className="p-2 h-full w-full resize-none border border-blue-100 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none text-gray-500 bg-gray-100 dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
+              className="p-2 h-full w-full resize-none border border-gray-400 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none text-gray-500 bg-gray-100 dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
               value={JSON.stringify(cards)}
             ></textarea>
           </div>
@@ -211,7 +219,7 @@ const ModalButton = ({ children, onClick, className, disabled = false }) => {
     <button
       type="button"
       disabled={disabled}
-      className={` flex items-center space-x-1 px-3 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500  ${className} `}
+      className={`select-none flex items-center space-x-1 px-3 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-md hover:bg-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500  ${className} `}
       onClick={onClick}
     >
       {children}
