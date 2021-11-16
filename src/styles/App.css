@@ -28,3 +28,8 @@
   background-color: transparent;
   color: transparent;
 }
+
+/* For Animation Performance */
+.will-change-transform {
+  will-change: transform;
+}

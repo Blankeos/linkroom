@@ -40,7 +40,7 @@ export default function SlideOver({
               leaveTo="opacity-0 translate-x-5"
             >
               <div
-                className={`transform translate-x-0 bg-white transition-all h-full overflow-hidden shadow-xl overflow-y-auto ${slideOverClass}`}
+                className={`will-change-transform transform translate-x-0 bg-white transition-all h-full overflow-hidden shadow-xl overflow-y-auto ${slideOverClass}`}
               >
                 <div>{children}</div>
               </div>
