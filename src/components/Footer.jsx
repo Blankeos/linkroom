@@ -25,18 +25,18 @@ const MobileFooter = () => {
         <div className="h-16 bg-gray-50 border-t w-full grid grid-cols-3 text-gray-600 dark:bg-gray-900 dark:border-black dark:text-gray-400 transition">
           <Link
             to="/"
-            className="flex flex-col items-center justify-center h-full"
+            className="flex flex-col items-center justify-center h-full hover:bg-gray-200 dark:hover:bg-black"
           >
             <HomeIcon size="1.3rem" />
             <span className="text-xs">Home</span>
           </Link>
-          <button className="flex flex-col items-center justify-center h-full">
+          <button className="flex flex-col items-center justify-center h-full hover:bg-gray-200 dark:hover:bg-black">
             <SortIcon size="1.3rem" />
             <span className="text-xs">Sort</span>
           </button>
           <Link
             to="/about"
-            className="flex flex-col items-center justify-center h-full"
+            className="flex flex-col items-center justify-center h-full hover:bg-gray-200 dark:hover:bg-black"
           >
             <InfoIcon size="1.3rem" />
             <span className="text-xs">Info</span>
