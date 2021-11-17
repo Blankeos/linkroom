@@ -4,7 +4,7 @@ import FAQsDisclosureGroup from "../components/DisclosureGroups/FAQsDisclosureGr
 
 const AboutPage = () => {
   return (
-    <div className="bg-blue-50 dark:bg-gray-800 flex-grow">
+    <div className="bg-white dark:bg-gray-800 flex-grow pb-32">
       {/* Hero */}
       <div className="py-10 max-w-4xl mx-auto px-10 flex flex-col items-center space-y-5">
         <h1 className="font-extrabold text-4xl md:text-5xl tracking-tighter text-gray-900 dark:text-white max-w-sm text-center">
