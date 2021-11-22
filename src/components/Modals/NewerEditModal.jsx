@@ -9,7 +9,7 @@ import Tippy from "@tippyjs/react";
 import { BlockPicker } from "react-color";
 
 const EditModal = ({
-  modalHeader = "✍ Edit Card",
+  modalHeader = "Edit Card",
   isOpen,
   closeModal,
   completeEditModal,
@@ -56,15 +56,19 @@ const EditModal = ({
       closeModal={closeModal}
     >
       <div className="p-10 pb-5">
-        <h1 className="flex items-center justify-between font-bold text-xl text-gray-700 dark:text-gray-200">
-          <span>{modalHeader}</span>
+        <div className="flex items-center justify-between text-xl text-gray-700 dark:text-gray-200">
+          <h1 className="">
+            <span>✍</span>
+            <span> </span>
+            <span className="font-bold">{modalHeader}</span>
+          </h1>
           <button onClick={closeModal}>
             <CloseIcon
               className="text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300"
               size="1.2rem"
             />
           </button>
-        </h1>
+        </div>
         <div className="the-color-picker flex items-center mt-10">
           <Tippy
             trigger="click mouseenter"

@@ -8,7 +8,7 @@ const EditModalContext = createContext(initialValue);
 export const useEditModalContext = () => useContext(EditModalContext);
 
 const EditModalProvider = ({ children }) => {
-  const [modalHeader, setModalHeader] = useState("✍ Edit Card");
+  const [modalHeader, setModalHeader] = useState("Edit Card");
   const [isOpen, setIsOpen] = useState(false);
   const [card, dispatch] = useReducer(reducer, createNewStateObject());
 
@@ -25,7 +25,7 @@ const EditModalProvider = ({ children }) => {
         },
       });
 
-      setModalHeader("✍ Edit Card");
+      setModalHeader("Edit Card");
     } else {
       dispatch({
         type: "SET_ALL",
@@ -33,7 +33,7 @@ const EditModalProvider = ({ children }) => {
           state: createNewStateObject(),
         },
       });
-      setModalHeader("✍ Add New Card");
+      setModalHeader("Add New Card");
     }
   };
 
