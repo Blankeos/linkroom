@@ -125,7 +125,7 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
             </p>
           </div>
         </div>
-        <div className="transition bg-white dark:bg-gray-700 flex-grow p-6 flex flex-col space-y-2 text-gray-600 dark:text-gray-300 rounded-b-2xl">
+        <div className="transition bg-white dark:bg-gray-700 flex-grow py-3 flex flex-col text-gray-600 dark:text-gray-300 rounded-b-2xl">
           {links &&
             links.map((link, i) => {
               return (
@@ -150,7 +150,7 @@ const Link = ({ url, icon, children, disabled = false }) => {
     <a
       href={url || "/404"}
       target={!url ? "" : "_blank"}
-      className={`flex items-center space-x-2 hover:text-blue-500 font-light ${
+      className={`flex items-center space-x-2 px-6 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-600 font-light ${
         disabled && "pointer-events-none"
       }`}
     >
