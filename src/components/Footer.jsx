@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
-
+import { useLocation } from "react-router-dom";
 // Components
 import { Link } from "react-router-dom";
 
@@ -18,32 +18,50 @@ const DesktopFooter = () => {
 };
 
 const MobileFooter = () => {
+  const location = useLocation();
   return (
     <>
       <div className="h-16 bg-gray-50 border-t w-full grid grid-cols-3 text-gray-600 dark:bg-gray-900 dark:border-black dark:text-gray-400 transition" />
       <div className="fixed bottom-0 w-full">
         <div className="h-16 bg-gray-50 border-t w-full grid grid-cols-3 text-gray-600 dark:bg-gray-900 dark:border-black dark:text-gray-400 transition">
-          <Link
-            to="/"
-            className="flex flex-col items-center justify-center h-full hover:bg-gray-200 dark:hover:bg-black"
+          <NavItem
+            icon={<HomeIcon size="1.3rem" />}
+            url="/"
+            active={location.pathname === "/"}
           >
-            <HomeIcon size="1.3rem" />
-            <span className="text-xs">Home</span>
-          </Link>
-          <button className="flex flex-col items-center justify-center h-full hover:bg-gray-200 dark:hover:bg-black">
-            <SortIcon size="1.3rem" />
-            <span className="text-xs">Sort</span>
-          </button>
-          <Link
-            to="/about"
-            className="flex flex-col items-center justify-center h-full hover:bg-gray-200 dark:hover:bg-black"
+            Home
+          </NavItem>
+          <NavItem
+            icon={<SortIcon size="1.3rem" />}
+            url="/sort"
+            active={location.pathname === "/sort"}
           >
-            <InfoIcon size="1.3rem" />
-            <span className="text-xs">Info</span>
-          </Link>
+            Sort
+          </NavItem>
+          <NavItem
+            icon={<InfoIcon size="1.3rem" />}
+            url="/about"
+            active={location.pathname === "/about"}
+          >
+            Info
+          </NavItem>
         </div>
       </div>
     </>
+  );
+};
+
+const NavItem = ({ children, icon, url = "/", active = false }) => {
+  return (
+    <Link
+      to={url}
+      className={`flex flex-col items-center justify-center h-full ${
+        active ? "text-blue-500" : "hover:bg-gray-200 dark:hover:bg-black"
+      }`}
+    >
+      {icon}
+      <span className="text-xs">{children}</span>
+    </Link>
   );
 };
 export default Footer;
