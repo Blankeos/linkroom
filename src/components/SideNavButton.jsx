@@ -5,7 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 import DarkModeSwitch from "./Switches/DarkModeSwitch";
 
 // Icons
-import { BsChevronBarRight as CloseIcon } from "react-icons/bs";
+import { IoClose as CloseIcon } from "react-icons/io5";
+import { HiOutlineMenuAlt3 as OpenIcon } from "react-icons/hi";
 
 const SideNavButton = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,11 @@ const SideNavButton = ({ children }) => {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>{children}</button>
+      <button onClick={() => setIsOpen(true)}>
+        <span className="block p-1">
+          <OpenIcon size="1.7rem" />
+        </span>
+      </button>
       <SlideOver
         slideOverClass="dark:bg-gray-900"
         isOpen={isOpen}
@@ -37,7 +42,7 @@ const SideNavButton = ({ children }) => {
             </>
           )}
           <NavLink onClick={() => setIsOpen(false)} to="/about" icon="📔">
-            About
+            About & FAQs
           </NavLink>
           <a
             onClick={() => setIsOpen(false)}

@@ -7,12 +7,9 @@ import { useCardsContext } from "../../contexts/CardsContext";
 import { RiInformationLine as InfoIcon } from "react-icons/ri";
 import { IoMdClose as CloseIcon } from "react-icons/io";
 import { HiUpload as ImportIcon } from "react-icons/hi";
-import {
-  BiCopy as CopyIcon,
-  BiError as ErrorIcon,
-  BiCheckCircle as CheckIcon,
-} from "react-icons/bi";
+import { BiCopy as CopyIcon, BiCheckCircle as CheckIcon } from "react-icons/bi";
 import { BsCheck as CopiedIcon } from "react-icons/bs";
+import { MdError as ErrorIcon } from "react-icons/md";
 
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -132,7 +129,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
     }, 300);
 
     // Here, we keep a state bool that says the import input was used.
-    if (importInput.length > 0) {
+    if (importInput.length > 0 && !importInputWasUsed) {
       setImportInputWasUsed(true);
     }
 
@@ -165,6 +162,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
           </span>
           <div className="h-52  text-gray-600">
             <textarea
+              spellCheck={false}
               onChange={(e) => {
                 setImportInput(e.target.value);
               }}
@@ -211,6 +209,7 @@ const ImportExportModal = ({ isOpen, closeModal }) => {
           </span>
           <div className="h-52 text-gray-600">
             <textarea
+              spellCheck={false}
               onChange={() => {}}
               className="p-2 h-full w-full resize-none border border-gray-400 focus:ring-1 rounded focus:ring-blue-500 outline-none focus:outline-none text-gray-500 bg-gray-100 dark:bg-gray-800 dark:text-gray-500 dark:border-gray-600"
               value={JSON.stringify(cards)}

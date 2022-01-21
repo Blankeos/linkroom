@@ -4,9 +4,6 @@ import SideNavButton from "./SideNavButton";
 // Components
 import { Link } from "react-router-dom";
 
-// Icons
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
-
 const Header = () => {
   return (
     <header className="relative bg-blue-500 dark:bg-gray-900 h-20 flex items-center transition">
@@ -28,11 +25,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="absolute right-0 text-white p-5">
-        <SideNavButton>
-          <span className="block p-1">
-            <HiOutlineMenuAlt3 size="1.7rem" />
-          </span>
-        </SideNavButton>
+        <SideNavButton />
       </div>
     </header>
   );
