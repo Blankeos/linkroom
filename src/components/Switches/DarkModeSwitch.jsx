@@ -2,6 +2,11 @@ import React from "react";
 import { Switch } from "@headlessui/react";
 import { useDarkThemeContext } from "../../contexts/DarkThemeContext";
 
+import {
+  RiMoonClearFill as DarkModeIcon,
+  RiSunFill as LightModeIcon,
+} from "react-icons/ri";
+
 export default function DarkModeSwitch() {
   const { isDark, setIsDark } = useDarkThemeContext();
 
@@ -20,8 +25,20 @@ export default function DarkModeSwitch() {
         className={`${
           isDark ? "translate-x-9 bg-yellow-200" : "translate-x-0 bg-white"
         }
-            pointer-events-none inline-block h-[34px] w-[34px] rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200`}
-      />
+            relative grid place-items-center pointer-events-none h-[34px] w-[34px] rounded-full shadow-lg transform ring-0 transition ease-in-out duration-200 overflow-hidden`}
+      >
+        <LightModeIcon
+          className={`${
+            isDark ? "translate-y-7" : ""
+          } transform transition-transform absolute text-yellow-500`}
+          size="1.1rem"
+        />
+        <DarkModeIcon
+          className={`${
+            isDark ? "" : "-translate-y-7"
+          } transform transition-transform absolute text-gray-700`}
+        />
+      </span>
     </Switch>
   );
 }

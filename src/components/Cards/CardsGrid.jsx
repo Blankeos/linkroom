@@ -115,7 +115,7 @@ const CardsGrid = ({ cards, isEditingAllCards }) => {
     useSensor(PointerSensor, {
       activationConstraint: {
         tolerance: 5,
-        delay: 250,
+        delay: 150,
       },
     })
   );
