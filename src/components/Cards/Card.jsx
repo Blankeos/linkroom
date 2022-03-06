@@ -30,7 +30,7 @@ const Card = ({ card, id }) => {
   } = useSortable({
     id: id,
     transition: {
-      duration: 150, // milliseconds
+      duration: 200, // milliseconds
       easing: "cubic-bezier(0.25, 1, 0.5, 1)",
     },
   });
@@ -70,10 +70,10 @@ const Card = ({ card, id }) => {
       <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
         <div
           className={`h-full transform transition duration-300 ease-in-out cursor-grab ${
-            isDragging && "opacity-40"
+            isDragging ? "opacity-40" : "opacity-100 "
           }`}
           style={{
-            transform: isDragging ? "scale(1.02)" : undefined,
+            // transform: isDragging ? "scale(1)" : undefined,
             minHeight: "18rem",
           }}
         >
@@ -111,8 +111,16 @@ export const CardElement = ({ card, dropDownItems = [], disabled = false }) => {
                 {title}
                 {renderDummyIfEmpty(title)}
               </h2>
-              <DropDown disabled={disabled} items={dropDownItems}>
-                <MenuIcon size="1.5rem" />
+              <DropDown
+                className="group relative grid place-items-center"
+                disabled={disabled}
+                items={dropDownItems}
+              >
+                <span
+                  className="absolute bg-gray-100 opacity-0 rounded-full w-8 h-8 group-hover:opacity-40 transition"
+                  aria-hidden
+                ></span>
+                <MenuIcon size="1.5rem" className="relative" />
               </DropDown>
             </div>
             <p className="text-sm font-light truncate">

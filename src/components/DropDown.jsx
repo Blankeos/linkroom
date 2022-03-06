@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
-const DropDown = ({ children, items, disabled = false }) => {
+const DropDown = ({ className = "", children, items, disabled = false }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
       {({ open }) => (
@@ -12,7 +12,7 @@ const DropDown = ({ children, items, disabled = false }) => {
               disabled={disabled}
               className={`focus:outline-none ${
                 disabled && "pointer-events-none"
-              }`}
+              } ${className}`}
             >
               {children}
             </Menu.Button>
