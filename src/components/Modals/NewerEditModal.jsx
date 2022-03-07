@@ -68,7 +68,7 @@ const EditModal = ({
               <span> </span>
               <span className="font-bold">{modalHeader}</span>
             </h1>
-            <button onClick={closeModal}>
+            <button onClick={closeModal} type="button">
               <CloseIcon
                 className="text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300"
                 size="1.2rem"
@@ -117,6 +117,7 @@ const EditModal = ({
                   Pick A Color
                 </span>
                 <button
+                  type="button"
                   className="h-9 w-9 rounded-full border-2 border-transparent"
                   style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
                 ></button>
@@ -207,6 +208,7 @@ const EditModal = ({
                 })}
               <span className="pt-1">
                 <button
+                  type="button"
                   className="text-green-500 dark:text-green-300"
                   onClick={() =>
                     dispatch({
@@ -222,7 +224,11 @@ const EditModal = ({
         </div>
         {/* End of Card Preview */}
         <div className="bg-gray-200 px-10 py-5 flex justify-end items-center space-x-5 dark:bg-gray-800">
-          <button className="text-green-500 font-medium" onClick={closeModal}>
+          <button
+            type="button"
+            className="text-green-500 font-medium"
+            onClick={closeModal}
+          >
             Cancel
           </button>
           <button
@@ -254,13 +260,13 @@ const LinkItem = ({
             {Object.keys(iconDict).map((key, i) => {
               return (
                 <button
-                  className="outline-none focus:outline-none"
+                  type="button"
+                  className="outline-none focus:outline-none p-2 text-lg"
                   onClick={() => {
                     if (changeLinkProperty) {
                       changeLinkProperty(linkValue._id, "icon", key);
                     }
                   }}
-                  className="p-2 text-lg"
                   key={i}
                 >
                   {iconDict[key]}
@@ -272,7 +278,9 @@ const LinkItem = ({
       >
         <span className="flex items-center">
           <Tippy content="Choose an icon" hideOnClick arrow={false}>
-            <button className="">{iconDict[linkValue.icon]}</button>
+            <button className="" type="button">
+              {iconDict[linkValue.icon]}
+            </button>
           </Tippy>
         </span>
       </Tippy>
@@ -293,7 +301,7 @@ const LinkItem = ({
         }
         value={linkValue.url}
       />
-      <button onClick={onDelete}>
+      <button type="button" onClick={onDelete}>
         <CloseIcon
           className="text-gray-500 hover:text-gray-500 dark:hover:text-gray-300"
           size="1.2rem"
@@ -321,6 +329,7 @@ const LinkItem2 = ({
                 {Object.keys(iconDict).map((key, i) => {
                   return (
                     <button
+                      type="button"
                       onClick={() => {
                         if (changeLinkProperty) {
                           changeLinkProperty(linkValue._id, "icon", key);
@@ -338,12 +347,14 @@ const LinkItem2 = ({
           >
             <span>
               <Tippy content="Choose an icon" hideOnClick arrow={false}>
-                <button className="">{iconDict[linkValue.icon]}</button>
+                <button className="" type="button">
+                  {iconDict[linkValue.icon]}
+                </button>
               </Tippy>
             </span>
           </Tippy>
 
-          <button onClick={onDelete}>
+          <button onClick={onDelete} type="button">
             <CloseIcon
               className="text-gray-500 hover:text-gray-500 dark:hover:text-gray-300"
               size="1.2rem"
