@@ -55,177 +55,184 @@ const EditModal = ({
       isOpen={isOpen}
       closeModal={closeModal}
     >
-      <div className="p-10 pb-5">
-        <div className="flex items-center justify-between text-xl text-gray-700 dark:text-gray-200">
-          <h1 className="">
-            <span>✍</span>
-            <span> </span>
-            <span className="font-bold">{modalHeader}</span>
-          </h1>
-          <button onClick={closeModal}>
-            <CloseIcon
-              className="text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300"
-              size="1.2rem"
-            />
-          </button>
-        </div>
-        <div className="the-color-picker flex items-center mt-10">
-          <Tippy
-            trigger="click mouseenter"
-            interactive={true}
-            arrow={false}
-            theme="transparent"
-            placement="right-end"
-            content={
-              <div className="shadow-lg rounded">
-                <BlockPicker
-                  colors={[
-                    "#3B82F6",
-                    "#2ccce4",
-                    "#EF4444",
-                    "#F47373",
-                    "#ff8a65",
-                    "#F59E0B",
-                    "#37d67a",
-                    "#EC4899",
-                    "#ba68c8",
-                    "#555555",
-                  ]}
-                  color={(card && card.color) || "#3B82F6"}
-                  triangle="hide"
-                  onChangeComplete={(color) =>
-                    dispatch({
-                      type: "SET_PROPERTY",
-                      payload: {
-                        propertyName: "color",
-                        value: color.hex,
-                      },
-                    })
-                  }
-                />
-              </div>
-            }
-          >
-            <span className="flex items-center space-x-5 font-medium cursor-pointer">
-              <span style={{ color: (card && card.color) || "#3B82F6" }}>
-                Pick A Color
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          completeEditModal();
+        }}
+      >
+        <div className="p-10 pb-5">
+          <div className="flex items-center justify-between text-xl text-gray-700 dark:text-gray-200">
+            <h1 className="">
+              <span>✍</span>
+              <span> </span>
+              <span className="font-bold">{modalHeader}</span>
+            </h1>
+            <button onClick={closeModal}>
+              <CloseIcon
+                className="text-gray-400 hover:text-gray-500 dark:text-gray-400 dark:hover:text-gray-300"
+                size="1.2rem"
+              />
+            </button>
+          </div>
+          <div className="the-color-picker flex items-center mt-10">
+            <Tippy
+              trigger="click mouseenter"
+              interactive={true}
+              arrow={false}
+              theme="transparent"
+              placement="right-end"
+              content={
+                <div className="shadow-lg rounded">
+                  <BlockPicker
+                    colors={[
+                      "#3B82F6",
+                      "#2ccce4",
+                      "#EF4444",
+                      "#F47373",
+                      "#ff8a65",
+                      "#F59E0B",
+                      "#37d67a",
+                      "#EC4899",
+                      "#ba68c8",
+                      "#555555",
+                    ]}
+                    color={(card && card.color) || "#3B82F6"}
+                    triangle="hide"
+                    onChangeComplete={(color) =>
+                      dispatch({
+                        type: "SET_PROPERTY",
+                        payload: {
+                          propertyName: "color",
+                          value: color.hex,
+                        },
+                      })
+                    }
+                  />
+                </div>
+              }
+            >
+              <span className="flex items-center space-x-5 font-medium cursor-pointer">
+                <span style={{ color: (card && card.color) || "#3B82F6" }}>
+                  Pick A Color
+                </span>
+                <button
+                  className="h-9 w-9 rounded-full border-2 border-transparent"
+                  style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
+                ></button>
               </span>
-              <button
-                className="h-9 w-9 rounded-full border-2 border-transparent"
-                style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
-              ></button>
-            </span>
-          </Tippy>
+            </Tippy>
+          </div>
         </div>
-      </div>
-      {/* Card Preview */}
-      <div className="bg-green-500 grid grid-cols-1 h-full min-h-[20rem] max-h-full shadow hover:shadow-lg transition w-full">
-        <div className="h-full bg-indigo-600 flex flex-col">
-          {/* Card Preview Top Part */}
-          <div
-            className="relative flex flex-col space-y-1 text-white p-6"
-            style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
-          >
+        {/* Card Preview */}
+        <div className="bg-green-500 grid grid-cols-1 h-full min-h-[20rem] max-h-full shadow hover:shadow-lg transition w-full">
+          <div className="h-full bg-indigo-600 flex flex-col">
+            {/* Card Preview Top Part */}
             <div
-              className="absolute inset-0 opacity-40"
-              style={{
-                backgroundImage: "url('/assets/socket_illustration_1.svg')",
-                backgroundPosition: "right",
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                filter: "grayscale(1)",
-              }}
-            ></div>
-            <div className="relative flex flex-col space-y-1">
-              <div className="flex flex-col text-white pb-2">
+              className="relative flex flex-col space-y-1 text-white p-6"
+              style={{ backgroundColor: (card && card.color) || "#3B82F6" }}
+            >
+              <div
+                className="absolute inset-0 opacity-40"
+                style={{
+                  backgroundImage: "url('/assets/socket_illustration_1.svg')",
+                  backgroundPosition: "right",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  filter: "grayscale(1)",
+                }}
+              ></div>
+              <div className="relative flex flex-col space-y-1">
+                <div className="flex flex-col text-white pb-2">
+                  <input
+                    ref={titleRef}
+                    name="title"
+                    className="font-bold text-3xl truncate tracking-tight pr-0.5 bg-transparent border-b border-transparent focus:border-white outline-none placeholder-gray-50 placeholder-opacity-50"
+                    value={(card && card.title) || ""}
+                    placeholder="Enter title"
+                    onChange={handlePropertyChange}
+                    spellCheck="false"
+                    autoComplete="off"
+                  />
+                  {/* <h2 className="font-bold text-3xl truncate tracking-tight pr-0.5 border-b border-transparent">
+                  {card && card.title}
+                </h2> */}
+                </div>
                 <input
-                  ref={titleRef}
-                  name="title"
-                  className="font-bold text-3xl truncate tracking-tight pr-0.5 bg-transparent border-b border-transparent focus:border-white outline-none placeholder-gray-50 placeholder-opacity-50"
-                  value={(card && card.title) || ""}
-                  placeholder="Enter title"
+                  name="subheading1"
+                  className="text-sm font-light bg-transparent border-b border-transparent focus:border-white outline-none placeholder-gray-50 placeholder-opacity-50"
+                  value={(card && card.subheading1) || ""}
+                  placeholder="Enter subheading 1"
                   onChange={handlePropertyChange}
                   spellCheck="false"
                   autoComplete="off"
                 />
-                {/* <h2 className="font-bold text-3xl truncate tracking-tight pr-0.5 border-b border-transparent">
-                  {card && card.title}
-                </h2> */}
-              </div>
-              <input
-                name="subheading1"
-                className="text-sm font-light bg-transparent border-b border-transparent focus:border-white outline-none placeholder-gray-50 placeholder-opacity-50"
-                value={(card && card.subheading1) || ""}
-                placeholder="Enter subheading 1"
-                onChange={handlePropertyChange}
-                spellCheck="false"
-                autoComplete="off"
-              />
-              <input
-                name="subheading2"
-                className="text-sm font-light bg-transparent border-b border-transparent focus:border-white outline-none placeholder-gray-50 placeholder-opacity-50"
-                value={(card && card.subheading2) || ""}
-                placeholder="Enter subheading 2"
-                onChange={handlePropertyChange}
-                spellCheck="false"
-                autoComplete="off"
-              />
-              {/* <p className="text-sm font-light border-b border-transparent">
+                <input
+                  name="subheading2"
+                  className="text-sm font-light bg-transparent border-b border-transparent focus:border-white outline-none placeholder-gray-50 placeholder-opacity-50"
+                  value={(card && card.subheading2) || ""}
+                  placeholder="Enter subheading 2"
+                  onChange={handlePropertyChange}
+                  spellCheck="false"
+                  autoComplete="off"
+                />
+                {/* <p className="text-sm font-light border-b border-transparent">
                 {(card && card.subheading1) || "Subheading 1"}
               </p> */}
-              {/* <p className="text-sm font-light border-b border-transparent">
+                {/* <p className="text-sm font-light border-b border-transparent">
                 {(card && card.subheading2) || "Subheading 2"}
               </p> */}
+              </div>
+            </div>
+            {/* Card Preview Bottom Half */}
+            <div className="bg-white dark:bg-gray-700 flex-grow p-6 flex flex-col space-y-2 text-gray-600 dark:text-gray-300">
+              {card &&
+                card.links &&
+                card.links.map((link, i) => {
+                  return (
+                    <LinkItem
+                      key={link._id}
+                      linkValue={link}
+                      onDelete={() =>
+                        dispatch({
+                          type: "DELETE_LINK",
+                          payload: {
+                            id: link._id,
+                          },
+                        })
+                      }
+                      changeLinkProperty={changeLinkProperty}
+                    />
+                  );
+                })}
+              <span className="pt-1">
+                <button
+                  className="text-green-500 dark:text-green-300"
+                  onClick={() =>
+                    dispatch({
+                      type: "NEW_LINK",
+                    })
+                  }
+                >
+                  + Add new link
+                </button>
+              </span>
             </div>
           </div>
-          {/* Card Preview Bottom Half */}
-          <div className="bg-white dark:bg-gray-700 flex-grow p-6 flex flex-col space-y-2 text-gray-600 dark:text-gray-300">
-            {card &&
-              card.links &&
-              card.links.map((link, i) => {
-                return (
-                  <LinkItem
-                    key={link._id}
-                    linkValue={link}
-                    onDelete={() =>
-                      dispatch({
-                        type: "DELETE_LINK",
-                        payload: {
-                          id: link._id,
-                        },
-                      })
-                    }
-                    changeLinkProperty={changeLinkProperty}
-                  />
-                );
-              })}
-            <span className="pt-1">
-              <button
-                className="text-green-500 dark:text-green-300"
-                onClick={() =>
-                  dispatch({
-                    type: "NEW_LINK",
-                  })
-                }
-              >
-                + Add new link
-              </button>
-            </span>
-          </div>
         </div>
-      </div>
-      {/* End of Card Preview */}
-      <div className="bg-gray-200 px-10 py-5 flex justify-end items-center space-x-5 dark:bg-gray-800">
-        <button className="text-green-500 font-medium" onClick={closeModal}>
-          Cancel
-        </button>
-        <button
-          className="bg-green-500 hover:bg-green-600 py-2 px-3.5 text-green-100 rounded-md font-medium dark:bg-green-400 dark:hover:bg-green-500 dark:text-white"
-          onClick={completeEditModal}
-        >
-          Save changes
-        </button>
-      </div>
+        {/* End of Card Preview */}
+        <div className="bg-gray-200 px-10 py-5 flex justify-end items-center space-x-5 dark:bg-gray-800">
+          <button className="text-green-500 font-medium" onClick={closeModal}>
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-green-500 hover:bg-green-600 py-2 px-3.5 text-green-100 rounded-md font-medium dark:bg-green-400 dark:hover:bg-green-500 dark:text-white"
+          >
+            Save changes
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 };

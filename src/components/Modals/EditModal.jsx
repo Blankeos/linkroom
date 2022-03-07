@@ -53,7 +53,10 @@ const EditModal = ({
           />
         </button>
       </h1>
-      <div className="flex flex-col space-y-3">
+      <form
+        className="flex flex-col space-y-3"
+        onSubmit={() => console.log("wow")}
+      >
         <div className="flex items-center">
           <Tippy
             trigger="click mouseenter"
@@ -172,13 +175,13 @@ const EditModal = ({
             Cancel
           </button>
           <button
-            onClick={completeEditModal}
+            type="submit"
             className="w-full text-sm focus-within:ring-1 rounded border border-blue-500 py-5 transition hover:bg-blue-400 bg-blue-500 text-white font-semibold"
           >
             Done
           </button>
         </div>
-      </div>
+      </form>
     </Modal>
   );
 };
