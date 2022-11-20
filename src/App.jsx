@@ -18,6 +18,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import TerminationNotice from "./components/TerminationNotice";
 // import FeedbackPage from "./pages/FeedbackPage";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <DarkThemeProvider>
         <Router>
           <div className="flex flex-col min-h-screen">
+            <TerminationNotice />
             <Header />
             <Main>
               <Switch>
