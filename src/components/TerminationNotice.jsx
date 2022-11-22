@@ -3,8 +3,7 @@ import { AiFillWarning as WarningIcon } from "react-icons/ai";
 import { IoClose as CloseIcon } from "react-icons/io5";
 
 const TerminationNotice = () => {
-  console.log(window.location.origin);
-  if (window.location.origin === "https://linkroom.vercel.live") return <></>;
+  if (window.location.origin === "https://linkroom.vercel.app") return <></>;
 
   const [isShown, setIsShown] = useState(true);
   return (
